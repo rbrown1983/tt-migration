@@ -217,7 +217,7 @@
 <script>
 // ── Config ───────────────────────────────────────────────────────────────────
 const ADMIN_PIN   = '170717';
-const STORAGE_KEY = 'tt_migration_v3';
+const STORAGE_KEY = 'tt_migration_v4';
 
 // ── Default metrics data ─────────────────────────────────────────────────────
 const DEFAULT_DATA = {
@@ -299,8 +299,8 @@ function loadAll() {
     const s = localStorage.getItem(STORAGE_KEY);
     if (s) { const p = JSON.parse(s); data = p.data; sites = p.sites; }
   } catch {}
-  if (!data)  data  = JSON.parse(JSON.stringify(DEFAULT_DATA));
-  if (!sites) sites = JSON.parse(JSON.stringify(DEFAULT_SITES));
+  if (!data  || typeof data  !== 'object') data  = JSON.parse(JSON.stringify(DEFAULT_DATA));
+  if (!sites || !Array.isArray(sites) || sites.length === 0) sites = JSON.parse(JSON.stringify(DEFAULT_SITES));
 }
 function saveAll() { localStorage.setItem(STORAGE_KEY, JSON.stringify({ data, sites })); }
 
@@ -493,6 +493,4 @@ function renderSitesTable(filter) {
       : `<span class="notes-cell">${s.notes || '&mdash;'}</span>`;
     return `<tr>
       <td><strong>${s.site}</strong><br><span style="font-size:11px;color:#8899aa;">${s.country}</span></td>
-      <td><span class="region-badge ${regionClass[s.region]}">${s.region}</span></td>
-      <td>${statusCell}</td>
-      <td>${notesCell}</td>
+      <td><span class="region-badge ${regionClass[s.region]}">${s.
