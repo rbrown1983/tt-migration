@@ -290,18 +290,13 @@ function setSaveStatus(msg, cls){
 }
 
 async function loadFromGitHub(){
-  // Use GitHub API directly - no CDN caching, always returns latest committed data
-  var url = 'https://api.github.com/repos/'+GITHUB_REPO+'/contents/'+DATA_FILE;
+  // Read from GitHub Pages URL - no rate limits, no auth needed.
+  // Each unique timestamp bypasses CDN cache so everyone always gets fresh data.
+  var pagesUrl = 'https://'+GITHUB_REPO.split('/')[0]+'.github.io/'+GITHUB_REPO.split('/')[1]+'/'+DATA_FILE+'?t='+Date.now();
   try {
-    var res = await fetch(url, {
-      headers:{ Accept:'application/vnd.github.v3+json' },
-      cache:'no-store'
-    });
+    var res = await fetch(pagesUrl, { cache:'no-store' });
     if(res.ok){
-      var json = await res.json();
-      currentSHA = json.sha; // capture SHA so saves don't need a separate lookup
-      var decoded = decodeURIComponent(escape(atob(json.content.replace(/\n/g,''))));
-      var data = JSON.parse(decoded);
+      var data = await res.json();
       if(data.metrics && data.metrics.length > 0) metrics = data.metrics;
       if(data.sites   && data.sites.length   > 0) sites   = data.sites;
       if(data.asOf) asOf = data.asOf;
