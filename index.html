@@ -290,12 +290,18 @@ function setSaveStatus(msg, cls){
 }
 
 async function loadFromGitHub(){
-  // Public read - no token needed
-  var url = 'https://raw.githubusercontent.com/'+GITHUB_REPO+'/main/'+DATA_FILE+'?t='+Date.now();
+  // Use GitHub API directly - no CDN caching, always returns latest committed data
+  var url = 'https://api.github.com/repos/'+GITHUB_REPO+'/contents/'+DATA_FILE;
   try {
-    var res = await fetch(url);
+    var res = await fetch(url, {
+      headers:{ Accept:'application/vnd.github.v3+json' },
+      cache:'no-store'
+    });
     if(res.ok){
-      var data = await res.json();
+      var json = await res.json();
+      currentSHA = json.sha; // capture SHA so saves don't need a separate lookup
+      var decoded = decodeURIComponent(escape(atob(json.content.replace(/\n/g,''))));
+      var data = JSON.parse(decoded);
       if(data.metrics && data.metrics.length > 0) metrics = data.metrics;
       if(data.sites   && data.sites.length   > 0) sites   = data.sites;
       if(data.asOf) asOf = data.asOf;
@@ -305,25 +311,21 @@ async function loadFromGitHub(){
   if(!sites   || sites.length   === 0) sites   = deepCopy(DEFAULT_SITES);
 }
 
-async function getFileSHA(){
-  var token = getStoredToken();
-  try {
-    var res = await fetch('https://api.github.com/repos/'+GITHUB_REPO+'/contents/'+DATA_FILE, {
-      headers:{ Authorization:'token '+token, Accept:'application/vnd.github.v3+json' }
-    });
-    if(res.ok){ var j = await res.json(); return j.sha; }
-  } catch(e){}
-  return null;
-}
-
 async function saveToGitHub(){
   var token = getStoredToken();
   if(!token){ setSaveStatus('No token', 'error'); return; }
   setSaveStatus('Saving...', 'saving');
-  var sha = await getFileSHA();
+  // Re-fetch SHA immediately before save to avoid conflict errors
+  try {
+    var shaRes = await fetch('https://api.github.com/repos/'+GITHUB_REPO+'/contents/'+DATA_FILE, {
+      headers:{ Authorization:'token '+token, Accept:'application/vnd.github.v3+json' },
+      cache:'no-store'
+    });
+    if(shaRes.ok){ var shaJson = await shaRes.json(); currentSHA = shaJson.sha; }
+  } catch(e){}
   var payload = JSON.stringify({metrics:metrics, sites:sites, asOf:asOf}, null, 2);
   var body = { message:'Dashboard update '+new Date().toISOString(), content:toBase64(payload) };
-  if(sha) body.sha = sha;
+  if(currentSHA) body.sha = currentSHA;
   try {
     var res = await fetch('https://api.github.com/repos/'+GITHUB_REPO+'/contents/'+DATA_FILE, {
       method:'PUT',
@@ -331,6 +333,8 @@ async function saveToGitHub(){
       body: JSON.stringify(body)
     });
     if(res.ok){
+      var saved = await res.json();
+      currentSHA = saved.content.sha;
       setSaveStatus('Saved', 'saved');
       setTimeout(function(){ setSaveStatus(''); }, 3000);
     } else {
