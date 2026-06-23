@@ -42,7 +42,7 @@
     },
     {
       "label": "Remote Sites Decommissioned",
-      "complete": 13,
+      "complete": 12,
       "total": 55,
       "unitLabel": "sites",
       "doneLabel": "Decommissioned",
@@ -98,7 +98,7 @@
       "country": "South Africa",
       "region": "EMEA",
       "status": "Decommissioned",
-      "notes": "3 servers: CostX, data, test. Data and CostX migrated."
+      "notes": ""
     },
     {
       "site": "Doha",
@@ -119,14 +119,14 @@
       "country": "Ireland",
       "region": "EMEA",
       "status": "In Progress",
-      "notes": "1 Server CostX. CostX migrated to cloud. Support ends 26/11 - being decommissioned."
+      "notes": ""
     },
     {
       "site": "Durban",
       "country": "South Africa",
       "region": "EMEA",
       "status": "Decommissioned",
-      "notes": "3 servers: CostX, File, test. Data migrated."
+      "notes": ""
     },
     {
       "site": "Edinburgh",
@@ -147,7 +147,7 @@
       "country": "Botswana",
       "region": "EMEA",
       "status": "Decommissioned",
-      "notes": "2 servers: File, test. Data migrated. No HW support."
+      "notes": ""
     },
     {
       "site": "Glasgow",
@@ -182,35 +182,35 @@
       "country": "South Africa",
       "region": "EMEA",
       "status": "In Progress",
-      "notes": "Telstra contract end July 2026."
+      "notes": ""
     },
     {
       "site": "Krakow",
       "country": "Poland",
       "region": "EMEA",
       "status": "Decommissioned",
-      "notes": "3 servers: DC, data, test. Data migrated, DC demoted."
+      "notes": ""
     },
     {
       "site": "Kuala Lumpur",
       "country": "Malaysia",
       "region": "APAC",
       "status": "Decommissioned",
-      "notes": "2 servers: data, DC. Data migrated, DC demoted."
+      "notes": ""
     },
     {
       "site": "Leeds",
       "country": "UK",
       "region": "EMEA",
       "status": "Active",
-      "notes": "Primary datacenter / migration target."
+      "notes": ""
     },
     {
       "site": "London",
       "country": "UK",
       "region": "EMEA",
       "status": "In Progress",
-      "notes": "Target decommission end of August."
+      "notes": ""
     },
     {
       "site": "Manchester",
@@ -238,7 +238,7 @@
       "country": "Germany",
       "region": "EMEA",
       "status": "In Progress",
-      "notes": "Telstra contract end July 2026."
+      "notes": ""
     },
     {
       "site": "Nairobi",
@@ -287,7 +287,7 @@
       "country": "China",
       "region": "APAC",
       "status": "In Progress",
-      "notes": "10 servers: DC, CostX, Door, Data, test, FSCT, Pay. Office move July-August."
+      "notes": ""
     },
     {
       "site": "Sheffield",
@@ -301,7 +301,7 @@
       "country": "Singapore",
       "region": "APAC",
       "status": "In Progress",
-      "notes": "Data migrated (confirm Fin use). DC not yet decommissioned. DHCP/DNS pending."
+      "notes": ""
     },
     {
       "site": "Sydney",
@@ -322,7 +322,7 @@
       "country": "Canada",
       "region": "Americas",
       "status": "In Progress",
-      "notes": "4 servers: DC, CostX, FSCT, test. CostX uses local GPU. HW support extended. Migration Aug/Sep."
+      "notes": ""
     }
   ],
   "asOf": "22 Jun 2026"
