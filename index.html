@@ -189,14 +189,16 @@ footer{text-align:center;color:#aab8c8;font-size:11px;padding:16px;}
     </div>
     <div class="filter-bar">
       <span style="font-size:12px;color:#6b7a8d;font-weight:600;">Filter:</span>
-      <button class="filter-btn active" onclick="filterSites('all',this)">All Sites</button>
-      <button class="filter-btn" onclick="filterSites('EMEA',this)">EMEA</button>
-      <button class="filter-btn" onclick="filterSites('Americas',this)">Americas</button>
-      <button class="filter-btn" onclick="filterSites('APAC',this)">APAC</button>
-      <button class="filter-btn" onclick="filterSites('Decommissioned',this)">Decommissioned</button>
-      <button class="filter-btn" onclick="filterSites('In Progress',this)">In Progress</button>
-      <button class="filter-btn" onclick="filterSites('Active',this)">Active</button>
-      <button class="filter-btn" onclick="filterSites('Blocked',this)" style="border-color:#7f1d1d;color:#7f1d1d;">Blocked</button>
+      <button class="filter-btn active" id="btnFilterAll" onclick="filterAll()">All Sites</button>
+      <span style="width:1px;background:#d0dae8;margin:0 6px;align-self:stretch;display:inline-block;"></span>
+      <button class="filter-btn" data-filter-region="EMEA" onclick="toggleFilter(this,'region','EMEA')">EMEA</button>
+      <button class="filter-btn" data-filter-region="Americas" onclick="toggleFilter(this,'region','Americas')">Americas</button>
+      <button class="filter-btn" data-filter-region="APAC" onclick="toggleFilter(this,'region','APAC')">APAC</button>
+      <span style="width:1px;background:#d0dae8;margin:0 6px;align-self:stretch;display:inline-block;"></span>
+      <button class="filter-btn" data-filter-status="Decommissioned" onclick="toggleFilter(this,'status','Decommissioned')">Decommissioned</button>
+      <button class="filter-btn" data-filter-status="In Progress" onclick="toggleFilter(this,'status','In Progress')">In Progress</button>
+      <button class="filter-btn" data-filter-status="Active" onclick="toggleFilter(this,'status','Active')">Active</button>
+      <button class="filter-btn" data-filter-status="Blocked" onclick="toggleFilter(this,'status','Blocked')" style="border-color:#7f1d1d;color:#7f1d1d;">Blocked</button>
       <button class="filter-btn" id="btnEditSites" onclick="requirePin('sites')" style="margin-left:auto;border-color:#2E75B6;color:#2E75B6;">Edit Sites</button>
     </div>
     <table>
@@ -395,7 +397,7 @@ function lockAll(){
     tableEditMode = false;
     document.getElementById('tableEditBar').classList.remove('active');
     document.getElementById('btnEditSites').textContent = 'Edit Sites';
-    renderSitesTable(currentFilter);
+    renderSitesTable();
   }
 }
 document.getElementById('pinInput').addEventListener('keydown', function(e){ if(e.key==='Enter') checkPin(); });
@@ -445,7 +447,7 @@ function openTableEdit(){
   tableEditMode = true;
   document.getElementById('tableEditBar').classList.add('active');
   document.getElementById('btnEditSites').textContent = 'Editing...';
-  renderSitesTable(currentFilter);
+  renderSitesTable();
 }
 async function saveSites(){
   for(var i=0; i<sites.length; i++){
@@ -472,7 +474,7 @@ function renderAll(){
   renderMetricCharts();
   renderBars();
   renderRegionalCharts();
-  renderSitesTable(currentFilter);
+  renderSitesTable();
 }
 
 function renderMetricCharts(){
@@ -545,12 +547,13 @@ function renderBars(){
   document.getElementById('progressBars').innerHTML=html;
 }
 
-function renderSitesTable(filter){
-  currentFilter=filter||'all';
+function renderSitesTable(){
   var filtered=[];
   for(var i=0; i<sites.length; i++){
     var s=sites[i];
-    if(currentFilter==='all'||s.region===currentFilter||s.status===currentFilter)
+    var regionOk=activeRegions.length===0||activeRegions.indexOf(s.region)!==-1;
+    var statusOk=activeStatuses.length===0||activeStatuses.indexOf(s.status)!==-1;
+    if(regionOk&&statusOk)
       filtered.push({site:s.site,country:s.country,region:s.region,status:s.status,notes:s.notes,idx:i});
   }
   var html='';
@@ -579,11 +582,25 @@ function renderSitesTable(filter){
   document.getElementById('sitesBody').innerHTML=html;
 }
 
-function filterSites(filter,btn){
-  var btns=document.querySelectorAll('.filter-btn');
-  for(var i=0; i<btns.length; i++) if(btns[i].id!=='btnEditSites') btns[i].classList.remove('active');
-  btn.classList.add('active');
-  renderSitesTable(filter);
+var activeRegions=[], activeStatuses=[];
+
+function filterAll(){
+  activeRegions=[];
+  activeStatuses=[];
+  var btns=document.querySelectorAll('.filter-btn[data-filter-region],.filter-btn[data-filter-status]');
+  for(var i=0; i<btns.length; i++) btns[i].classList.remove('active');
+  document.getElementById('btnFilterAll').classList.add('active');
+  renderSitesTable();
+}
+
+function toggleFilter(btn,type,value){
+  var arr=type==='region'?activeRegions:activeStatuses;
+  var idx=arr.indexOf(value);
+  if(idx===-1){ arr.push(value); btn.classList.add('active'); }
+  else{ arr.splice(idx,1); btn.classList.remove('active'); }
+  // update All button
+  document.getElementById('btnFilterAll').classList.toggle('active', activeRegions.length===0&&activeStatuses.length===0);
+  renderSitesTable();
 }
 
 // ---- Init ----
