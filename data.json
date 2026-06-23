@@ -42,7 +42,7 @@
     },
     {
       "label": "Remote Sites Decommissioned",
-      "complete": 12,
+      "complete": 13,
       "total": 55,
       "unitLabel": "sites",
       "doneLabel": "Decommissioned",
