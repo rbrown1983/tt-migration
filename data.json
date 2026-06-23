@@ -1,1 +1,329 @@
-{"metrics":[],"sites":[],"asOf":""}
+{
+  "metrics": [
+    {
+      "label": "Server Decommissioning",
+      "complete": 126,
+      "total": 265,
+      "unitLabel": "servers",
+      "doneLabel": "Decommissioned",
+      "color": "#2E75B6"
+    },
+    {
+      "label": "Servers to Redundant Cluster",
+      "complete": 91,
+      "total": 116,
+      "unitLabel": "servers",
+      "doneLabel": "In Cluster",
+      "color": "#4ec9a0"
+    },
+    {
+      "label": "Servers Failed Over to Romford DC",
+      "complete": 25,
+      "total": 116,
+      "unitLabel": "servers",
+      "doneLabel": "Failed Over",
+      "color": "#f59e42"
+    },
+    {
+      "label": "Remote Sites Synced to Leeds",
+      "complete": 36,
+      "total": 50,
+      "unitLabel": "sites",
+      "doneLabel": "Synchronised",
+      "color": "#a78bfa"
+    },
+    {
+      "label": "Data Volume Synced to Leeds",
+      "complete": 128.66,
+      "total": 223.4,
+      "unitLabel": "TB",
+      "doneLabel": "Moved",
+      "color": "#2E75B6"
+    },
+    {
+      "label": "Remote Sites Decommissioned",
+      "complete": 13,
+      "total": 55,
+      "unitLabel": "sites",
+      "doneLabel": "Decommissioned",
+      "color": "#f472b6"
+    },
+    {
+      "label": "CostX Servers Migrated to Azure",
+      "complete": 27,
+      "total": 36,
+      "unitLabel": "servers",
+      "doneLabel": "Migrated",
+      "color": "#4ec9a0"
+    }
+  ],
+  "sites": [
+    {
+      "site": "Abu Dhabi",
+      "country": "UAE",
+      "region": "EMEA",
+      "status": "Active",
+      "notes": ""
+    },
+    {
+      "site": "Amsterdam",
+      "country": "Netherlands",
+      "region": "EMEA",
+      "status": "Active",
+      "notes": ""
+    },
+    {
+      "site": "Birmingham",
+      "country": "UK",
+      "region": "EMEA",
+      "status": "Decommissioned",
+      "notes": ""
+    },
+    {
+      "site": "Brisbane",
+      "country": "Australia",
+      "region": "APAC",
+      "status": "Active",
+      "notes": ""
+    },
+    {
+      "site": "Bristol",
+      "country": "UK",
+      "region": "EMEA",
+      "status": "Active",
+      "notes": ""
+    },
+    {
+      "site": "Cape Town",
+      "country": "South Africa",
+      "region": "EMEA",
+      "status": "Decommissioned",
+      "notes": "3 servers: CostX, data, test. Data and CostX migrated."
+    },
+    {
+      "site": "Doha",
+      "country": "Qatar",
+      "region": "EMEA",
+      "status": "Active",
+      "notes": ""
+    },
+    {
+      "site": "Dubai",
+      "country": "UAE",
+      "region": "EMEA",
+      "status": "Active",
+      "notes": ""
+    },
+    {
+      "site": "Dublin",
+      "country": "Ireland",
+      "region": "EMEA",
+      "status": "In Progress",
+      "notes": "1 Server CostX. CostX migrated to cloud. Support ends 26/11 - being decommissioned."
+    },
+    {
+      "site": "Durban",
+      "country": "South Africa",
+      "region": "EMEA",
+      "status": "Decommissioned",
+      "notes": "3 servers: CostX, File, test. Data migrated."
+    },
+    {
+      "site": "Edinburgh",
+      "country": "UK",
+      "region": "EMEA",
+      "status": "Decommissioned",
+      "notes": ""
+    },
+    {
+      "site": "Frankfurt",
+      "country": "Germany",
+      "region": "EMEA",
+      "status": "Decommissioned",
+      "notes": ""
+    },
+    {
+      "site": "Gaborone",
+      "country": "Botswana",
+      "region": "EMEA",
+      "status": "Decommissioned",
+      "notes": "2 servers: File, test. Data migrated. No HW support."
+    },
+    {
+      "site": "Glasgow",
+      "country": "UK",
+      "region": "EMEA",
+      "status": "Decommissioned",
+      "notes": ""
+    },
+    {
+      "site": "Gold Coast",
+      "country": "Australia",
+      "region": "APAC",
+      "status": "Active",
+      "notes": ""
+    },
+    {
+      "site": "Hong Kong",
+      "country": "SAR China",
+      "region": "APAC",
+      "status": "Active",
+      "notes": ""
+    },
+    {
+      "site": "Houston",
+      "country": "USA",
+      "region": "Americas",
+      "status": "Active",
+      "notes": ""
+    },
+    {
+      "site": "Johannesburg",
+      "country": "South Africa",
+      "region": "EMEA",
+      "status": "In Progress",
+      "notes": "Telstra contract end July 2026."
+    },
+    {
+      "site": "Krakow",
+      "country": "Poland",
+      "region": "EMEA",
+      "status": "Decommissioned",
+      "notes": "3 servers: DC, data, test. Data migrated, DC demoted."
+    },
+    {
+      "site": "Kuala Lumpur",
+      "country": "Malaysia",
+      "region": "APAC",
+      "status": "Decommissioned",
+      "notes": "2 servers: data, DC. Data migrated, DC demoted."
+    },
+    {
+      "site": "Leeds",
+      "country": "UK",
+      "region": "EMEA",
+      "status": "Active",
+      "notes": "Primary datacenter / migration target."
+    },
+    {
+      "site": "London",
+      "country": "UK",
+      "region": "EMEA",
+      "status": "In Progress",
+      "notes": "Target decommission end of August."
+    },
+    {
+      "site": "Manchester",
+      "country": "UK",
+      "region": "EMEA",
+      "status": "Decommissioned",
+      "notes": ""
+    },
+    {
+      "site": "Melbourne",
+      "country": "Australia",
+      "region": "APAC",
+      "status": "Decommissioned",
+      "notes": ""
+    },
+    {
+      "site": "Mumbai",
+      "country": "India",
+      "region": "APAC",
+      "status": "Active",
+      "notes": ""
+    },
+    {
+      "site": "Munich",
+      "country": "Germany",
+      "region": "EMEA",
+      "status": "In Progress",
+      "notes": "Telstra contract end July 2026."
+    },
+    {
+      "site": "Nairobi",
+      "country": "Kenya",
+      "region": "EMEA",
+      "status": "Active",
+      "notes": ""
+    },
+    {
+      "site": "Newcastle",
+      "country": "UK",
+      "region": "EMEA",
+      "status": "Active",
+      "notes": ""
+    },
+    {
+      "site": "New York",
+      "country": "USA",
+      "region": "Americas",
+      "status": "Active",
+      "notes": ""
+    },
+    {
+      "site": "Nottingham",
+      "country": "UK",
+      "region": "EMEA",
+      "status": "Active",
+      "notes": ""
+    },
+    {
+      "site": "Perth",
+      "country": "Australia",
+      "region": "APAC",
+      "status": "Active",
+      "notes": ""
+    },
+    {
+      "site": "Riyadh",
+      "country": "Saudi Arabia",
+      "region": "EMEA",
+      "status": "Active",
+      "notes": ""
+    },
+    {
+      "site": "Shanghai",
+      "country": "China",
+      "region": "APAC",
+      "status": "In Progress",
+      "notes": "10 servers: DC, CostX, Door, Data, test, FSCT, Pay. Office move July-August."
+    },
+    {
+      "site": "Sheffield",
+      "country": "UK",
+      "region": "EMEA",
+      "status": "Decommissioned",
+      "notes": ""
+    },
+    {
+      "site": "Singapore",
+      "country": "Singapore",
+      "region": "APAC",
+      "status": "In Progress",
+      "notes": "Data migrated (confirm Fin use). DC not yet decommissioned. DHCP/DNS pending."
+    },
+    {
+      "site": "Sydney",
+      "country": "Australia",
+      "region": "APAC",
+      "status": "Active",
+      "notes": ""
+    },
+    {
+      "site": "Teesside",
+      "country": "UK",
+      "region": "EMEA",
+      "status": "Active",
+      "notes": ""
+    },
+    {
+      "site": "Toronto",
+      "country": "Canada",
+      "region": "Americas",
+      "status": "In Progress",
+      "notes": "4 servers: DC, CostX, FSCT, test. CostX uses local GPU. HW support extended. Migration Aug/Sep."
+    }
+  ],
+  "asOf": "22 Jun 2026"
+}
