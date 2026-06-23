@@ -62,8 +62,8 @@
       "site": "Abu Dhabi",
       "country": "UAE",
       "region": "EMEA",
-      "status": "Active",
-      "notes": "sssssssss"
+      "status": "Blocked",
+      "notes": "Anyconnect firewall and CostX running until end of June"
     },
     {
       "site": "Amsterdam",
@@ -104,8 +104,8 @@
       "site": "Doha",
       "country": "Qatar",
       "region": "EMEA",
-      "status": "Active",
-      "notes": ""
+      "status": "Blocked",
+      "notes": "Local data in use"
     },
     {
       "site": "Dubai",
@@ -118,7 +118,7 @@
       "site": "Dublin",
       "country": "Ireland",
       "region": "EMEA",
-      "status": "In Progress",
+      "status": "Decommissioned",
       "notes": ""
     },
     {
@@ -167,8 +167,8 @@
       "site": "Hong Kong",
       "country": "SAR China",
       "region": "APAC",
-      "status": "Active",
-      "notes": ""
+      "status": "Blocked",
+      "notes": "Still using CostX until the end of June"
     },
     {
       "site": "Houston",
@@ -181,8 +181,8 @@
       "site": "Johannesburg",
       "country": "South Africa",
       "region": "EMEA",
-      "status": "In Progress",
-      "notes": ""
+      "status": "Blocked",
+      "notes": "Local instances of Finance apps, Fin and Sage."
     },
     {
       "site": "Krakow",
@@ -202,15 +202,15 @@
       "site": "Leeds",
       "country": "UK",
       "region": "EMEA",
-      "status": "Active",
-      "notes": ""
+      "status": "Blocked",
+      "notes": "Lots of Apps and data to move"
     },
     {
       "site": "London",
       "country": "UK",
       "region": "EMEA",
-      "status": "In Progress",
-      "notes": ""
+      "status": "Blocked",
+      "notes": "Data and Apps to migrate including Exchange and CostX to VAST"
     },
     {
       "site": "Manchester",
@@ -230,28 +230,28 @@
       "site": "Mumbai",
       "country": "India",
       "region": "APAC",
-      "status": "Active",
-      "notes": ""
+      "status": "Blocked",
+      "notes": "Local site using CostX due to rendering issue in the cloud"
     },
     {
       "site": "Munich",
       "country": "Germany",
       "region": "EMEA",
       "status": "In Progress",
-      "notes": ""
+      "notes": "DHCP and DNS being migrated - data copied. There is a local server that needs to be migrated to Leeds, Sam has setup Zerto to replicate and is trying to identify an owner."
     },
     {
       "site": "Nairobi",
       "country": "Kenya",
       "region": "EMEA",
-      "status": "Active",
-      "notes": ""
+      "status": "Blocked",
+      "notes": "Local data still in use."
     },
     {
       "site": "Newcastle",
       "country": "UK",
       "region": "EMEA",
-      "status": "Active",
+      "status": "In Progress",
       "notes": ""
     },
     {
@@ -265,29 +265,29 @@
       "site": "Nottingham",
       "country": "UK",
       "region": "EMEA",
-      "status": "Active",
+      "status": "In Progress",
       "notes": ""
     },
     {
       "site": "Perth",
       "country": "Australia",
       "region": "APAC",
-      "status": "Active",
+      "status": "In Progress",
       "notes": ""
     },
     {
       "site": "Riyadh",
       "country": "Saudi Arabia",
       "region": "EMEA",
-      "status": "Active",
-      "notes": ""
+      "status": "Blocked",
+      "notes": "Due to Data sovereignty "
     },
     {
       "site": "Shanghai",
       "country": "China",
       "region": "APAC",
-      "status": "In Progress",
-      "notes": ""
+      "status": "Blocked",
+      "notes": "Data still in use locally"
     },
     {
       "site": "Sheffield",
@@ -301,28 +301,28 @@
       "country": "Singapore",
       "region": "APAC",
       "status": "In Progress",
-      "notes": ""
+      "notes": "DHCP and DNS being migrated - data copied "
     },
     {
       "site": "Sydney",
       "country": "Australia",
       "region": "APAC",
-      "status": "Active",
-      "notes": ""
+      "status": "Blocked",
+      "notes": "Primavera instance on Citrix "
     },
     {
       "site": "Teesside",
       "country": "UK",
       "region": "EMEA",
-      "status": "Active",
-      "notes": ""
+      "status": "In Progress",
+      "notes": "DHCP and DNS being migrated - data copied "
     },
     {
       "site": "Toronto",
       "country": "Canada",
       "region": "Americas",
-      "status": "In Progress",
-      "notes": ""
+      "status": "Blocked",
+      "notes": "CostX rendering issues - we plan to test Citrix in CBRE cloud over the coming weeks."
     }
   ],
   "asOf": "22 Jun 2026"
