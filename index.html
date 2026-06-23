@@ -3,120 +3,53 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>T&T Infrastructure Integration – Migration Status</title>
+<title>T&T Infrastructure Integration - Migration Status</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.js" integrity="sha384-iU8HYtnGQ8Cy4zl7gbNMOhsDTTKX02BTXptVP/vqAWIaTfM7isw76iyZCsjL2eVi" crossorigin="anonymous"></script>
 <style>
   :root { color-scheme: light; }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
-  body {
-    font-family: 'Segoe UI', Arial, sans-serif;
-    background: #f0f4f8;
-    color: #1a2b3c;
-    min-height: 100vh;
-  }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f4f8; color: #1a2b3c; min-height: 100vh; }
 
   header {
     background: linear-gradient(135deg, #1F3864 0%, #2E75B6 100%);
-    color: white;
-    padding: 20px 28px 16px;
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 12px;
+    color: white; padding: 20px 28px 16px;
+    display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 12px;
   }
   header h1 { font-size: 20px; font-weight: 700; }
   header p  { font-size: 12px; opacity: 0.8; margin-top: 3px; }
-
   .header-right { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  .as-of { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 4px 14px; font-size: 12px; color: white; }
 
-  .as-of {
-    background: rgba(255,255,255,0.15);
-    border: 1px solid rgba(255,255,255,0.3);
-    border-radius: 20px;
-    padding: 4px 14px;
-    font-size: 12px;
-    color: white;
-  }
-
-  button {
-    border: none; border-radius: 8px;
-    padding: 7px 16px; font-size: 12px; font-weight: 600;
-    cursor: pointer; transition: opacity 0.15s;
-  }
+  button { border: none; border-radius: 8px; padding: 7px 16px; font-size: 12px; font-weight: 600; cursor: pointer; transition: opacity 0.15s; }
   button:hover { opacity: 0.85; }
   .btn-edit   { background: #fff; color: #1F3864; }
   .btn-save   { background: #4ec9a0; color: #fff; display: none; }
   .btn-cancel { background: rgba(255,255,255,0.2); color: #fff; display: none; }
+  .btn-lock   { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.2); display: none; font-size: 11px; }
 
   main { padding: 24px 20px; max-width: 1300px; margin: 0 auto; }
 
-  .section-label {
-    font-size: 11px; font-weight: 700;
-    letter-spacing: 1.8px; text-transform: uppercase;
-    color: #2E75B6; border-left: 3px solid #2E75B6;
-    padding-left: 10px; margin-bottom: 16px;
-  }
+  .section-label { font-size: 11px; font-weight: 700; letter-spacing: 1.8px; text-transform: uppercase; color: #2E75B6; border-left: 3px solid #2E75B6; padding-left: 10px; margin-bottom: 16px; }
 
-  /* ── Charts grids ─────────────────────────────────────────────── */
-  .charts-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 16px;
-    margin-bottom: 32px;
-  }
+  .charts-grid  { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; margin-bottom: 32px; }
+  .regional-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 32px; max-width: 900px; margin-left: auto; margin-right: auto; }
 
-  .regional-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-    margin-bottom: 32px;
-    max-width: 900px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .chart-card {
-    background: #fff; border-radius: 12px;
-    padding: 20px 16px 16px;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
-    display: flex; flex-direction: column;
-    align-items: center; gap: 10px;
-  }
-
-  .chart-card h3 {
-    font-size: 12px; font-weight: 600;
-    color: #344563; text-align: center; line-height: 1.4;
-  }
-
+  .chart-card { background: #fff; border-radius: 12px; padding: 20px 16px 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); display: flex; flex-direction: column; align-items: center; gap: 10px; }
+  .chart-card h3 { font-size: 12px; font-weight: 600; color: #344563; text-align: center; line-height: 1.4; }
   .chart-card.regional h3 { font-size: 13px; font-weight: 700; color: #1F3864; }
 
   .chart-wrap { position: relative; width: 150px; height: 150px; }
   .chart-wrap.large { width: 170px; height: 170px; }
-
-  .chart-center {
-    position: absolute; top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center; pointer-events: none;
-  }
-  .chart-pct  { font-size: 24px; font-weight: 800; color: #1F3864; }
-  .chart-sub  { font-size: 10px; color: #8899aa; margin-top: 1px; }
+  .chart-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); text-align: center; pointer-events: none; }
+  .chart-pct { font-size: 24px; font-weight: 800; color: #1F3864; }
+  .chart-sub { font-size: 10px; color: #8899aa; margin-top: 1px; }
 
   .stat-row { display: flex; gap: 6px; width: 100%; }
-  .stat {
-    flex: 1; background: #f5f8fc;
-    border-radius: 7px; padding: 7px 6px; text-align: center;
-  }
+  .stat { flex: 1; background: #f5f8fc; border-radius: 7px; padding: 7px 6px; text-align: center; }
   .stat-val { font-size: 13px; font-weight: 700; color: #2E75B6; }
   .stat-lbl { font-size: 9px; color: #8899aa; margin-top: 1px; }
 
-  /* ── Progress bars ─────────────────────────────────────────────── */
-  .progress-card {
-    background: #fff; border-radius: 12px;
-    padding: 24px; box-shadow: 0 1px 4px rgba(0,0,0,0.08);
-    margin-bottom: 32px;
-  }
+  .progress-card { background: #fff; border-radius: 12px; padding: 24px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); margin-bottom: 32px; }
   .prog-item { margin-bottom: 18px; }
   .prog-item:last-child { margin-bottom: 0; }
   .prog-header { display: flex; justify-content: space-between; margin-bottom: 6px; }
@@ -125,108 +58,98 @@
   .bar-track { height: 9px; background: #e8eef5; border-radius: 99px; overflow: hidden; }
   .bar-fill  { height: 100%; border-radius: 99px; transition: width 0.6s ease; }
 
-  /* ── Edit panel ─────────────────────────────────────────────────── */
-  .edit-panel {
-    display: none; background: #fff; border-radius: 12px;
-    padding: 24px; box-shadow: 0 1px 4px rgba(0,0,0,0.08);
-    margin-bottom: 28px;
-  }
+  /* PIN modal */
+  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center; }
+  .modal-overlay.active { display: flex; }
+  .modal { background: #fff; border-radius: 16px; padding: 32px 28px; width: 320px; text-align: center; box-shadow: 0 8px 32px rgba(0,0,0,0.2); }
+  .modal h2 { font-size: 16px; color: #1F3864; margin-bottom: 6px; }
+  .modal p  { font-size: 12px; color: #8899aa; margin-bottom: 20px; }
+  .pin-input { width: 100%; border: 2px solid #d0dae8; border-radius: 10px; padding: 10px 14px; font-size: 20px; letter-spacing: 6px; text-align: center; color: #1F3864; font-weight: 700; margin-bottom: 14px; }
+  .pin-input:focus { outline: none; border-color: #2E75B6; }
+  .pin-error { color: #dc2626; font-size: 12px; margin-bottom: 10px; min-height: 16px; }
+  .btn-pin-ok  { background: #1F3864; color: white; width: 100%; padding: 10px; font-size: 14px; border-radius: 10px; margin-bottom: 8px; }
+  .btn-pin-cancel { background: #f0f4f8; color: #344563; width: 100%; padding: 10px; font-size: 13px; border-radius: 10px; }
+
+  /* Edit panel */
+  .edit-panel { display: none; background: #fff; border-radius: 12px; padding: 24px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); margin-bottom: 28px; border: 2px solid #2E75B6; }
   .edit-panel.active { display: block; }
-  .edit-grid {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
-    gap: 8px 16px; align-items: center;
-  }
-  .col-hdr {
-    font-size: 11px; font-weight: 700; color: #8899aa;
-    text-transform: uppercase; letter-spacing: 1px;
-    padding-bottom: 6px; border-bottom: 1px solid #e8eef5; margin-bottom: 4px;
-  }
-  .edit-row-label {
-    font-size: 13px; color: #344563; font-weight: 500;
-    padding: 6px 0; border-bottom: 1px solid #f0f4f8;
-  }
-  .edit-input {
-    border: 1px solid #d0dae8; border-radius: 7px;
-    padding: 6px 10px; font-size: 13px; color: #1a2b3c;
-    width: 100%; text-align: right;
-  }
+  .edit-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 8px 16px; align-items: center; }
+  .col-hdr { font-size: 11px; font-weight: 700; color: #8899aa; text-transform: uppercase; letter-spacing: 1px; padding-bottom: 6px; border-bottom: 1px solid #e8eef5; margin-bottom: 4px; }
+  .edit-row-label { font-size: 13px; color: #344563; font-weight: 500; padding: 6px 0; border-bottom: 1px solid #f0f4f8; }
+  .edit-input { border: 1px solid #d0dae8; border-radius: 7px; padding: 6px 10px; font-size: 13px; color: #1a2b3c; width: 100%; text-align: right; }
   .edit-input:focus { outline: none; border-color: #2E75B6; box-shadow: 0 0 0 2px rgba(46,117,182,0.15); }
   .edit-note { font-size: 11px; color: #8899aa; margin-top: 16px; font-style: italic; }
 
-  /* ── Sites table ─────────────────────────────────────────────────── */
-  .sites-card {
-    background: #fff; border-radius: 12px;
-    padding: 24px; box-shadow: 0 1px 4px rgba(0,0,0,0.08);
-    margin-bottom: 32px; overflow-x: auto;
-  }
-
-  .filter-bar {
-    display: flex; gap: 8px; flex-wrap: wrap;
-    margin-bottom: 16px; align-items: center;
-  }
-
-  .filter-btn {
-    border: 1px solid #d0dae8; border-radius: 20px;
-    padding: 5px 14px; font-size: 12px; font-weight: 600;
-    cursor: pointer; transition: all 0.15s; background: #f5f8fc; color: #344563;
-  }
+  /* Sites table */
+  .sites-card { background: #fff; border-radius: 12px; padding: 24px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); margin-bottom: 32px; overflow-x: auto; }
+  .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; align-items: center; }
+  .filter-btn { border: 1px solid #d0dae8; border-radius: 20px; padding: 5px 14px; font-size: 12px; font-weight: 600; cursor: pointer; transition: all 0.15s; background: #f5f8fc; color: #344563; }
   .filter-btn:hover { border-color: #2E75B6; color: #2E75B6; }
   .filter-btn.active { background: #2E75B6; color: white; border-color: #2E75B6; }
 
   table { width: 100%; border-collapse: collapse; font-size: 13px; }
   thead tr { background: #1F3864; }
-  thead th {
-    color: white; font-weight: 600; padding: 10px 14px;
-    text-align: left; font-size: 11px; letter-spacing: 0.5px;
-  }
+  thead th { color: white; font-weight: 600; padding: 10px 14px; text-align: left; font-size: 11px; letter-spacing: 0.5px; }
   tbody tr { border-bottom: 1px solid #f0f4f8; transition: background 0.1s; }
   tbody tr:hover { background: #f5f8fc; }
-  tbody td { padding: 9px 14px; color: #344563; vertical-align: top; }
+  tbody td { padding: 9px 14px; color: #344563; vertical-align: middle; }
 
-  .region-badge {
-    display: inline-block; border-radius: 12px;
-    padding: 2px 10px; font-size: 11px; font-weight: 600;
-  }
-  .badge-emea   { background: #dbeafe; color: #1e40af; }
+  .region-badge { display: inline-block; border-radius: 12px; padding: 2px 10px; font-size: 11px; font-weight: 600; }
+  .badge-emea     { background: #dbeafe; color: #1e40af; }
   .badge-americas { background: #dcfce7; color: #166534; }
-  .badge-apac   { background: #fef3c7; color: #92400e; }
+  .badge-apac     { background: #fef3c7; color: #92400e; }
 
-  .status-badge {
-    display: inline-block; border-radius: 12px;
-    padding: 2px 10px; font-size: 11px; font-weight: 600;
-  }
+  .status-badge { display: inline-block; border-radius: 12px; padding: 2px 10px; font-size: 11px; font-weight: 600; }
   .status-decom    { background: #fee2e2; color: #991b1b; }
   .status-active   { background: #f0f4f8; color: #475569; }
   .status-progress { background: #fef9c3; color: #854d0e; }
-  .status-pending  { background: #ede9fe; color: #5b21b6; }
 
   .notes-cell { font-size: 11px; color: #6b7a8d; max-width: 280px; }
 
-  footer {
-    text-align: center; color: #aab8c8;
-    font-size: 11px; padding: 16px;
-  }
+  /* Inline table editing */
+  .tbl-status-select { border: 1px solid #d0dae8; border-radius: 6px; padding: 4px 8px; font-size: 12px; color: #1a2b3c; background: #fff; cursor: pointer; }
+  .tbl-notes-input { border: 1px solid #d0dae8; border-radius: 6px; padding: 5px 8px; font-size: 11px; color: #344563; width: 100%; min-width: 200px; resize: vertical; min-height: 36px; font-family: inherit; }
+  .tbl-notes-input:focus, .tbl-status-select:focus { outline: none; border-color: #2E75B6; }
+
+  .table-edit-bar { display: none; justify-content: space-between; align-items: center; margin-bottom: 12px; background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 10px 14px; }
+  .table-edit-bar.active { display: flex; }
+  .table-edit-bar span { font-size: 12px; color: #1e40af; font-weight: 500; }
+  .btn-save-sites { background: #2E75B6; color: white; padding: 6px 14px; font-size: 12px; border-radius: 7px; }
+
+  footer { text-align: center; color: #aab8c8; font-size: 11px; padding: 16px; }
 </style>
 </head>
 <body>
 
+<!-- PIN Modal -->
+<div class="modal-overlay" id="pinModal">
+  <div class="modal">
+    <h2>Admin Access</h2>
+    <p>Enter your PIN to edit the dashboard</p>
+    <input type="password" class="pin-input" id="pinInput" maxlength="10" placeholder="------" autocomplete="off">
+    <div class="pin-error" id="pinError"></div>
+    <button class="btn-pin-ok" onclick="checkPin()">Unlock</button>
+    <button class="btn-pin-cancel" onclick="closePin()">Cancel</button>
+  </div>
+</div>
+
 <header>
   <div>
-    <h1>T&amp;T Infrastructure Integration</h1>
+    <h1>T&T Infrastructure Integration</h1>
     <p>Migration Status Dashboard</p>
   </div>
   <div class="header-right">
     <span class="as-of" id="asOfLabel">As of 22 Jun 2026</span>
+    <button class="btn-lock" id="btnLock" onclick="lockAll()">Lock</button>
     <button class="btn-cancel" id="btnCancel" onclick="cancelEdit()">Cancel</button>
     <button class="btn-save"   id="btnSave"   onclick="saveEdit()">Save &amp; Refresh</button>
-    <button class="btn-edit"   id="btnEdit"   onclick="openEdit()">✏️ Update Figures</button>
+    <button class="btn-edit"   id="btnEdit"   onclick="requirePin('figures')">Edit Figures</button>
   </div>
 </header>
 
 <main>
 
-  <!-- Edit panel -->
+  <!-- Edit panel (figures) -->
   <div class="edit-panel" id="editPanel">
     <div class="section-label" style="margin-bottom:16px;">Update Figures</div>
     <div class="edit-grid">
@@ -239,14 +162,14 @@
       <div style="font-size:12px; color:#344563; font-weight:600;">As of date:</div>
       <input type="text" id="editDate" class="edit-input" style="width:180px; text-align:left;" placeholder="e.g. 29 Jun 2026">
     </div>
-    <p class="edit-note">* "Remaining" is calculated automatically as Total − Complete.</p>
+    <p class="edit-note">* Remaining is calculated automatically as Total minus Complete.</p>
   </div>
 
-  <!-- Section 1: Migration metrics -->
+  <!-- Charts -->
   <div class="section-label">Migration Progress</div>
   <div class="charts-grid" id="chartsGrid"></div>
 
-  <!-- Section 2: Regional decom -->
+  <!-- Regional -->
   <div class="section-label">Site Decommissioning by Region</div>
   <div class="regional-grid" id="regionalGrid"></div>
 
@@ -257,6 +180,10 @@
   <!-- Sites table -->
   <div class="section-label" style="margin-top:32px;">Site Status</div>
   <div class="sites-card">
+    <div class="table-edit-bar" id="tableEditBar">
+      <span>Edit mode — update status and notes for any site, then save.</span>
+      <button class="btn-save-sites" onclick="saveSites()">Save Site Changes</button>
+    </div>
     <div class="filter-bar">
       <span style="font-size:12px; color:#6b7a8d; font-weight:600;">Filter:</span>
       <button class="filter-btn active" onclick="filterSites('all', this)">All Sites</button>
@@ -266,6 +193,7 @@
       <button class="filter-btn" onclick="filterSites('Decommissioned', this)">Decommissioned</button>
       <button class="filter-btn" onclick="filterSites('In Progress', this)">In Progress</button>
       <button class="filter-btn" onclick="filterSites('Active', this)">Active</button>
+      <button class="filter-btn" id="btnEditSites" onclick="requirePin('sites')" style="margin-left:auto; border-color:#2E75B6; color:#2E75B6;">Edit Sites</button>
     </div>
     <table id="sitesTable">
       <thead>
@@ -279,24 +207,26 @@
       <tbody id="sitesBody"></tbody>
     </table>
   </div>
-
 </main>
 
-<footer>T&amp;T Infrastructure Integration · CBRE · Confidential · Data as at 22 June 2026</footer>
+<footer>T&T Infrastructure Integration &middot; CBRE &middot; Confidential &middot; Data as at 22 June 2026</footer>
 
 <script>
-const STORAGE_KEY = 'tt_migration_v2';
+// ── Config ───────────────────────────────────────────────────────────────────
+const ADMIN_PIN   = '170717';
+const STORAGE_KEY = 'tt_migration_v3';
 
+// ── Default metrics data ─────────────────────────────────────────────────────
 const DEFAULT_DATA = {
   asOf: '22 Jun 2026',
   metrics: [
-    { label: 'Server Decommissioning',            complete: 126,    total: 265,    unitLabel: 'servers',  doneLabel: 'Decommissioned', color: '#2E75B6' },
-    { label: 'Servers → Redundant Cluster',        complete: 91,     total: 116,    unitLabel: 'servers',  doneLabel: 'In Cluster',     color: '#4ec9a0' },
-    { label: 'Servers Failed Over to Romford DC',  complete: 25,     total: 116,    unitLabel: 'servers',  doneLabel: 'Failed Over',    color: '#f59e42' },
-    { label: 'Remote Sites Synced to Leeds',       complete: 36,     total: 50,     unitLabel: 'sites',    doneLabel: 'Synchronised',   color: '#a78bfa' },
-    { label: 'Data Volume Synced to Leeds',        complete: 128.66, total: 223.4,  unitLabel: 'TB',       doneLabel: 'Moved',          color: '#2E75B6' },
-    { label: 'Remote Sites Decommissioned',        complete: 12,     total: 55,     unitLabel: 'sites',    doneLabel: 'Decommissioned', color: '#f472b6' },
-    { label: 'CostX Servers Migrated to Azure',   complete: 27,     total: 36,     unitLabel: 'servers',  doneLabel: 'Migrated',       color: '#4ec9a0' },
+    { label: 'Server Decommissioning',           complete: 126,    total: 265,   unitLabel: 'servers', doneLabel: 'Decommissioned', color: '#2E75B6' },
+    { label: 'Servers to Redundant Cluster',      complete: 91,     total: 116,   unitLabel: 'servers', doneLabel: 'In Cluster',     color: '#4ec9a0' },
+    { label: 'Servers Failed Over to Romford DC', complete: 25,     total: 116,   unitLabel: 'servers', doneLabel: 'Failed Over',    color: '#f59e42' },
+    { label: 'Remote Sites Synced to Leeds',      complete: 36,     total: 50,    unitLabel: 'sites',   doneLabel: 'Synchronised',   color: '#a78bfa' },
+    { label: 'Data Volume Synced to Leeds',       complete: 128.66, total: 223.4, unitLabel: 'TB',      doneLabel: 'Moved',          color: '#2E75B6' },
+    { label: 'Remote Sites Decommissioned',       complete: 12,     total: 55,    unitLabel: 'sites',   doneLabel: 'Decommissioned', color: '#f472b6' },
+    { label: 'CostX Servers Migrated to Azure',   complete: 27,     total: 36,    unitLabel: 'servers', doneLabel: 'Migrated',       color: '#4ec9a0' },
   ],
   regional: [
     { label: 'EMEA',     decom: 10, total: 25, color: '#2E75B6' },
@@ -305,189 +235,106 @@ const DEFAULT_DATA = {
   ]
 };
 
-const SITES = [
-  { site: 'Abu Dhabi',     country: 'UAE',          region: 'EMEA',     status: 'Active',         notes: '' },
-  { site: 'Amsterdam',     country: 'Netherlands',  region: 'EMEA',     status: 'Active',         notes: '' },
-  { site: 'Birmingham',    country: 'UK',           region: 'EMEA',     status: 'Decommissioned', notes: '' },
-  { site: 'Brisbane',      country: 'Australia',    region: 'APAC',     status: 'Active',         notes: '' },
-  { site: 'Bristol',       country: 'UK',           region: 'EMEA',     status: 'Active',         notes: '' },
-  { site: 'Cape Town',     country: 'South Africa', region: 'EMEA',     status: 'Decommissioned', notes: '3 servers: CostX, data, test. Data & CostX migrated.' },
-  { site: 'Doha',          country: 'Qatar',        region: 'EMEA',     status: 'Active',         notes: '' },
-  { site: 'Dubai',         country: 'UAE',          region: 'EMEA',     status: 'Active',         notes: '' },
-  { site: 'Dublin',        country: 'Ireland',      region: 'EMEA',     status: 'In Progress',    notes: '1 Server CostX. CostX migrated to cloud. Support ends 26/11 – being decommissioned.' },
-  { site: 'Durham',        country: 'South Africa', region: 'EMEA',     status: 'Decommissioned', notes: '3 servers: CostX, File, test. Data migrated.' },
-  { site: 'Edinburgh',     country: 'UK',           region: 'EMEA',     status: 'Decommissioned', notes: '' },
-  { site: 'Frankfurt',     country: 'Germany',      region: 'EMEA',     status: 'Decommissioned', notes: '' },
-  { site: 'Gaborone',      country: 'Botswana',     region: 'EMEA',     status: 'Decommissioned', notes: '2 servers: File, test. Data migrated. No HW support.' },
-  { site: 'Glasgow',       country: 'UK',           region: 'EMEA',     status: 'Decommissioned', notes: '' },
-  { site: 'Gold Coast',    country: 'Australia',    region: 'APAC',     status: 'Active',         notes: '' },
-  { site: 'Hong Kong',     country: 'SAR China',    region: 'APAC',     status: 'Active',         notes: '' },
-  { site: 'Houston',       country: 'USA',          region: 'Americas', status: 'Active',         notes: '' },
-  { site: 'Johannesburg',  country: 'South Africa', region: 'EMEA',     status: 'In Progress',    notes: 'Telstra contract end July 2026.' },
-  { site: 'Krakow',        country: 'Poland',       region: 'EMEA',     status: 'Decommissioned', notes: '3 servers: DC, data, test. Data migrated, DC demoted.' },
-  { site: 'Kuala Lumpur',  country: 'Malaysia',     region: 'APAC',     status: 'Decommissioned', notes: '2 servers: data, DC. Data migrated, DC demoted.' },
-  { site: 'Leeds',         country: 'UK',           region: 'EMEA',     status: 'Active',         notes: 'Primary datacenter / migration target.' },
-  { site: 'London',        country: 'UK',           region: 'EMEA',     status: 'In Progress',    notes: 'Target decommission end of August.' },
-  { site: 'Manchester',    country: 'UK',           region: 'EMEA',     status: 'Decommissioned', notes: '' },
-  { site: 'Melbourne',     country: 'Australia',    region: 'APAC',     status: 'Decommissioned', notes: '' },
-  { site: 'Mumbai',        country: 'India',        region: 'APAC',     status: 'Active',         notes: '' },
-  { site: 'Munich',        country: 'Germany',      region: 'EMEA',     status: 'In Progress',    notes: 'Telstra contract end July 2026.' },
-  { site: 'Nairobi',       country: 'Kenya',        region: 'EMEA',     status: 'Active',         notes: '' },
-  { site: 'Newcastle',     country: 'UK',           region: 'EMEA',     status: 'Active',         notes: '' },
-  { site: 'New York',      country: 'USA',          region: 'Americas', status: 'Active',         notes: '' },
-  { site: 'Nottingham',    country: 'UK',           region: 'EMEA',     status: 'Active',         notes: '' },
-  { site: 'Perth',         country: 'Australia',    region: 'APAC',     status: 'Active',         notes: '' },
-  { site: 'Riyadh',        country: 'Saudi Arabia', region: 'EMEA',     status: 'Active',         notes: '' },
-  { site: 'Shanghai',      country: 'China',        region: 'APAC',     status: 'In Progress',    notes: '10 servers: DC, CostX, Door, Data, test, FSCT, Pay. Office move July–August. Working to decommission.' },
-  { site: 'Sheffield',     country: 'UK',           region: 'EMEA',     status: 'Decommissioned', notes: '' },
-  { site: 'Singapore',     country: 'Singapore',    region: 'APAC',     status: 'In Progress',    notes: 'Data migrated (confirm Fin use). DC not yet decommissioned. DHCP/DNS pending. Office move July–August.' },
-  { site: 'Sydney',        country: 'Australia',    region: 'APAC',     status: 'Active',         notes: '' },
-  { site: 'Teesside',      country: 'UK',           region: 'EMEA',     status: 'Active',         notes: '' },
-  { site: 'Toronto',       country: 'Canada',       region: 'Americas', status: 'In Progress',    notes: '4 servers: DC, CostX, FSCT, test. CostX uses local GPU. HW support extended. Site migration Aug/Sep.' },
+// ── Default sites ─────────────────────────────────────────────────────────────
+const DEFAULT_SITES = [
+  { site: 'Abu Dhabi',    country: 'UAE',          region: 'EMEA',     status: 'Active',         notes: '' },
+  { site: 'Amsterdam',    country: 'Netherlands',  region: 'EMEA',     status: 'Active',         notes: '' },
+  { site: 'Birmingham',   country: 'UK',           region: 'EMEA',     status: 'Decommissioned', notes: '' },
+  { site: 'Brisbane',     country: 'Australia',    region: 'APAC',     status: 'Active',         notes: '' },
+  { site: 'Bristol',      country: 'UK',           region: 'EMEA',     status: 'Active',         notes: '' },
+  { site: 'Cape Town',    country: 'South Africa', region: 'EMEA',     status: 'Decommissioned', notes: '3 servers: CostX, data, test. Data and CostX migrated.' },
+  { site: 'Doha',         country: 'Qatar',        region: 'EMEA',     status: 'Active',         notes: '' },
+  { site: 'Dubai',        country: 'UAE',          region: 'EMEA',     status: 'Active',         notes: '' },
+  { site: 'Dublin',       country: 'Ireland',      region: 'EMEA',     status: 'In Progress',    notes: '1 Server CostX. CostX migrated to cloud. Support ends 26/11 - being decommissioned.' },
+  { site: 'Durban',       country: 'South Africa', region: 'EMEA',     status: 'Decommissioned', notes: '3 servers: CostX, File, test. Data migrated.' },
+  { site: 'Edinburgh',    country: 'UK',           region: 'EMEA',     status: 'Decommissioned', notes: '' },
+  { site: 'Frankfurt',    country: 'Germany',      region: 'EMEA',     status: 'Decommissioned', notes: '' },
+  { site: 'Gaborone',     country: 'Botswana',     region: 'EMEA',     status: 'Decommissioned', notes: '2 servers: File, test. Data migrated. No HW support.' },
+  { site: 'Glasgow',      country: 'UK',           region: 'EMEA',     status: 'Decommissioned', notes: '' },
+  { site: 'Gold Coast',   country: 'Australia',    region: 'APAC',     status: 'Active',         notes: '' },
+  { site: 'Hong Kong',    country: 'SAR China',    region: 'APAC',     status: 'Active',         notes: '' },
+  { site: 'Houston',      country: 'USA',          region: 'Americas', status: 'Active',         notes: '' },
+  { site: 'Johannesburg', country: 'South Africa', region: 'EMEA',     status: 'In Progress',    notes: 'Telstra contract end July 2026.' },
+  { site: 'Krakow',       country: 'Poland',       region: 'EMEA',     status: 'Decommissioned', notes: '3 servers: DC, data, test. Data migrated, DC demoted.' },
+  { site: 'Kuala Lumpur', country: 'Malaysia',     region: 'APAC',     status: 'Decommissioned', notes: '2 servers: data, DC. Data migrated, DC demoted.' },
+  { site: 'Leeds',        country: 'UK',           region: 'EMEA',     status: 'Active',         notes: 'Primary datacenter / migration target.' },
+  { site: 'London',       country: 'UK',           region: 'EMEA',     status: 'In Progress',    notes: 'Target decommission end of August.' },
+  { site: 'Manchester',   country: 'UK',           region: 'EMEA',     status: 'Decommissioned', notes: '' },
+  { site: 'Melbourne',    country: 'Australia',    region: 'APAC',     status: 'Decommissioned', notes: '' },
+  { site: 'Mumbai',       country: 'India',        region: 'APAC',     status: 'Active',         notes: '' },
+  { site: 'Munich',       country: 'Germany',      region: 'EMEA',     status: 'In Progress',    notes: 'Telstra contract end July 2026.' },
+  { site: 'Nairobi',      country: 'Kenya',        region: 'EMEA',     status: 'Active',         notes: '' },
+  { site: 'Newcastle',    country: 'UK',           region: 'EMEA',     status: 'Active',         notes: '' },
+  { site: 'New York',     country: 'USA',          region: 'Americas', status: 'Active',         notes: '' },
+  { site: 'Nottingham',   country: 'UK',           region: 'EMEA',     status: 'Active',         notes: '' },
+  { site: 'Perth',        country: 'Australia',    region: 'APAC',     status: 'Active',         notes: '' },
+  { site: 'Riyadh',       country: 'Saudi Arabia', region: 'EMEA',     status: 'Active',         notes: '' },
+  { site: 'Shanghai',     country: 'China',        region: 'APAC',     status: 'In Progress',    notes: '10 servers: DC, CostX, Door, Data, test, FSCT, Pay. Office move July-August. Working to decommission.' },
+  { site: 'Sheffield',    country: 'UK',           region: 'EMEA',     status: 'Decommissioned', notes: '' },
+  { site: 'Singapore',    country: 'Singapore',    region: 'APAC',     status: 'In Progress',    notes: 'Data migrated (confirm Fin use). DC not yet decommissioned. DHCP/DNS pending. Office move July-August.' },
+  { site: 'Sydney',       country: 'Australia',    region: 'APAC',     status: 'Active',         notes: '' },
+  { site: 'Teesside',     country: 'UK',           region: 'EMEA',     status: 'Active',         notes: '' },
+  { site: 'Toronto',      country: 'Canada',       region: 'Americas', status: 'In Progress',    notes: '4 servers: DC, CostX, FSCT, test. CostX uses local GPU. HW support extended. Site migration Aug/Sep.' },
 ];
 
-function loadData() {
+// ── State ────────────────────────────────────────────────────────────────────
+let isAuthenticated = false;
+let pendingAction   = null;
+let data, sites;
+let charts = [], regionalCharts = [];
+let tableEditMode = false;
+let currentFilter = 'all';
+
+function loadAll() {
   try {
     const s = localStorage.getItem(STORAGE_KEY);
-    return s ? JSON.parse(s) : DEFAULT_DATA;
-  } catch { return DEFAULT_DATA; }
+    if (s) { const p = JSON.parse(s); data = p.data; sites = p.sites; }
+  } catch {}
+  if (!data)  data  = JSON.parse(JSON.stringify(DEFAULT_DATA));
+  if (!sites) sites = JSON.parse(JSON.stringify(DEFAULT_SITES));
 }
-function saveData(d) { localStorage.setItem(STORAGE_KEY, JSON.stringify(d)); }
+function saveAll() { localStorage.setItem(STORAGE_KEY, JSON.stringify({ data, sites })); }
 
-let data = loadData();
-let charts = [], regionalCharts = [];
-
-function pct(done, total) { return total > 0 ? done / total : 0; }
-function fmt(n) { return Number.isInteger(n) ? n : parseFloat(n.toFixed(2)); }
-
-function renderAll() {
-  document.getElementById('asOfLabel').textContent = 'As of ' + data.asOf;
-  renderMetricCharts();
-  renderRegionalCharts();
-  renderBars();
-  renderSitesTable(null);
+// ── PIN logic ────────────────────────────────────────────────────────────────
+function requirePin(action) {
+  if (isAuthenticated) { doAction(action); return; }
+  pendingAction = action;
+  document.getElementById('pinInput').value = '';
+  document.getElementById('pinError').textContent = '';
+  document.getElementById('pinModal').classList.add('active');
+  setTimeout(() => document.getElementById('pinInput').focus(), 100);
 }
+function checkPin() {
+  const val = document.getElementById('pinInput').value.trim();
+  if (val === ADMIN_PIN) {
+    isAuthenticated = true;
+    document.getElementById('pinModal').classList.remove('active');
+    document.getElementById('btnLock').style.display = 'inline-block';
+    doAction(pendingAction);
+  } else {
+    document.getElementById('pinError').textContent = 'Incorrect PIN. Please try again.';
+    document.getElementById('pinInput').value = '';
+    document.getElementById('pinInput').focus();
+  }
+}
+function closePin() {
+  document.getElementById('pinModal').classList.remove('active');
+  pendingAction = null;
+}
+function lockAll() {
+  isAuthenticated = false;
+  document.getElementById('btnLock').style.display = 'none';
+  cancelEdit();
+  if (tableEditMode) { tableEditMode = false; renderSitesTable(currentFilter); document.getElementById('tableEditBar').classList.remove('active'); document.getElementById('btnEditSites').textContent = 'Edit Sites'; }
+}
+document.getElementById('pinInput').addEventListener('keydown', e => { if (e.key === 'Enter') checkPin(); });
 
-// ── Metric donut charts ────────────────────────────────────────────────────
-function renderMetricCharts() {
-  charts.forEach(c => c.destroy()); charts = [];
-  const grid = document.getElementById('chartsGrid');
-  grid.innerHTML = '';
-  data.metrics.forEach((m, i) => {
-    const p = pct(m.complete, m.total);
-    const remain = fmt(m.total - m.complete);
-    const card = document.createElement('div');
-    card.className = 'chart-card';
-    card.innerHTML = `
-      <h3>${m.label}</h3>
-      <div class="chart-wrap">
-        <canvas id="mc_${i}"></canvas>
-        <div class="chart-center">
-          <div class="chart-pct">${(p*100).toFixed(1)}%</div>
-          <div class="chart-sub">complete</div>
-        </div>
-      </div>
-      <div class="stat-row">
-        <div class="stat"><div class="stat-val">${fmt(m.complete)}</div><div class="stat-lbl">${m.doneLabel}</div></div>
-        <div class="stat"><div class="stat-val">${remain}</div><div class="stat-lbl">Remaining</div></div>
-        <div class="stat"><div class="stat-val">${fmt(m.total)}</div><div class="stat-lbl">Total ${m.unitLabel}</div></div>
-      </div>`;
-    grid.appendChild(card);
-    charts.push(makeDonut(`mc_${i}`, p, m.color));
-  });
+function doAction(action) {
+  if (action === 'figures') openEdit();
+  if (action === 'sites')   openTableEdit();
 }
 
-// ── Regional pie charts ────────────────────────────────────────────────────
-function renderRegionalCharts() {
-  regionalCharts.forEach(c => c.destroy()); regionalCharts = [];
-  const grid = document.getElementById('regionalGrid');
-  grid.innerHTML = '';
-  data.regional.forEach((r, i) => {
-    const p = pct(r.decom, r.total);
-    const remain = r.total - r.decom;
-    const card = document.createElement('div');
-    card.className = 'chart-card regional';
-    card.innerHTML = `
-      <h3>${r.label}</h3>
-      <div class="chart-wrap large">
-        <canvas id="rc_${i}"></canvas>
-        <div class="chart-center">
-          <div class="chart-pct">${(p*100).toFixed(0)}%</div>
-          <div class="chart-sub">decommissioned</div>
-        </div>
-      </div>
-      <div class="stat-row">
-        <div class="stat"><div class="stat-val">${r.decom}</div><div class="stat-lbl">Decommissioned</div></div>
-        <div class="stat"><div class="stat-val">${remain}</div><div class="stat-lbl">Remaining</div></div>
-        <div class="stat"><div class="stat-val">${r.total}</div><div class="stat-lbl">Total Sites</div></div>
-      </div>`;
-    grid.appendChild(card);
-    regionalCharts.push(makeDonut(`rc_${i}`, p, r.color, '#e8eef5'));
-  });
-}
-
-function makeDonut(id, p, fillColor, trackColor = '#e8eef5') {
-  const ctx = document.getElementById(id).getContext('2d');
-  return new Chart(ctx, {
-    type: 'doughnut',
-    data: {
-      datasets: [{
-        data: [p * 100, (1 - p) * 100],
-        backgroundColor: [fillColor, trackColor],
-        borderWidth: 0, borderRadius: 3
-      }]
-    },
-    options: {
-      responsive: true, maintainAspectRatio: false, cutout: '72%',
-      plugins: { legend: { display: false }, tooltip: { enabled: false } },
-      animation: { animateRotate: true, duration: 700 }
-    }
-  });
-}
-
-// ── Progress bars ──────────────────────────────────────────────────────────
-function renderBars() {
-  const container = document.getElementById('progressBars');
-  container.innerHTML = data.metrics.map(m => {
-    const p = pct(m.complete, m.total);
-    return `<div class="prog-item">
-      <div class="prog-header">
-        <span class="prog-name">${m.label}</span>
-        <span class="prog-pct">${(p*100).toFixed(1)}%</span>
-      </div>
-      <div class="bar-track">
-        <div class="bar-fill" style="width:${(p*100).toFixed(1)}%;background:${m.color};"></div>
-      </div>
-    </div>`;
-  }).join('');
-}
-
-// ── Sites table ────────────────────────────────────────────────────────────
-function renderSitesTable(filter) {
-  const tbody = document.getElementById('sitesBody');
-  const filtered = filter && filter !== 'all'
-    ? SITES.filter(s => s.region === filter || s.status === filter)
-    : SITES;
-
-  const statusClass = { 'Decommissioned': 'status-decom', 'Active': 'status-active', 'In Progress': 'status-progress' };
-  const regionClass = { 'EMEA': 'badge-emea', 'Americas': 'badge-americas', 'APAC': 'badge-apac' };
-
-  tbody.innerHTML = filtered.map(s => `
-    <tr>
-      <td><strong>${s.site}</strong><br><span style="font-size:11px;color:#8899aa;">${s.country}</span></td>
-      <td><span class="region-badge ${regionClass[s.region]}">${s.region}</span></td>
-      <td><span class="status-badge ${statusClass[s.status]}">${s.status}</span></td>
-      <td class="notes-cell">${s.notes || '—'}</td>
-    </tr>`).join('');
-}
-
-function filterSites(filter, btn) {
-  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  renderSitesTable(filter === 'all' ? null : filter);
-}
-
-// ── Edit panel ─────────────────────────────────────────────────────────────
+// ── Figures edit ─────────────────────────────────────────────────────────────
 function openEdit() {
   document.getElementById('editDate').value = data.asOf;
   document.getElementById('editRows').innerHTML = data.metrics.map((m, i) => `
@@ -500,14 +347,12 @@ function openEdit() {
   document.getElementById('btnSave').style.display   = 'inline-block';
   document.getElementById('btnCancel').style.display = 'inline-block';
 }
-
 function cancelEdit() {
   document.getElementById('editPanel').classList.remove('active');
   document.getElementById('btnEdit').style.display   = 'inline-block';
   document.getElementById('btnSave').style.display   = 'none';
   document.getElementById('btnCancel').style.display = 'none';
 }
-
 function saveEdit() {
   data.asOf = document.getElementById('editDate').value.trim() || data.asOf;
   data.metrics.forEach((m, i) => {
@@ -516,11 +361,143 @@ function saveEdit() {
     if (!isNaN(c)) m.complete = c;
     if (!isNaN(t)) m.total   = t;
   });
-  saveData(data);
-  cancelEdit();
-  renderAll();
+  saveAll(); cancelEdit(); renderAll();
 }
 
+// ── Table edit ───────────────────────────────────────────────────────────────
+function openTableEdit() {
+  tableEditMode = true;
+  document.getElementById('tableEditBar').classList.add('active');
+  document.getElementById('btnEditSites').textContent = 'Editing...';
+  renderSitesTable(currentFilter);
+}
+function saveSites() {
+  // Read back edits from DOM
+  sites.forEach((s, i) => {
+    const selEl  = document.getElementById(`sel_${i}`);
+    const notesEl = document.getElementById(`notes_${i}`);
+    if (selEl)   s.status = selEl.value;
+    if (notesEl) s.notes  = notesEl.value;
+  });
+  tableEditMode = false;
+  document.getElementById('tableEditBar').classList.remove('active');
+  document.getElementById('btnEditSites').textContent = 'Edit Sites';
+  saveAll();
+  renderSitesTable(currentFilter);
+}
+
+// ── Render ────────────────────────────────────────────────────────────────────
+function pct(done, total) { return total > 0 ? done / total : 0; }
+function fmt(n) { return Number.isInteger(n) ? n : parseFloat(n.toFixed(2)); }
+
+function renderAll() {
+  document.getElementById('asOfLabel').textContent = 'As of ' + data.asOf;
+  renderMetricCharts();
+  renderRegionalCharts();
+  renderBars();
+  renderSitesTable(currentFilter);
+}
+
+function renderMetricCharts() {
+  charts.forEach(c => c.destroy()); charts = [];
+  const grid = document.getElementById('chartsGrid');
+  grid.innerHTML = '';
+  data.metrics.forEach((m, i) => {
+    const p = pct(m.complete, m.total);
+    const card = document.createElement('div');
+    card.className = 'chart-card';
+    card.innerHTML = `
+      <h3>${m.label}</h3>
+      <div class="chart-wrap"><canvas id="mc_${i}"></canvas>
+        <div class="chart-center"><div class="chart-pct">${(p*100).toFixed(1)}%</div><div class="chart-sub">complete</div></div>
+      </div>
+      <div class="stat-row">
+        <div class="stat"><div class="stat-val">${fmt(m.complete)}</div><div class="stat-lbl">${m.doneLabel}</div></div>
+        <div class="stat"><div class="stat-val">${fmt(m.total - m.complete)}</div><div class="stat-lbl">Remaining</div></div>
+        <div class="stat"><div class="stat-val">${fmt(m.total)}</div><div class="stat-lbl">Total ${m.unitLabel}</div></div>
+      </div>`;
+    grid.appendChild(card);
+    charts.push(makeDonut(`mc_${i}`, p, m.color));
+  });
+}
+
+function renderRegionalCharts() {
+  regionalCharts.forEach(c => c.destroy()); regionalCharts = [];
+  const grid = document.getElementById('regionalGrid');
+  grid.innerHTML = '';
+  data.regional.forEach((r, i) => {
+    const p = pct(r.decom, r.total);
+    const card = document.createElement('div');
+    card.className = 'chart-card regional';
+    card.innerHTML = `
+      <h3>${r.label}</h3>
+      <div class="chart-wrap large"><canvas id="rc_${i}"></canvas>
+        <div class="chart-center"><div class="chart-pct">${(p*100).toFixed(0)}%</div><div class="chart-sub">decommissioned</div></div>
+      </div>
+      <div class="stat-row">
+        <div class="stat"><div class="stat-val">${r.decom}</div><div class="stat-lbl">Decommissioned</div></div>
+        <div class="stat"><div class="stat-val">${r.total - r.decom}</div><div class="stat-lbl">Remaining</div></div>
+        <div class="stat"><div class="stat-val">${r.total}</div><div class="stat-lbl">Total Sites</div></div>
+      </div>`;
+    grid.appendChild(card);
+    regionalCharts.push(makeDonut(`rc_${i}`, p, r.color));
+  });
+}
+
+function makeDonut(id, p, fillColor) {
+  const ctx = document.getElementById(id).getContext('2d');
+  return new Chart(ctx, {
+    type: 'doughnut',
+    data: { datasets: [{ data: [p*100, (1-p)*100], backgroundColor: [fillColor, '#e8eef5'], borderWidth: 0, borderRadius: 3 }] },
+    options: { responsive: true, maintainAspectRatio: false, cutout: '72%', plugins: { legend: { display: false }, tooltip: { enabled: false } }, animation: { animateRotate: true, duration: 700 } }
+  });
+}
+
+function renderBars() {
+  document.getElementById('progressBars').innerHTML = data.metrics.map(m => {
+    const p = pct(m.complete, m.total);
+    return `<div class="prog-item">
+      <div class="prog-header"><span class="prog-name">${m.label}</span><span class="prog-pct">${(p*100).toFixed(1)}%</span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:${(p*100).toFixed(1)}%;background:${m.color};"></div></div>
+    </div>`;
+  }).join('');
+}
+
+function renderSitesTable(filter) {
+  currentFilter = filter || 'all';
+  const regionClass = { EMEA: 'badge-emea', Americas: 'badge-americas', APAC: 'badge-apac' };
+  const statusClass  = { Decommissioned: 'status-decom', Active: 'status-active', 'In Progress': 'status-progress' };
+  const statuses = ['Active', 'In Progress', 'Decommissioned'];
+
+  const filtered = currentFilter === 'all'
+    ? sites.map((s, i) => ({ ...s, _i: i }))
+    : sites.map((s, i) => ({ ...s, _i: i })).filter(s => s.region === currentFilter || s.status === currentFilter);
+
+  document.getElementById('sitesBody').innerHTML = filtered.map(s => {
+    const i = s._i;
+    const statusCell = tableEditMode
+      ? `<select class="tbl-status-select" id="sel_${i}">${statuses.map(st => `<option value="${st}" ${st === s.status ? 'selected' : ''}>${st}</option>`).join('')}</select>`
+      : `<span class="status-badge ${statusClass[s.status]}">${s.status}</span>`;
+    const notesCell = tableEditMode
+      ? `<textarea class="tbl-notes-input" id="notes_${i}">${s.notes}</textarea>`
+      : `<span class="notes-cell">${s.notes || '&mdash;'}</span>`;
+    return `<tr>
+      <td><strong>${s.site}</strong><br><span style="font-size:11px;color:#8899aa;">${s.country}</span></td>
+      <td><span class="region-badge ${regionClass[s.region]}">${s.region}</span></td>
+      <td>${statusCell}</td>
+      <td>${notesCell}</td>
+    </tr>`;
+  }).join('');
+}
+
+function filterSites(filter, btn) {
+  document.querySelectorAll('.filter-btn:not(#btnEditSites)').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderSitesTable(filter === 'all' ? 'all' : filter);
+}
+
+// ── Init ──────────────────────────────────────────────────────────────────────
+loadAll();
 renderAll();
 </script>
 </body>
