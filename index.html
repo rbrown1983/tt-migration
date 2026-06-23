@@ -14,6 +14,10 @@ header h1{font-size:20px;font-weight:700;}
 header p{font-size:12px;opacity:0.8;margin-top:3px;}
 .header-right{display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
 .as-of{background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);border-radius:20px;padding:4px 14px;font-size:12px;color:white;}
+.save-status{font-size:12px;color:rgba(255,255,255,0.8);min-width:80px;text-align:right;}
+.save-status.saving{color:#fef9c3;}
+.save-status.saved{color:#4ec9a0;}
+.save-status.error{color:#fca5a5;}
 button{border:none;border-radius:8px;padding:7px 16px;font-size:12px;font-weight:600;cursor:pointer;transition:opacity 0.15s;}
 button:hover{opacity:0.85;}
 .btn-edit{background:#fff;color:#1F3864;}
@@ -47,11 +51,13 @@ main{padding:24px 20px;max-width:1300px;margin:0 auto;}
 .bar-fill{height:100%;border-radius:99px;transition:width 0.6s ease;}
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:1000;align-items:center;justify-content:center;}
 .modal-overlay.active{display:flex;}
-.modal{background:#fff;border-radius:16px;padding:32px 28px;width:320px;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,0.2);}
+.modal{background:#fff;border-radius:16px;padding:32px 28px;width:340px;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,0.2);}
 .modal h2{font-size:16px;color:#1F3864;margin-bottom:6px;}
-.modal p{font-size:12px;color:#8899aa;margin-bottom:20px;}
+.modal p{font-size:12px;color:#8899aa;margin-bottom:20px;line-height:1.5;}
 .pin-input{width:100%;border:2px solid #d0dae8;border-radius:10px;padding:10px 14px;font-size:20px;letter-spacing:6px;text-align:center;color:#1F3864;font-weight:700;margin-bottom:14px;}
 .pin-input:focus{outline:none;border-color:#2E75B6;}
+.token-input{width:100%;border:2px solid #d0dae8;border-radius:10px;padding:10px 14px;font-size:12px;letter-spacing:0;text-align:left;color:#344563;font-weight:400;margin-bottom:14px;font-family:monospace;}
+.token-input:focus{outline:none;border-color:#2E75B6;}
 .pin-error{color:#dc2626;font-size:12px;margin-bottom:10px;min-height:16px;}
 .btn-pin-ok{background:#1F3864;color:white;width:100%;padding:10px;font-size:14px;border-radius:10px;margin-bottom:8px;}
 .btn-pin-cancel{background:#f0f4f8;color:#344563;width:100%;padding:10px;font-size:13px;border-radius:10px;}
@@ -90,11 +96,22 @@ tbody td{padding:9px 14px;color:#344563;vertical-align:middle;}
 .table-edit-bar.active{display:flex;}
 .table-edit-bar span{font-size:12px;color:#1e40af;font-weight:500;}
 .btn-save-sites{background:#2E75B6;color:white;padding:6px 14px;font-size:12px;border-radius:7px;}
+.loading-overlay{display:none;position:fixed;inset:0;background:rgba(240,244,248,0.85);z-index:500;align-items:center;justify-content:center;flex-direction:column;gap:12px;}
+.loading-overlay.active{display:flex;}
+.spinner{width:36px;height:36px;border:3px solid #d0dae8;border-top-color:#2E75B6;border-radius:50%;animation:spin 0.7s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.loading-text{font-size:13px;color:#344563;font-weight:500;}
 footer{text-align:center;color:#aab8c8;font-size:11px;padding:16px;}
 </style>
 </head>
 <body>
 
+<div class="loading-overlay active" id="loadingOverlay">
+  <div class="spinner"></div>
+  <div class="loading-text">Loading dashboard data...</div>
+</div>
+
+<!-- PIN modal -->
 <div class="modal-overlay" id="pinModal">
   <div class="modal">
     <h2>Admin Access</h2>
@@ -106,13 +123,26 @@ footer{text-align:center;color:#aab8c8;font-size:11px;padding:16px;}
   </div>
 </div>
 
+<!-- GitHub token setup modal -->
+<div class="modal-overlay" id="tokenModal">
+  <div class="modal">
+    <h2>GitHub Token Setup</h2>
+    <p>Paste your fine-grained GitHub token below. It will be stored only in this browser and never uploaded to GitHub.</p>
+    <input type="password" class="token-input" id="tokenInput" placeholder="github_pat_..." autocomplete="off">
+    <div class="pin-error" id="tokenError"></div>
+    <button class="btn-pin-ok" onclick="saveToken()">Save Token</button>
+    <button class="btn-pin-cancel" onclick="closeTokenModal()">Cancel</button>
+  </div>
+</div>
+
 <header>
   <div>
     <h1>T&amp;T Infrastructure Integration</h1>
     <p>Migration Status Dashboard</p>
   </div>
   <div class="header-right">
-    <span class="as-of" id="asOfLabel">As of 22 Jun 2026</span>
+    <span class="as-of" id="asOfLabel">Loading...</span>
+    <span class="save-status" id="saveStatus"></span>
     <button class="btn-lock" id="btnLock" onclick="lockAll()">Lock</button>
     <button class="btn-cancel" id="btnCancel" onclick="cancelEdit()">Cancel</button>
     <button class="btn-save" id="btnSave" onclick="saveEdit()">Save &amp; Refresh</button>
@@ -148,7 +178,7 @@ footer{text-align:center;color:#aab8c8;font-size:11px;padding:16px;}
   <div class="section-label" style="margin-top:16px;">Site Status</div>
   <div class="sites-card">
     <div class="table-edit-bar" id="tableEditBar">
-      <span>Edit mode - update status and notes for any site, then save.</span>
+      <span>Edit mode - update status and notes, then save.</span>
       <button class="btn-save-sites" onclick="saveSites()">Save Site Changes</button>
     </div>
     <div class="filter-bar">
@@ -170,11 +200,17 @@ footer{text-align:center;color:#aab8c8;font-size:11px;padding:16px;}
   </div>
 </main>
 
-<footer>T&amp;T Infrastructure Integration &middot; CBRE &middot; Confidential &middot; Data as at 22 June 2026</footer>
+<footer>T&amp;T Infrastructure Integration &middot; CBRE &middot; Confidential &middot; Data as at <span id="footerDate"></span></footer>
 
 <script>
-var ADMIN_PIN = '170717';
-var STORAGE_KEY = 'tt_migration_v5';
+// ============================================================
+// CONFIG
+// ============================================================
+var GITHUB_REPO  = 'rbrown1983/tt-migration';
+var DATA_FILE    = 'data.json';
+var ADMIN_PIN    = '170717';
+var GH_TOKEN_KEY = 'tt_gh_token';
+// ============================================================
 
 var DEFAULT_METRICS = [
   {label:'Server Decommissioning',complete:126,total:265,unitLabel:'servers',doneLabel:'Decommissioned',color:'#2E75B6'},
@@ -239,69 +275,118 @@ var charts = [], regionalCharts = [];
 var tableEditMode = false;
 var currentFilter = 'all';
 var asOf = '22 Jun 2026';
+var currentSHA = null;
 
-function deepCopy(obj) { return JSON.parse(JSON.stringify(obj)); }
+function deepCopy(o){ return JSON.parse(JSON.stringify(o)); }
+function getStoredToken(){ return localStorage.getItem(GH_TOKEN_KEY) || ''; }
 
-function loadAll() {
+// ---- GitHub API ----
+function toBase64(str){ return btoa(unescape(encodeURIComponent(str))); }
+
+function setSaveStatus(msg, cls){
+  var el = document.getElementById('saveStatus');
+  el.textContent = msg;
+  el.className = 'save-status'+(cls?' '+cls:'');
+}
+
+async function loadFromGitHub(){
+  // Public read - no token needed
+  var url = 'https://raw.githubusercontent.com/'+GITHUB_REPO+'/main/'+DATA_FILE+'?t='+Date.now();
   try {
-    var raw = localStorage.getItem(STORAGE_KEY);
-    if (raw) {
-      var p = JSON.parse(raw);
-      if (p.metrics && p.metrics.length > 0) metrics = p.metrics;
-      if (p.sites && p.sites.length > 0) sites = p.sites;
-      if (p.asOf) asOf = p.asOf;
+    var res = await fetch(url);
+    if(res.ok){
+      var data = await res.json();
+      if(data.metrics && data.metrics.length > 0) metrics = data.metrics;
+      if(data.sites   && data.sites.length   > 0) sites   = data.sites;
+      if(data.asOf) asOf = data.asOf;
     }
-  } catch(e) {}
-  if (!metrics || metrics.length === 0) metrics = deepCopy(DEFAULT_METRICS);
-  if (!sites   || sites.length   === 0) sites   = deepCopy(DEFAULT_SITES);
+  } catch(e){ console.warn('Load error, using defaults:', e); }
+  if(!metrics || metrics.length === 0) metrics = deepCopy(DEFAULT_METRICS);
+  if(!sites   || sites.length   === 0) sites   = deepCopy(DEFAULT_SITES);
 }
 
-function saveAll() {
-  try { localStorage.setItem(STORAGE_KEY, JSON.stringify({metrics:metrics, sites:sites, asOf:asOf})); } catch(e) {}
+async function getFileSHA(){
+  var token = getStoredToken();
+  try {
+    var res = await fetch('https://api.github.com/repos/'+GITHUB_REPO+'/contents/'+DATA_FILE, {
+      headers:{ Authorization:'token '+token, Accept:'application/vnd.github.v3+json' }
+    });
+    if(res.ok){ var j = await res.json(); return j.sha; }
+  } catch(e){}
+  return null;
 }
 
-function getRegionalData() {
-  return ['EMEA','Americas','APAC'].map(function(r) {
-    return {
-      label: r,
-      decom: sites.filter(function(s){ return s.region===r && s.status==='Decommissioned'; }).length,
-      total: sites.filter(function(s){ return s.region===r; }).length,
-      color: REGIONAL_COLORS[r]
-    };
-  });
+async function saveToGitHub(){
+  var token = getStoredToken();
+  if(!token){ setSaveStatus('No token', 'error'); return; }
+  setSaveStatus('Saving...', 'saving');
+  var sha = await getFileSHA();
+  var payload = JSON.stringify({metrics:metrics, sites:sites, asOf:asOf}, null, 2);
+  var body = { message:'Dashboard update '+new Date().toISOString(), content:toBase64(payload) };
+  if(sha) body.sha = sha;
+  try {
+    var res = await fetch('https://api.github.com/repos/'+GITHUB_REPO+'/contents/'+DATA_FILE, {
+      method:'PUT',
+      headers:{ Authorization:'token '+token, Accept:'application/vnd.github.v3+json', 'Content-Type':'application/json' },
+      body: JSON.stringify(body)
+    });
+    if(res.ok){
+      setSaveStatus('Saved', 'saved');
+      setTimeout(function(){ setSaveStatus(''); }, 3000);
+    } else {
+      var err = await res.json();
+      setSaveStatus('Save failed', 'error');
+      console.error('Save error:', err);
+    }
+  } catch(e){ setSaveStatus('Save failed','error'); console.error(e); }
 }
 
-function pct(done, total) { return total > 0 ? done/total : 0; }
-function fmt(n) { return Number.isInteger(n) ? n : parseFloat(n.toFixed(2)); }
+// ---- Token modal ----
+function showTokenModal(){
+  document.getElementById('tokenInput').value = getStoredToken();
+  document.getElementById('tokenError').textContent = '';
+  document.getElementById('tokenModal').classList.add('active');
+  setTimeout(function(){ document.getElementById('tokenInput').focus(); }, 100);
+}
+function closeTokenModal(){ document.getElementById('tokenModal').classList.remove('active'); }
+function saveToken(){
+  var val = document.getElementById('tokenInput').value.trim();
+  if(!val){ document.getElementById('tokenError').textContent = 'Please paste a token.'; return; }
+  localStorage.setItem(GH_TOKEN_KEY, val);
+  closeTokenModal();
+  doAction(pendingAction);
+}
 
-// PIN
-function requirePin(action) {
-  if (isAuthenticated) { doAction(action); return; }
+// ---- PIN ----
+function requirePin(action){
+  if(isAuthenticated){ doAction(action); return; }
   pendingAction = action;
   document.getElementById('pinInput').value = '';
   document.getElementById('pinError').textContent = '';
   document.getElementById('pinModal').classList.add('active');
   setTimeout(function(){ document.getElementById('pinInput').focus(); }, 100);
 }
-function checkPin() {
+function checkPin(){
   var val = document.getElementById('pinInput').value.trim();
-  if (val === ADMIN_PIN) {
+  if(val === ADMIN_PIN){
     isAuthenticated = true;
     document.getElementById('pinModal').classList.remove('active');
     document.getElementById('btnLock').style.display = 'inline-block';
-    doAction(pendingAction);
+    // Check token exists before proceeding
+    if(!getStoredToken()){ showTokenModal(); }
+    else { doAction(pendingAction); }
   } else {
-    document.getElementById('pinError').textContent = 'Incorrect PIN. Please try again.';
+    document.getElementById('pinError').textContent = 'Incorrect PIN.';
     document.getElementById('pinInput').value = '';
     document.getElementById('pinInput').focus();
   }
 }
-function closePin() { document.getElementById('pinModal').classList.remove('active'); pendingAction = null; }
-function lockAll() {
+function closePin(){ document.getElementById('pinModal').classList.remove('active'); pendingAction = null; }
+function lockAll(){
   isAuthenticated = false;
   document.getElementById('btnLock').style.display = 'none';
   cancelEdit();
-  if (tableEditMode) {
+  if(tableEditMode){
     tableEditMode = false;
     document.getElementById('tableEditBar').classList.remove('active');
     document.getElementById('btnEditSites').textContent = 'Edit Sites';
@@ -309,19 +394,21 @@ function lockAll() {
   }
 }
 document.getElementById('pinInput').addEventListener('keydown', function(e){ if(e.key==='Enter') checkPin(); });
-function doAction(action) {
-  if (action==='figures') openEdit();
-  if (action==='sites') openTableEdit();
+document.getElementById('tokenInput').addEventListener('keydown', function(e){ if(e.key==='Enter') saveToken(); });
+function doAction(action){
+  if(action==='figures') openEdit();
+  if(action==='sites') openTableEdit();
 }
 
-// Figures edit
-function openEdit() {
+// ---- Figures edit ----
+function openEdit(){
   document.getElementById('editDate').value = asOf;
   var html = '';
-  for (var i=0; i<metrics.length; i++) {
-    html += '<div class="edit-row-label">'+metrics[i].label+'</div>';
-    html += '<input class="edit-input" type="number" id="inp_c_'+i+'" value="'+fmt(metrics[i].complete)+'" step="any" min="0">';
-    html += '<input class="edit-input" type="number" id="inp_t_'+i+'" value="'+fmt(metrics[i].total)+'" step="any" min="0">';
+  for(var i=0; i<metrics.length; i++){
+    var m = metrics[i];
+    html += '<div class="edit-row-label">'+m.label+'</div>';
+    html += '<input class="edit-input" type="number" id="inp_c_'+i+'" value="'+fmt(m.complete)+'" step="any" min="0">';
+    html += '<input class="edit-input" type="number" id="inp_t_'+i+'" value="'+fmt(m.total)+'" step="any" min="0">';
   }
   document.getElementById('editRows').innerHTML = html;
   document.getElementById('editPanel').classList.add('active');
@@ -329,170 +416,176 @@ function openEdit() {
   document.getElementById('btnSave').style.display = 'inline-block';
   document.getElementById('btnCancel').style.display = 'inline-block';
 }
-function cancelEdit() {
+function cancelEdit(){
   document.getElementById('editPanel').classList.remove('active');
   document.getElementById('btnEdit').style.display = 'inline-block';
   document.getElementById('btnSave').style.display = 'none';
   document.getElementById('btnCancel').style.display = 'none';
 }
-function saveEdit() {
+async function saveEdit(){
   var d = document.getElementById('editDate').value.trim();
-  if (d) asOf = d;
-  for (var i=0; i<metrics.length; i++) {
+  if(d) asOf = d;
+  for(var i=0; i<metrics.length; i++){
     var c = parseFloat(document.getElementById('inp_c_'+i).value);
     var t = parseFloat(document.getElementById('inp_t_'+i).value);
-    if (!isNaN(c)) metrics[i].complete = c;
-    if (!isNaN(t)) metrics[i].total = t;
+    if(!isNaN(c)) metrics[i].complete = c;
+    if(!isNaN(t)) metrics[i].total = t;
   }
-  saveAll(); cancelEdit(); renderAll();
+  cancelEdit(); renderAll();
+  await saveToGitHub();
 }
 
-// Table edit
-function openTableEdit() {
+// ---- Table edit ----
+function openTableEdit(){
   tableEditMode = true;
   document.getElementById('tableEditBar').classList.add('active');
   document.getElementById('btnEditSites').textContent = 'Editing...';
   renderSitesTable(currentFilter);
 }
-function saveSites() {
-  for (var i=0; i<sites.length; i++) {
-    var sel = document.getElementById('sel_'+i);
+async function saveSites(){
+  for(var i=0; i<sites.length; i++){
+    var sel   = document.getElementById('sel_'+i);
     var notes = document.getElementById('notes_'+i);
-    if (sel) sites[i].status = sel.value;
-    if (notes) sites[i].notes = notes.value;
+    if(sel)   sites[i].status = sel.value;
+    if(notes) sites[i].notes  = notes.value;
   }
   tableEditMode = false;
   document.getElementById('tableEditBar').classList.remove('active');
   document.getElementById('btnEditSites').textContent = 'Edit Sites';
-  saveAll();
-  renderRegionalCharts();
-  renderSitesTable(currentFilter);
+  metrics[5].complete = sites.filter(function(s){ return s.status==='Decommissioned'; }).length;
+  renderAll();
+  await saveToGitHub();
 }
 
-// Render
-function renderAll() {
-  document.getElementById('asOfLabel').textContent = 'As of ' + asOf;
+// ---- Render ----
+function pct(done,total){ return total>0 ? done/total : 0; }
+function fmt(n){ return Number.isInteger(n) ? n : parseFloat(n.toFixed(2)); }
+
+function renderAll(){
+  document.getElementById('asOfLabel').textContent = 'As of '+asOf;
+  document.getElementById('footerDate').textContent = asOf;
   renderMetricCharts();
   renderBars();
   renderRegionalCharts();
   renderSitesTable(currentFilter);
 }
 
-function renderMetricCharts() {
-  charts.forEach(function(c){ c.destroy(); }); charts = [];
+function renderMetricCharts(){
+  charts.forEach(function(c){ c.destroy(); }); charts=[];
   var grid = document.getElementById('chartsGrid');
-  grid.innerHTML = '';
-  for (var i=0; i<metrics.length; i++) {
-    var m = metrics[i];
-    var p = pct(m.complete, m.total);
-    var card = document.createElement('div');
-    card.className = 'chart-card';
-    card.innerHTML =
-      '<h3>'+m.label+'</h3>' +
-      '<div class="chart-wrap"><canvas id="mc_'+i+'"></canvas>' +
-      '<div class="chart-center"><div class="chart-pct">'+(p*100).toFixed(1)+'%</div><div class="chart-sub">complete</div></div></div>' +
-      '<div class="stat-row">' +
-      '<div class="stat"><div class="stat-val">'+fmt(m.complete)+'</div><div class="stat-lbl">'+m.doneLabel+'</div></div>' +
-      '<div class="stat"><div class="stat-val">'+fmt(m.total-m.complete)+'</div><div class="stat-lbl">Remaining</div></div>' +
-      '<div class="stat"><div class="stat-val">'+fmt(m.total)+'</div><div class="stat-lbl">Total '+m.unitLabel+'</div></div>' +
+  grid.innerHTML='';
+  for(var i=0; i<metrics.length; i++){
+    var m=metrics[i], p=pct(m.complete,m.total);
+    var card=document.createElement('div'); card.className='chart-card';
+    card.innerHTML='<h3>'+m.label+'</h3>'+
+      '<div class="chart-wrap"><canvas id="mc_'+i+'"></canvas>'+
+      '<div class="chart-center"><div class="chart-pct">'+(p*100).toFixed(1)+'%</div><div class="chart-sub">complete</div></div></div>'+
+      '<div class="stat-row">'+
+      '<div class="stat"><div class="stat-val">'+fmt(m.complete)+'</div><div class="stat-lbl">'+m.doneLabel+'</div></div>'+
+      '<div class="stat"><div class="stat-val">'+fmt(m.total-m.complete)+'</div><div class="stat-lbl">Remaining</div></div>'+
+      '<div class="stat"><div class="stat-val">'+fmt(m.total)+'</div><div class="stat-lbl">Total '+m.unitLabel+'</div></div>'+
       '</div>';
     grid.appendChild(card);
-    charts.push(makeDonut('mc_'+i, p, m.color));
+    charts.push(makeDonut('mc_'+i,p,m.color));
   }
 }
 
-function renderRegionalCharts() {
-  regionalCharts.forEach(function(c){ c.destroy(); }); regionalCharts = [];
-  var grid = document.getElementById('regionalGrid');
-  grid.innerHTML = '';
-  var rd = getRegionalData();
-  for (var i=0; i<rd.length; i++) {
-    var r = rd[i];
-    var p = pct(r.decom, r.total);
-    var card = document.createElement('div');
-    card.className = 'chart-card regional';
-    card.innerHTML =
-      '<h3>'+r.label+'</h3>' +
-      '<div class="chart-wrap large"><canvas id="rc_'+i+'"></canvas>' +
-      '<div class="chart-center"><div class="chart-pct">'+(p*100).toFixed(0)+'%</div><div class="chart-sub">decommissioned</div></div></div>' +
-      '<div class="stat-row">' +
-      '<div class="stat"><div class="stat-val">'+r.decom+'</div><div class="stat-lbl">Decommissioned</div></div>' +
-      '<div class="stat"><div class="stat-val">'+(r.total-r.decom)+'</div><div class="stat-lbl">Remaining</div></div>' +
-      '<div class="stat"><div class="stat-val">'+r.total+'</div><div class="stat-lbl">Total Sites</div></div>' +
+function renderRegionalCharts(){
+  regionalCharts.forEach(function(c){ c.destroy(); }); regionalCharts=[];
+  var grid=document.getElementById('regionalGrid'); grid.innerHTML='';
+  var rd=getRegionalData();
+  for(var i=0; i<rd.length; i++){
+    var r=rd[i], p=pct(r.decom,r.total);
+    var card=document.createElement('div'); card.className='chart-card regional';
+    card.innerHTML='<h3>'+r.label+'</h3>'+
+      '<div class="chart-wrap large"><canvas id="rc_'+i+'"></canvas>'+
+      '<div class="chart-center"><div class="chart-pct">'+(p*100).toFixed(0)+'%</div><div class="chart-sub">decommissioned</div></div></div>'+
+      '<div class="stat-row">'+
+      '<div class="stat"><div class="stat-val">'+r.decom+'</div><div class="stat-lbl">Decommissioned</div></div>'+
+      '<div class="stat"><div class="stat-val">'+(r.total-r.decom)+'</div><div class="stat-lbl">Remaining</div></div>'+
+      '<div class="stat"><div class="stat-val">'+r.total+'</div><div class="stat-lbl">Total Sites</div></div>'+
       '</div>';
     grid.appendChild(card);
-    regionalCharts.push(makeDonut('rc_'+i, p, r.color));
+    regionalCharts.push(makeDonut('rc_'+i,p,r.color));
   }
 }
 
-function makeDonut(id, p, fillColor) {
-  var ctx = document.getElementById(id).getContext('2d');
-  return new Chart(ctx, {
-    type: 'doughnut',
-    data: {datasets:[{data:[p*100,(1-p)*100],backgroundColor:[fillColor,'#e8eef5'],borderWidth:0,borderRadius:3}]},
-    options: {responsive:true,maintainAspectRatio:false,cutout:'72%',plugins:{legend:{display:false},tooltip:{enabled:false}},animation:{animateRotate:true,duration:700}}
+function getRegionalData(){
+  return ['EMEA','Americas','APAC'].map(function(r){
+    return {
+      label:r,
+      decom:sites.filter(function(s){ return s.region===r&&s.status==='Decommissioned'; }).length,
+      total:sites.filter(function(s){ return s.region===r; }).length,
+      color:REGIONAL_COLORS[r]
+    };
   });
 }
 
-function renderBars() {
-  var html = '';
-  for (var i=0; i<metrics.length; i++) {
-    var m = metrics[i];
-    var p = pct(m.complete, m.total);
-    html += '<div class="prog-item"><div class="prog-header"><span class="prog-name">'+m.label+'</span><span class="prog-pct">'+(p*100).toFixed(1)+'%</span></div>' +
-            '<div class="bar-track"><div class="bar-fill" style="width:'+(p*100).toFixed(1)+'%;background:'+m.color+';"></div></div></div>';
-  }
-  document.getElementById('progressBars').innerHTML = html;
+function makeDonut(id,p,fillColor){
+  var ctx=document.getElementById(id).getContext('2d');
+  return new Chart(ctx,{
+    type:'doughnut',
+    data:{datasets:[{data:[p*100,(1-p)*100],backgroundColor:[fillColor,'#e8eef5'],borderWidth:0,borderRadius:3}]},
+    options:{responsive:true,maintainAspectRatio:false,cutout:'72%',plugins:{legend:{display:false},tooltip:{enabled:false}},animation:{animateRotate:true,duration:700}}
+  });
 }
 
-function renderSitesTable(filter) {
-  currentFilter = filter || 'all';
-  var filtered = [];
-  for (var i=0; i<sites.length; i++) {
-    var s = sites[i];
-    if (currentFilter==='all' || s.region===currentFilter || s.status===currentFilter) {
-      filtered.push({site:s.site,country:s.country,region:s.region,status:s.status,notes:s.notes,idx:i});
-    }
+function renderBars(){
+  var html='';
+  for(var i=0; i<metrics.length; i++){
+    var m=metrics[i], p=pct(m.complete,m.total);
+    html+='<div class="prog-item"><div class="prog-header"><span class="prog-name">'+m.label+'</span><span class="prog-pct">'+(p*100).toFixed(1)+'%</span></div>'+
+          '<div class="bar-track"><div class="bar-fill" style="width:'+(p*100).toFixed(1)+'%;background:'+m.color+';"></div></div></div>';
   }
-  var html = '';
-  for (var j=0; j<filtered.length; j++) {
-    var row = filtered[j];
-    var idx = row.idx;
-    var statusCell, notesCell;
-    if (tableEditMode) {
-      var opts = '';
-      for (var k=0; k<STATUSES.length; k++) {
-        opts += '<option value="'+STATUSES[k]+'"'+(STATUSES[k]===row.status?' selected':'')+'>'+STATUSES[k]+'</option>';
-      }
-      statusCell = '<select class="tbl-status-select" id="sel_'+idx+'">'+opts+'</select>';
-      notesCell = '<textarea class="tbl-notes-input" id="notes_'+idx+'">'+row.notes+'</textarea>';
+  document.getElementById('progressBars').innerHTML=html;
+}
+
+function renderSitesTable(filter){
+  currentFilter=filter||'all';
+  var filtered=[];
+  for(var i=0; i<sites.length; i++){
+    var s=sites[i];
+    if(currentFilter==='all'||s.region===currentFilter||s.status===currentFilter)
+      filtered.push({site:s.site,country:s.country,region:s.region,status:s.status,notes:s.notes,idx:i});
+  }
+  var html='';
+  for(var j=0; j<filtered.length; j++){
+    var row=filtered[j], idx=row.idx, statusCell, notesCell;
+    if(tableEditMode){
+      var opts='';
+      for(var k=0; k<STATUSES.length; k++)
+        opts+='<option value="'+STATUSES[k]+'"'+(STATUSES[k]===row.status?' selected':'')+'>'+STATUSES[k]+'</option>';
+      statusCell='<select class="tbl-status-select" id="sel_'+idx+'">'+opts+'</select>';
+      notesCell='<textarea class="tbl-notes-input" id="notes_'+idx+'">'+row.notes+'</textarea>';
     } else {
-      var sc = STATUS_CLASS[row.status] || 'status-active';
-      statusCell = '<span class="status-badge '+sc+'">'+row.status+'</span>';
-      notesCell = '<span class="notes-cell">'+(row.notes || '&mdash;')+'</span>';
+      var sc=STATUS_CLASS[row.status]||'status-active';
+      statusCell='<span class="status-badge '+sc+'">'+row.status+'</span>';
+      notesCell='<span class="notes-cell">'+(row.notes||'&mdash;')+'</span>';
     }
-    var rc = REGION_CLASS[row.region] || '';
-    html += '<tr>' +
-      '<td><strong>'+row.site+'</strong><br><span style="font-size:11px;color:#8899aa;">'+row.country+'</span></td>' +
-      '<td><span class="region-badge '+rc+'">'+row.region+'</span></td>' +
-      '<td>'+statusCell+'</td>' +
-      '<td>'+notesCell+'</td>' +
+    var rc=REGION_CLASS[row.region]||'';
+    html+='<tr>'+
+      '<td><strong>'+row.site+'</strong><br><span style="font-size:11px;color:#8899aa;">'+row.country+'</span></td>'+
+      '<td><span class="region-badge '+rc+'">'+row.region+'</span></td>'+
+      '<td>'+statusCell+'</td>'+
+      '<td>'+notesCell+'</td>'+
       '</tr>';
   }
-  document.getElementById('sitesBody').innerHTML = html;
+  document.getElementById('sitesBody').innerHTML=html;
 }
 
-function filterSites(filter, btn) {
-  var btns = document.querySelectorAll('.filter-btn');
-  for (var i=0; i<btns.length; i++) {
-    if (btns[i].id !== 'btnEditSites') btns[i].classList.remove('active');
-  }
+function filterSites(filter,btn){
+  var btns=document.querySelectorAll('.filter-btn');
+  for(var i=0; i<btns.length; i++) if(btns[i].id!=='btnEditSites') btns[i].classList.remove('active');
   btn.classList.add('active');
   renderSitesTable(filter);
 }
 
-loadAll();
-renderAll();
+// ---- Init ----
+(async function(){
+  await loadFromGitHub();
+  document.getElementById('loadingOverlay').classList.remove('active');
+  renderAll();
+})();
 </script>
 </body>
 </html>
