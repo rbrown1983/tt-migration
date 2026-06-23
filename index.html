@@ -31,7 +31,8 @@
 
   .section-label { font-size: 11px; font-weight: 700; letter-spacing: 1.8px; text-transform: uppercase; color: #2E75B6; border-left: 3px solid #2E75B6; padding-left: 10px; margin-bottom: 16px; }
 
-  .charts-grid  { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; margin-bottom: 32px; }
+  .charts-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; margin-bottom: 32px; }
+  .charts-grid .chart-card { flex: 0 0 calc(25% - 12px); min-width: 210px; max-width: 300px; }
   .regional-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 32px; max-width: 900px; margin-left: auto; margin-right: auto; }
 
   .chart-card { background: #fff; border-radius: 12px; padding: 20px 16px 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); display: flex; flex-direction: column; align-items: center; gap: 10px; }
@@ -169,16 +170,16 @@
   <div class="section-label">Migration Progress</div>
   <div class="charts-grid" id="chartsGrid"></div>
 
-  <!-- Regional -->
-  <div class="section-label">Site Decommissioning by Region</div>
-  <div class="regional-grid" id="regionalGrid"></div>
-
   <!-- Progress bars -->
   <div class="section-label">Overall Summary</div>
   <div class="progress-card" id="progressBars"></div>
 
+  <!-- Regional -->
+  <div class="section-label" style="margin-top:32px;">Site Decommissioning by Region</div>
+  <div class="regional-grid" id="regionalGrid"></div>
+
   <!-- Sites table -->
-  <div class="section-label" style="margin-top:32px;">Site Status</div>
+  <div class="section-label" style="margin-top:16px;">Site Status</div>
   <div class="sites-card">
     <div class="table-edit-bar" id="tableEditBar">
       <span>Edit mode — update status and notes for any site, then save.</span>
@@ -496,9 +497,4 @@ function filterSites(filter, btn) {
   renderSitesTable(filter === 'all' ? 'all' : filter);
 }
 
-// ── Init ──────────────────────────────────────────────────────────────────────
-loadAll();
-renderAll();
-</script>
-</body>
-</html>
+// ── Init ──────────────────────────────────────────────────────
