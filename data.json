@@ -88,7 +88,7 @@
       "region": "APAC",
       "status": "Active",
       "notes": "",
-      "migrationDate": ""
+      "migrationDate": "2026-08-03"
     },
     {
       "site": "Bristol",
@@ -176,7 +176,7 @@
       "region": "APAC",
       "status": "Active",
       "notes": "",
-      "migrationDate": ""
+      "migrationDate": "2026-08-03"
     },
     {
       "site": "Hong Kong",
@@ -184,7 +184,7 @@
       "region": "APAC",
       "status": "Blocked",
       "notes": "Still using CostX until the end of June",
-      "migrationDate": ""
+      "migrationDate": "2026-08-03"
     },
     {
       "site": "Houston",
@@ -216,7 +216,7 @@
       "region": "APAC",
       "status": "Decommissioned",
       "notes": "",
-      "migrationDate": ""
+      "migrationDate": "2026-08-03"
     },
     {
       "site": "Leeds",
@@ -248,7 +248,7 @@
       "region": "APAC",
       "status": "Decommissioned",
       "notes": "",
-      "migrationDate": ""
+      "migrationDate": "2026-08-03"
     },
     {
       "site": "Mumbai",
@@ -256,7 +256,7 @@
       "region": "APAC",
       "status": "Blocked",
       "notes": "Local site using CostX due to rendering issue in the cloud",
-      "migrationDate": ""
+      "migrationDate": "2026-08-03"
     },
     {
       "site": "Munich",
@@ -304,7 +304,7 @@
       "region": "APAC",
       "status": "In Progress",
       "notes": "",
-      "migrationDate": ""
+      "migrationDate": "2026-08-03"
     },
     {
       "site": "Riyadh",
@@ -320,7 +320,7 @@
       "region": "APAC",
       "status": "Blocked",
       "notes": "Data still in use locally",
-      "migrationDate": ""
+      "migrationDate": "2026-08-03"
     },
     {
       "site": "Sheffield",
@@ -336,7 +336,7 @@
       "region": "APAC",
       "status": "In Progress",
       "notes": "DHCP and DNS being migrated - data copied, door access controls, forescout and test servers to decom with site",
-      "migrationDate": ""
+      "migrationDate": "2026-08-03"
     },
     {
       "site": "Sydney",
@@ -344,7 +344,7 @@
       "region": "APAC",
       "status": "Blocked",
       "notes": "Primavera instance on Citrix ",
-      "migrationDate": ""
+      "migrationDate": "2026-08-03"
     },
     {
       "site": "Teesside",
