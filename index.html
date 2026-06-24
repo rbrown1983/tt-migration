@@ -203,6 +203,12 @@ footer{text-align:center;color:#aab8c8;font-size:11px;padding:16px;}
       <button class="filter-btn" data-filter-status="In Progress" onclick="toggleFilter(this,'status','In Progress')">In Progress</button>
       <button class="filter-btn" data-filter-status="Active" onclick="toggleFilter(this,'status','Active')">Active</button>
       <button class="filter-btn" data-filter-status="Blocked" onclick="toggleFilter(this,'status','Blocked')" style="border-color:#7f1d1d;color:#7f1d1d;">Blocked</button>
+      <span style="width:1px;background:#d0dae8;margin:0 6px;align-self:stretch;display:inline-block;"></span>
+      <span style="font-size:12px;color:#6b7a8d;font-weight:600;">Date:</span>
+      <input type="date" id="filterDateFrom" class="tbl-date-input" style="width:130px;" onchange="applyDateFilter()" title="From date" />
+      <span style="font-size:12px;color:#6b7a8d;">to</span>
+      <input type="date" id="filterDateTo" class="tbl-date-input" style="width:130px;" onchange="applyDateFilter()" title="To date" />
+      <button class="filter-btn" id="btnClearDate" onclick="clearDateFilter()" style="display:none;border-color:#e74c3c;color:#e74c3c;">✕ Clear Date</button>
       <button class="filter-btn" id="btnEditSites" onclick="requirePin('sites')" style="margin-left:auto;border-color:#2E75B6;color:#2E75B6;">Edit Sites</button>
     </div>
     <table>
@@ -559,7 +565,16 @@ function renderSitesTable(){
     var s=sites[i];
     var regionOk=activeRegions.length===0||activeRegions.indexOf(s.region)!==-1;
     var statusOk=activeStatuses.length===0||activeStatuses.indexOf(s.status)!==-1;
-    if(regionOk&&statusOk)
+    var dateOk=true;
+    if(dateFilterFrom||dateFilterTo){
+      var d=s.migrationDate||'';
+      if(!d){ dateOk=false; }
+      else{
+        if(dateFilterFrom&&d<dateFilterFrom) dateOk=false;
+        if(dateFilterTo  &&d>dateFilterTo)   dateOk=false;
+      }
+    }
+    if(regionOk&&statusOk&&dateOk)
       filtered.push({site:s.site,country:s.country,region:s.region,status:s.status,migrationDate:s.migrationDate||'',notes:s.notes,idx:i});
   }
   var html='';
@@ -597,7 +612,7 @@ function renderSitesTable(){
   document.getElementById('sitesBody').innerHTML=html;
 }
 
-var activeRegions=[], activeStatuses=[];
+var activeRegions=[], activeStatuses=[], dateFilterFrom='', dateFilterTo='';
 
 function filterAll(){
   activeRegions=[];
@@ -613,7 +628,23 @@ function toggleFilter(btn,type,value){
   var idx=arr.indexOf(value);
   if(idx===-1){ arr.push(value); btn.classList.add('active'); }
   else{ arr.splice(idx,1); btn.classList.remove('active'); }
-  // update All button
+  document.getElementById('btnFilterAll').classList.toggle('active', activeRegions.length===0&&activeStatuses.length===0&&!dateFilterFrom&&!dateFilterTo);
+  renderSitesTable();
+}
+
+function applyDateFilter(){
+  dateFilterFrom=document.getElementById('filterDateFrom').value;
+  dateFilterTo=document.getElementById('filterDateTo').value;
+  document.getElementById('btnClearDate').style.display=(dateFilterFrom||dateFilterTo)?'':'none';
+  document.getElementById('btnFilterAll').classList.toggle('active', activeRegions.length===0&&activeStatuses.length===0&&!dateFilterFrom&&!dateFilterTo);
+  renderSitesTable();
+}
+
+function clearDateFilter(){
+  dateFilterFrom=''; dateFilterTo='';
+  document.getElementById('filterDateFrom').value='';
+  document.getElementById('filterDateTo').value='';
+  document.getElementById('btnClearDate').style.display='none';
   document.getElementById('btnFilterAll').classList.toggle('active', activeRegions.length===0&&activeStatuses.length===0);
   renderSitesTable();
 }
