@@ -77,10 +77,11 @@ main{padding:24px 20px;max-width:1300px;margin:0 auto;}
 table{width:100%;border-collapse:collapse;font-size:13px;table-layout:fixed;}
 thead tr{background:#1F3864;}
 thead th{color:white;font-weight:600;padding:10px 14px;text-align:left;font-size:11px;letter-spacing:0.5px;}
-thead th:nth-child(1){width:24%;}
-thead th:nth-child(2){width:13%;}
-thead th:nth-child(3){width:14%;}
-thead th:nth-child(4){width:49%;}
+thead th:nth-child(1){width:22%;}
+thead th:nth-child(2){width:12%;}
+thead th:nth-child(3){width:13%;}
+thead th:nth-child(4){width:13%;}
+thead th:nth-child(5){width:40%;}
 tbody tr{border-bottom:1px solid #f0f4f8;transition:background 0.1s;}
 tbody tr:hover{background:#f5f8fc;}
 tbody td{padding:9px 14px;color:#344563;vertical-align:middle;overflow:hidden;}
@@ -98,6 +99,9 @@ tbody td{padding:9px 14px;color:#344563;vertical-align:middle;overflow:hidden;}
 .notes-cell.expanded{white-space:normal;overflow:visible;text-overflow:unset;}
 .tbl-status-select{border:1px solid #d0dae8;border-radius:6px;padding:4px 8px;font-size:12px;color:#1a2b3c;background:#fff;cursor:pointer;}
 .tbl-notes-input{border:1px solid #d0dae8;border-radius:6px;padding:5px 8px;font-size:11px;color:#344563;width:100%;min-width:200px;resize:vertical;min-height:36px;font-family:inherit;}
+.tbl-date-input{border:1px solid #d0dae8;border-radius:6px;padding:4px 8px;font-size:12px;color:#344563;background:#fff;cursor:pointer;width:100%;}
+.date-display{font-size:12px;color:#344563;}
+.date-display.empty{color:#aab4c0;font-style:italic;}
 .table-edit-bar{display:none;justify-content:space-between;align-items:center;margin-bottom:12px;background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:10px 14px;}
 .table-edit-bar.active{display:flex;}
 .table-edit-bar span{font-size:12px;color:#1e40af;font-weight:500;}
@@ -202,7 +206,7 @@ footer{text-align:center;color:#aab8c8;font-size:11px;padding:16px;}
       <button class="filter-btn" id="btnEditSites" onclick="requirePin('sites')" style="margin-left:auto;border-color:#2E75B6;color:#2E75B6;">Edit Sites</button>
     </div>
     <table>
-      <thead><tr><th>Site</th><th>Region</th><th>Status</th><th>Notes</th></tr></thead>
+      <thead><tr><th>Site</th><th>Region</th><th>Status</th><th>Migration Date</th><th>Notes</th></tr></thead>
       <tbody id="sitesBody"></tbody>
     </table>
   </div>
@@ -452,9 +456,11 @@ function openTableEdit(){
 async function saveSites(){
   for(var i=0; i<sites.length; i++){
     var sel   = document.getElementById('sel_'+i);
+    var mdate = document.getElementById('mdate_'+i);
     var notes = document.getElementById('notes_'+i);
-    if(sel)   sites[i].status = sel.value;
-    if(notes) sites[i].notes  = notes.value;
+    if(sel)   sites[i].status        = sel.value;
+    if(mdate) sites[i].migrationDate = mdate.value;
+    if(notes) sites[i].notes         = notes.value;
   }
   tableEditMode = false;
   document.getElementById('tableEditBar').classList.remove('active');
@@ -554,20 +560,28 @@ function renderSitesTable(){
     var regionOk=activeRegions.length===0||activeRegions.indexOf(s.region)!==-1;
     var statusOk=activeStatuses.length===0||activeStatuses.indexOf(s.status)!==-1;
     if(regionOk&&statusOk)
-      filtered.push({site:s.site,country:s.country,region:s.region,status:s.status,notes:s.notes,idx:i});
+      filtered.push({site:s.site,country:s.country,region:s.region,status:s.status,migrationDate:s.migrationDate||'',notes:s.notes,idx:i});
   }
   var html='';
   for(var j=0; j<filtered.length; j++){
-    var row=filtered[j], idx=row.idx, statusCell, notesCell;
+    var row=filtered[j], idx=row.idx, statusCell, dateCell, notesCell;
     if(tableEditMode){
       var opts='';
       for(var k=0; k<STATUSES.length; k++)
         opts+='<option value="'+STATUSES[k]+'"'+(STATUSES[k]===row.status?' selected':'')+'>'+STATUSES[k]+'</option>';
       statusCell='<select class="tbl-status-select" id="sel_'+idx+'">'+opts+'</select>';
+      dateCell='<input type="date" class="tbl-date-input" id="mdate_'+idx+'"'+(row.migrationDate?' value="'+row.migrationDate+'"':'')+' />';
       notesCell='<textarea class="tbl-notes-input" id="notes_'+idx+'">'+row.notes+'</textarea>';
     } else {
       var sc=STATUS_CLASS[row.status]||'status-active';
       statusCell='<span class="status-badge '+sc+'">'+row.status+'</span>';
+      if(row.migrationDate){
+        var dp=new Date(row.migrationDate+'T00:00:00');
+        var fmtDate=dp.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'});
+        dateCell='<span class="date-display">'+fmtDate+'</span>';
+      } else {
+        dateCell='<span class="date-display empty">—</span>';
+      }
       var notesTxt=row.notes||'&mdash;';
       notesCell='<span class="notes-cell" title="'+notesTxt.replace(/"/g,'&quot;')+'" onclick="this.classList.toggle(\'expanded\')">'+notesTxt+'</span>';
     }
@@ -576,6 +590,7 @@ function renderSitesTable(){
       '<td><strong>'+row.site+'</strong><br><span style="font-size:11px;color:#8899aa;">'+row.country+'</span></td>'+
       '<td><span class="region-badge '+rc+'">'+row.region+'</span></td>'+
       '<td>'+statusCell+'</td>'+
+      '<td>'+dateCell+'</td>'+
       '<td>'+notesCell+'</td>'+
       '</tr>';
   }
