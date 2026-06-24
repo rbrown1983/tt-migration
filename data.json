@@ -63,266 +63,304 @@
       "country": "UAE",
       "region": "EMEA",
       "status": "Blocked",
-      "notes": "Anyconnect firewall and CostX running until end of June"
+      "notes": "Anyconnect firewall and CostX running until end of June",
+      "migrationDate": ""
     },
     {
       "site": "Amsterdam",
       "country": "Netherlands",
       "region": "EMEA",
       "status": "Active",
-      "notes": ""
+      "notes": "",
+      "migrationDate": ""
     },
     {
       "site": "Birmingham",
       "country": "UK",
       "region": "EMEA",
       "status": "Decommissioned",
-      "notes": ""
+      "notes": "",
+      "migrationDate": "2026-08-03"
     },
     {
       "site": "Brisbane",
       "country": "Australia",
       "region": "APAC",
       "status": "Active",
-      "notes": ""
+      "notes": "",
+      "migrationDate": ""
     },
     {
       "site": "Bristol",
       "country": "UK",
       "region": "EMEA",
       "status": "Active",
-      "notes": ""
+      "notes": "",
+      "migrationDate": ""
     },
     {
       "site": "Cape Town",
       "country": "South Africa",
       "region": "EMEA",
       "status": "Decommissioned",
-      "notes": ""
+      "notes": "",
+      "migrationDate": ""
     },
     {
       "site": "Doha",
       "country": "Qatar",
       "region": "EMEA",
       "status": "Blocked",
-      "notes": "Local data in use - working to identify what can be moved to sharepoint to have the shares stopped.."
+      "notes": "Local data in use - working to identify what can be moved to sharepoint to have the shares stopped..",
+      "migrationDate": ""
     },
     {
       "site": "Dubai",
       "country": "UAE",
       "region": "EMEA",
       "status": "Active",
-      "notes": ""
+      "notes": "",
+      "migrationDate": ""
     },
     {
       "site": "Dublin",
       "country": "Ireland",
       "region": "EMEA",
       "status": "Decommissioned",
-      "notes": ""
+      "notes": "",
+      "migrationDate": ""
     },
     {
       "site": "Durban",
       "country": "South Africa",
       "region": "EMEA",
       "status": "Decommissioned",
-      "notes": ""
+      "notes": "",
+      "migrationDate": ""
     },
     {
       "site": "Edinburgh",
       "country": "UK",
       "region": "EMEA",
       "status": "Decommissioned",
-      "notes": ""
+      "notes": "",
+      "migrationDate": "2026-08-03"
     },
     {
       "site": "Frankfurt",
       "country": "Germany",
       "region": "EMEA",
       "status": "Decommissioned",
-      "notes": ""
+      "notes": "",
+      "migrationDate": "2026-08-03"
     },
     {
       "site": "Gaborone",
       "country": "Botswana",
       "region": "EMEA",
       "status": "Decommissioned",
-      "notes": ""
+      "notes": "",
+      "migrationDate": ""
     },
     {
       "site": "Glasgow",
       "country": "UK",
       "region": "EMEA",
       "status": "Decommissioned",
-      "notes": ""
+      "notes": "",
+      "migrationDate": "2026-08-03"
     },
     {
       "site": "Gold Coast",
       "country": "Australia",
       "region": "APAC",
       "status": "Active",
-      "notes": ""
+      "notes": "",
+      "migrationDate": ""
     },
     {
       "site": "Hong Kong",
       "country": "SAR China",
       "region": "APAC",
       "status": "Blocked",
-      "notes": "Still using CostX until the end of June"
+      "notes": "Still using CostX until the end of June",
+      "migrationDate": ""
     },
     {
       "site": "Houston",
       "country": "USA",
       "region": "Americas",
       "status": "Active",
-      "notes": ""
+      "notes": "",
+      "migrationDate": ""
     },
     {
       "site": "Johannesburg",
       "country": "South Africa",
       "region": "EMEA",
       "status": "Blocked",
-      "notes": "Local instances of Finance apps, Fin and Sage."
+      "notes": "Local instances of Finance apps, Fin and Sage.",
+      "migrationDate": ""
     },
     {
       "site": "Krakow",
       "country": "Poland",
       "region": "EMEA",
       "status": "Decommissioned",
-      "notes": ""
+      "notes": "",
+      "migrationDate": "2026-08-03"
     },
     {
       "site": "Kuala Lumpur",
       "country": "Malaysia",
       "region": "APAC",
       "status": "Decommissioned",
-      "notes": ""
+      "notes": "",
+      "migrationDate": ""
     },
     {
       "site": "Leeds",
       "country": "UK",
       "region": "EMEA",
       "status": "Blocked",
-      "notes": "Lots of Apps and data to move"
+      "notes": "Lots of Apps and data to move",
+      "migrationDate": ""
     },
     {
       "site": "London",
       "country": "UK",
       "region": "EMEA",
       "status": "Blocked",
-      "notes": "Data and Apps to migrate including Exchange and CostX to VAST"
+      "notes": "Data and Apps to migrate including Exchange and CostX to VAST",
+      "migrationDate": "2026-08-03"
     },
     {
       "site": "Manchester",
       "country": "UK",
       "region": "EMEA",
       "status": "Decommissioned",
-      "notes": ""
+      "notes": "",
+      "migrationDate": "2026-08-03"
     },
     {
       "site": "Melbourne",
       "country": "Australia",
       "region": "APAC",
       "status": "Decommissioned",
-      "notes": ""
+      "notes": "",
+      "migrationDate": ""
     },
     {
       "site": "Mumbai",
       "country": "India",
       "region": "APAC",
       "status": "Blocked",
-      "notes": "Local site using CostX due to rendering issue in the cloud"
+      "notes": "Local site using CostX due to rendering issue in the cloud",
+      "migrationDate": ""
     },
     {
       "site": "Munich",
       "country": "Germany",
       "region": "EMEA",
       "status": "In Progress",
-      "notes": "DHCP and DNS being migrated - data copied. There is a local server that needs to be migrated to Leeds, Sam has setup Zerto to replicate and is trying to identify an owner."
+      "notes": "DHCP and DNS being migrated - data copied. There is a local server that needs to be migrated to Leeds, Sam has setup Zerto to replicate and is trying to identify an owner.",
+      "migrationDate": "2026-08-03"
     },
     {
       "site": "Nairobi",
       "country": "Kenya",
       "region": "EMEA",
       "status": "Blocked",
-      "notes": "Local data still in use."
+      "notes": "Local data still in use.",
+      "migrationDate": ""
     },
     {
       "site": "Newcastle",
       "country": "UK",
       "region": "EMEA",
       "status": "In Progress",
-      "notes": ""
+      "notes": "",
+      "migrationDate": ""
     },
     {
       "site": "New York",
       "country": "USA",
       "region": "Americas",
       "status": "Active",
-      "notes": ""
+      "notes": "",
+      "migrationDate": ""
     },
     {
       "site": "Nottingham",
       "country": "UK",
       "region": "EMEA",
       "status": "In Progress",
-      "notes": ""
+      "notes": "",
+      "migrationDate": ""
     },
     {
       "site": "Perth",
       "country": "Australia",
       "region": "APAC",
       "status": "In Progress",
-      "notes": ""
+      "notes": "",
+      "migrationDate": ""
     },
     {
       "site": "Riyadh",
       "country": "Saudi Arabia",
       "region": "EMEA",
       "status": "Blocked",
-      "notes": "Due to Data sovereignty "
+      "notes": "Due to Data sovereignty ",
+      "migrationDate": ""
     },
     {
       "site": "Shanghai",
       "country": "China",
       "region": "APAC",
       "status": "Blocked",
-      "notes": "Data still in use locally"
+      "notes": "Data still in use locally",
+      "migrationDate": ""
     },
     {
       "site": "Sheffield",
       "country": "UK",
       "region": "EMEA",
       "status": "Decommissioned",
-      "notes": ""
+      "notes": "",
+      "migrationDate": "2026-08-03"
     },
     {
       "site": "Singapore",
       "country": "Singapore",
       "region": "APAC",
       "status": "In Progress",
-      "notes": "DHCP and DNS being migrated - data copied, door access controls, forescout and test servers to decom with site"
+      "notes": "DHCP and DNS being migrated - data copied, door access controls, forescout and test servers to decom with site",
+      "migrationDate": ""
     },
     {
       "site": "Sydney",
       "country": "Australia",
       "region": "APAC",
       "status": "Blocked",
-      "notes": "Primavera instance on Citrix "
+      "notes": "Primavera instance on Citrix ",
+      "migrationDate": ""
     },
     {
       "site": "Teesside",
       "country": "UK",
       "region": "EMEA",
       "status": "In Progress",
-      "notes": "DHCP and DNS being migrated - data copied "
+      "notes": "DHCP and DNS being migrated - data copied ",
+      "migrationDate": ""
     },
     {
       "site": "Toronto",
       "country": "Canada",
       "region": "Americas",
       "status": "Blocked",
-      "notes": "CostX rendering issues - we plan to test Citrix in CBRE cloud over the coming weeks."
+      "notes": "CostX rendering issues - we plan to test Citrix in CBRE cloud over the coming weeks.",
+      "migrationDate": ""
     }
   ],
   "asOf": "22 Jun 2026"
