@@ -301,7 +301,7 @@
       "country": "Singapore",
       "region": "APAC",
       "status": "In Progress",
-      "notes": "DHCP and DNS being migrated - data copied "
+      "notes": "DHCP and DNS being migrated - data copied, door access controls, forescout and test servers to decom with site"
     },
     {
       "site": "Sydney",
