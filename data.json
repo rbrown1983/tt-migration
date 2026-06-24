@@ -192,7 +192,7 @@
       "region": "Americas",
       "status": "Active",
       "notes": "",
-      "migrationDate": ""
+      "migrationDate": "2026-08-03"
     },
     {
       "site": "Johannesburg",
@@ -288,7 +288,7 @@
       "region": "Americas",
       "status": "Active",
       "notes": "",
-      "migrationDate": ""
+      "migrationDate": "2026-08-03"
     },
     {
       "site": "Nottingham",
@@ -360,7 +360,7 @@
       "region": "Americas",
       "status": "Blocked",
       "notes": "CostX rendering issues - we plan to test Citrix in CBRE cloud over the coming weeks.",
-      "migrationDate": ""
+      "migrationDate": "2026-08-03"
     }
   ],
   "asOf": "22 Jun 2026"
