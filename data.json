@@ -2,7 +2,7 @@
   "metrics": [
     {
       "label": "Server Decommissioning",
-      "complete": 126,
+      "complete": 131,
       "total": 265,
       "unitLabel": "servers",
       "doneLabel": "Decommissioned",
