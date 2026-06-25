@@ -236,7 +236,7 @@ var DEFAULT_METRICS = [
   {label:'Servers Failed Over to Romford DC',complete:25,total:116,unitLabel:'servers',doneLabel:'Failed Over',color:'#f59e42'},
   {label:'Remote Sites Synced to Leeds',complete:36,total:50,unitLabel:'sites',doneLabel:'Synchronised',color:'#a78bfa'},
   {label:'Data Volume Synced to Leeds',complete:128.66,total:223.4,unitLabel:'TB',doneLabel:'Moved',color:'#2E75B6'},
-  {label:'Remote Sites Decommissioned',complete:12,total:55,unitLabel:'sites',doneLabel:'Decommissioned',color:'#f472b6'},
+  {label:'Remote Sites Decommissioned',complete:12,total:39,unitLabel:'sites',doneLabel:'Decommissioned',color:'#f472b6'},
   {label:'CostX Servers Migrated to Azure',complete:27,total:36,unitLabel:'servers',doneLabel:'Migrated',color:'#4ec9a0'}
 ];
 
@@ -247,6 +247,7 @@ var DEFAULT_SITES = [
   {site:'Brisbane',country:'Australia',region:'APAC',status:'Active',notes:''},
   {site:'Bristol',country:'UK',region:'EMEA',status:'Active',notes:''},
   {site:'Cape Town',country:'South Africa',region:'EMEA',status:'Decommissioned',notes:'3 servers: CostX, data, test. Data and CostX migrated.'},
+  {site:'Darwin',country:'Australia',region:'APAC',status:'Active',notes:''},
   {site:'Doha',country:'Qatar',region:'EMEA',status:'Active',notes:''},
   {site:'Dubai',country:'UAE',region:'EMEA',status:'Active',notes:''},
   {site:'Dublin',country:'Ireland',region:'EMEA',status:'In Progress',notes:'1 Server CostX. CostX migrated to cloud. Support ends 26/11 - being decommissioned.'},
@@ -472,6 +473,7 @@ async function saveSites(){
   document.getElementById('tableEditBar').classList.remove('active');
   document.getElementById('btnEditSites').textContent = 'Edit Sites';
   metrics[5].complete = sites.filter(function(s){ return s.status==='Decommissioned'; }).length;
+  metrics[5].total    = sites.length;
   renderAll();
   await saveToGitHub();
 }
