@@ -43,7 +43,7 @@
     {
       "label": "Remote Sites Decommissioned",
       "complete": 13,
-      "total": 55,
+      "total": 58,
       "unitLabel": "sites",
       "doneLabel": "Decommissioned",
       "color": "#f472b6"
