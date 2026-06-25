@@ -18,7 +18,7 @@
     },
     {
       "label": "Servers Failed Over to Romford DC",
-      "complete": 25,
+      "complete": 26,
       "total": 116,
       "unitLabel": "servers",
       "doneLabel": "Failed Over",
