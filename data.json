@@ -42,7 +42,7 @@
     },
     {
       "label": "Remote Sites Decommissioned",
-      "complete": 14,
+      "complete": 16,
       "total": 38,
       "unitLabel": "sites",
       "doneLabel": "Decommissioned",
@@ -294,7 +294,7 @@
       "site": "Nottingham",
       "country": "UK",
       "region": "EMEA",
-      "status": "In Progress",
+      "status": "Decommissioned",
       "notes": "",
       "migrationDate": ""
     },
@@ -350,7 +350,7 @@
       "site": "Teesside",
       "country": "UK",
       "region": "EMEA",
-      "status": "In Progress",
+      "status": "Decommissioned",
       "notes": "DHCP and DNS being migrated - data copied ",
       "migrationDate": ""
     },
