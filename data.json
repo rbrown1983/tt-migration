@@ -343,7 +343,7 @@
       "country": "Australia",
       "region": "APAC",
       "status": "Blocked",
-      "notes": "Primavera instance on Citrix ",
+      "notes": "Primavera instance on Citrix \nIssues with Data, working with networks on VPN or will send HDD",
       "migrationDate": "2026-08-03"
     },
     {
