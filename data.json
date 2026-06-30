@@ -42,8 +42,8 @@
     },
     {
       "label": "Remote Sites Decommissioned",
-      "complete": 13,
-      "total": 58,
+      "complete": 14,
+      "total": 38,
       "unitLabel": "sites",
       "doneLabel": "Decommissioned",
       "color": "#f472b6"
@@ -94,7 +94,7 @@
       "site": "Bristol",
       "country": "UK",
       "region": "EMEA",
-      "status": "Active",
+      "status": "Decommissioned",
       "notes": "",
       "migrationDate": ""
     },
