@@ -2,7 +2,7 @@
   "metrics": [
     {
       "label": "Server Decommissioning",
-      "complete": 139,
+      "complete": 135,
       "total": 265,
       "unitLabel": "servers",
       "doneLabel": "Decommissioned",
@@ -42,7 +42,7 @@
     },
     {
       "label": "Remote Sites Decommissioned",
-      "complete": 16,
+      "complete": 14,
       "total": 38,
       "unitLabel": "sites",
       "doneLabel": "Decommissioned",
@@ -191,7 +191,7 @@
       "country": "USA",
       "region": "Americas",
       "status": "Active",
-      "notes": "",
+      "notes": "Data hasn't been accessed for a month plan to set to RO in the coming weeks.\n01/07",
       "migrationDate": "2026-08-03"
     },
     {
@@ -294,7 +294,7 @@
       "site": "Nottingham",
       "country": "UK",
       "region": "EMEA",
-      "status": "Decommissioned",
+      "status": "In Progress",
       "notes": "",
       "migrationDate": ""
     },
@@ -350,7 +350,7 @@
       "site": "Teesside",
       "country": "UK",
       "region": "EMEA",
-      "status": "Decommissioned",
+      "status": "In Progress",
       "notes": "DHCP and DNS being migrated - data copied ",
       "migrationDate": ""
     },
