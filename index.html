@@ -56,8 +56,6 @@ main{padding:24px 20px;max-width:1300px;margin:0 auto;}
 .modal p{font-size:12px;color:#8899aa;margin-bottom:20px;line-height:1.5;}
 .pin-input{width:100%;border:2px solid #d0dae8;border-radius:10px;padding:10px 14px;font-size:20px;letter-spacing:6px;text-align:center;color:#1F3864;font-weight:700;margin-bottom:14px;}
 .pin-input:focus{outline:none;border-color:#2E75B6;}
-.token-input{width:100%;border:2px solid #d0dae8;border-radius:10px;padding:10px 14px;font-size:12px;letter-spacing:0;text-align:left;color:#344563;font-weight:400;margin-bottom:14px;font-family:monospace;}
-.token-input:focus{outline:none;border-color:#2E75B6;}
 .pin-error{color:#dc2626;font-size:12px;margin-bottom:10px;min-height:16px;}
 .btn-pin-ok{background:#1F3864;color:white;width:100%;padding:10px;font-size:14px;border-radius:10px;margin-bottom:8px;}
 .btn-pin-cancel{background:#f0f4f8;color:#344563;width:100%;padding:10px;font-size:13px;border-radius:10px;}
@@ -100,6 +98,8 @@ tbody td{padding:9px 14px;color:#344563;vertical-align:middle;overflow:hidden;}
 .tbl-status-select{border:1px solid #d0dae8;border-radius:6px;padding:4px 8px;font-size:12px;color:#1a2b3c;background:#fff;cursor:pointer;}
 .tbl-notes-input{border:1px solid #d0dae8;border-radius:6px;padding:5px 8px;font-size:11px;color:#344563;width:100%;min-width:200px;resize:vertical;min-height:36px;font-family:inherit;}
 .tbl-date-input{border:1px solid #d0dae8;border-radius:6px;padding:4px 8px;font-size:12px;color:#344563;background:#fff;cursor:pointer;width:100%;}
+.token-input{width:100%;border:2px solid #d0dae8;border-radius:10px;padding:10px 14px;font-size:12px;color:#344563;margin-bottom:14px;font-family:monospace;}
+.token-input:focus{outline:none;border-color:#2E75B6;}
 .date-display{font-size:12px;color:#344563;}
 .date-display.empty{color:#aab4c0;font-style:italic;}
 .table-edit-bar{display:none;justify-content:space-between;align-items:center;margin-bottom:12px;background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:10px 14px;}
@@ -121,6 +121,18 @@ footer{text-align:center;color:#aab8c8;font-size:11px;padding:16px;}
   <div class="loading-text">Loading dashboard data...</div>
 </div>
 
+<!-- GitHub token setup modal -->
+<div class="modal-overlay" id="tokenModal">
+  <div class="modal">
+    <h2>GitHub Token Setup</h2>
+    <p>Paste your fine-grained GitHub token below. It will be stored only in this browser and never uploaded.</p>
+    <input type="password" class="token-input" id="tokenInput" placeholder="github_pat_..." autocomplete="off">
+    <div class="pin-error" id="tokenError"></div>
+    <button class="btn-pin-ok" onclick="saveToken()">Save Token</button>
+    <button class="btn-pin-cancel" onclick="closeTokenModal()">Cancel</button>
+  </div>
+</div>
+
 <!-- PIN modal -->
 <div class="modal-overlay" id="pinModal">
   <div class="modal">
@@ -133,17 +145,6 @@ footer{text-align:center;color:#aab8c8;font-size:11px;padding:16px;}
   </div>
 </div>
 
-<!-- GitHub token setup modal -->
-<div class="modal-overlay" id="tokenModal">
-  <div class="modal">
-    <h2>GitHub Token Setup</h2>
-    <p>Paste your fine-grained GitHub token below. It will be stored only in this browser and never uploaded to GitHub.</p>
-    <input type="password" class="token-input" id="tokenInput" placeholder="github_pat_..." autocomplete="off">
-    <div class="pin-error" id="tokenError"></div>
-    <button class="btn-pin-ok" onclick="saveToken()">Save Token</button>
-    <button class="btn-pin-cancel" onclick="closeTokenModal()">Cancel</button>
-  </div>
-</div>
 
 <header>
   <div>
@@ -295,11 +296,8 @@ var tableEditMode = false;
 var currentFilter = 'all';
 var asOf = '22 Jun 2026';
 var currentSHA = null;
-
 function deepCopy(o){ return JSON.parse(JSON.stringify(o)); }
 function getStoredToken(){ return localStorage.getItem(GH_TOKEN_KEY) || ''; }
-
-// ---- GitHub API ----
 function toBase64(str){ return btoa(unescape(encodeURIComponent(str))); }
 
 function setSaveStatus(msg, cls){
@@ -308,9 +306,7 @@ function setSaveStatus(msg, cls){
   el.className = 'save-status'+(cls?' '+cls:'');
 }
 
-async function loadFromGitHub(){
-  // Read from GitHub Pages URL - no rate limits, no auth needed.
-  // Each unique timestamp bypasses CDN cache so everyone always gets fresh data.
+async function loadData(){
   var pagesUrl = 'https://'+GITHUB_REPO.split('/')[0]+'.github.io/'+GITHUB_REPO.split('/')[1]+'/'+DATA_FILE+'?t='+Date.now();
   try {
     var res = await fetch(pagesUrl, { cache:'no-store' });
@@ -325,11 +321,10 @@ async function loadFromGitHub(){
   if(!sites   || sites.length   === 0) sites   = deepCopy(DEFAULT_SITES);
 }
 
-async function saveToGitHub(){
+async function saveData(){
   var token = getStoredToken();
   if(!token){ setSaveStatus('No token', 'error'); return; }
   setSaveStatus('Saving...', 'saving');
-  // Re-fetch SHA immediately before save to avoid conflict errors
   try {
     var shaRes = await fetch('https://api.github.com/repos/'+GITHUB_REPO+'/contents/'+DATA_FILE, {
       headers:{ Authorization:'token '+token, Accept:'application/vnd.github.v3+json' },
@@ -359,22 +354,6 @@ async function saveToGitHub(){
   } catch(e){ setSaveStatus('Save failed','error'); console.error(e); }
 }
 
-// ---- Token modal ----
-function showTokenModal(){
-  document.getElementById('tokenInput').value = getStoredToken();
-  document.getElementById('tokenError').textContent = '';
-  document.getElementById('tokenModal').classList.add('active');
-  setTimeout(function(){ document.getElementById('tokenInput').focus(); }, 100);
-}
-function closeTokenModal(){ document.getElementById('tokenModal').classList.remove('active'); }
-function saveToken(){
-  var val = document.getElementById('tokenInput').value.trim();
-  if(!val){ document.getElementById('tokenError').textContent = 'Please paste a token.'; return; }
-  localStorage.setItem(GH_TOKEN_KEY, val);
-  closeTokenModal();
-  doAction(pendingAction);
-}
-
 // ---- PIN ----
 function requirePin(action){
   if(isAuthenticated){ doAction(action); return; }
@@ -390,7 +369,6 @@ function checkPin(){
     isAuthenticated = true;
     document.getElementById('pinModal').classList.remove('active');
     document.getElementById('btnLock').style.display = 'inline-block';
-    // Check token exists before proceeding
     if(!getStoredToken()){ showTokenModal(); }
     else { doAction(pendingAction); }
   } else {
@@ -413,6 +391,20 @@ function lockAll(){
 }
 document.getElementById('pinInput').addEventListener('keydown', function(e){ if(e.key==='Enter') checkPin(); });
 document.getElementById('tokenInput').addEventListener('keydown', function(e){ if(e.key==='Enter') saveToken(); });
+function showTokenModal(){
+  document.getElementById('tokenInput').value = getStoredToken();
+  document.getElementById('tokenError').textContent = '';
+  document.getElementById('tokenModal').classList.add('active');
+  setTimeout(function(){ document.getElementById('tokenInput').focus(); }, 100);
+}
+function closeTokenModal(){ document.getElementById('tokenModal').classList.remove('active'); }
+function saveToken(){
+  var val = document.getElementById('tokenInput').value.trim();
+  if(!val){ document.getElementById('tokenError').textContent = 'Please paste a token.'; return; }
+  localStorage.setItem(GH_TOKEN_KEY, val);
+  closeTokenModal();
+  doAction(pendingAction);
+}
 function doAction(action){
   if(action==='figures') openEdit();
   if(action==='sites') openTableEdit();
@@ -450,7 +442,7 @@ async function saveEdit(){
     if(!isNaN(t)) metrics[i].total = t;
   }
   cancelEdit(); renderAll();
-  await saveToGitHub();
+  await saveData();
 }
 
 // ---- Table edit ----
@@ -475,7 +467,7 @@ async function saveSites(){
   metrics[5].complete = sites.filter(function(s){ return s.status==='Decommissioned'; }).length;
   metrics[5].total    = sites.length;
   renderAll();
-  await saveToGitHub();
+  await saveData();
 }
 
 // ---- Render ----
@@ -653,7 +645,7 @@ function clearDateFilter(){
 
 // ---- Init ----
 (async function(){
-  await loadFromGitHub();
+  await loadData();
   document.getElementById('loadingOverlay').classList.remove('active');
   renderAll();
 })();
