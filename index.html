@@ -333,6 +333,8 @@ async function saveData(){
     });
     if(shaRes.ok){ var shaJson = await shaRes.json(); currentSHA = shaJson.sha; }
   } catch(e){}
+  var now = new Date();
+  asOf = now.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'})+' '+now.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
   var payload = JSON.stringify({metrics:metrics, sites:sites, asOf:asOf}, null, 2);
   var body = { message:'Dashboard update '+new Date().toISOString(), content:toBase64(payload) };
   if(currentSHA) body.sha = currentSHA;
