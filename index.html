@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Infrastructure Integration - Migration Status</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.js" integrity="sha384-iU8HYtnGQ8Cy4zl7gbNMOhsDTTKX02BTXptVP/vqAWIaTfM7isw76iyZCsjL2eVi" crossorigin="anonymous"></script>
+<style>
+:root{color-scheme:light;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;color:#1a2b3c;min-height:100vh;}
+header{background:linear-gradient(135deg,#1F3864 0%,#2E75B6 100%);color:white;padding:20px 28px 16px;display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+header h1{font-size:20px;font-weight:700;}
+header p{font-size:12px;opacity:0.8;margin-top:3px;}
+.header-right{display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
+.as-of{background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);border-radius:20px;padding:4px 14px;font-size:12px;color:white;}
+.save-status{font-size:12px;color:rgba(255,255,255,0.8);min-width:80px;text-align:right;}
+.save-status.saving{color:#fef9c3;}
+.save-status.saved{color:#4ec9a0;}
+.save-status.error{color:#fca5a5;}
+button{border:none;border-radius:8px;padding:7px 16px;font-size:12px;font-weight:600;cursor:pointer;transition:opacity 0.15s;}
+button:hover{opacity:0.85;}
+.btn-edit{background:#fff;color:#1F3864;}
+.btn-save{background:#4ec9a0;color:#fff;display:none;}
+.btn-cancel{background:rgba(255,255,255,0.2);color:#fff;display:none;}
+.btn-lock{background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.2);display:none;font-size:11px;}
+main{padding:24px 20px;max-width:1300px;margin:0 auto;}
+.section-label{font-size:11px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;color:#2E75B6;border-left:3px solid #2E75B6;padding-left:10px;margin-bottom:16px;}
+.charts-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:16px;margin-bottom:32px;}
+.charts-grid .chart-card{flex:0 0 calc(25% - 12px);min-width:210px;max-width:300px;}
+.regional-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:32px;max-width:900px;margin-left:auto;margin-right:auto;}
+.chart-card{background:#fff;border-radius:12px;padding:20px 16px 16px;box-shadow:0 1px 4px rgba(0,0,0,0.08);display:flex;flex-direction:column;align-items:center;gap:10px;}
+.chart-card h3{font-size:12px;font-weight:600;color:#344563;text-align:center;line-height:1.4;}
+.chart-card.regional h3{font-size:13px;font-weight:700;color:#1F3864;}
+.chart-wrap{position:relative;width:150px;height:150px;}
+.chart-wrap.large{width:170px;height:170px;}
+.chart-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;pointer-events:none;}
+.chart-pct{font-size:24px;font-weight:800;color:#1F3864;}
+.chart-sub{font-size:10px;color:#8899aa;margin-top:1px;}
+.stat-row{display:flex;gap:6px;width:100%;}
+.stat{flex:1;background:#f5f8fc;border-radius:7px;padding:7px 6px;text-align:center;}
+.stat-val{font-size:13px;font-weight:700;color:#2E75B6;}
+.stat-lbl{font-size:9px;color:#8899aa;margin-top:1px;}
+.progress-card{background:#fff;border-radius:12px;padding:24px;box-shadow:0 1px 4px rgba(0,0,0,0.08);margin-bottom:32px;}
+.prog-item{margin-bottom:18px;}
+.prog-item:last-child{margin-bottom:0;}
+.prog-header{display:flex;justify-content:space-between;margin-bottom:6px;}
+.prog-name{font-size:13px;color:#344563;font-weight:500;}
+.prog-pct{font-size:13px;font-weight:700;color:#1F3864;}
+.bar-track{height:9px;background:#e8eef5;border-radius:99px;overflow:hidden;}
+.bar-fill{height:100%;border-radius:99px;transition:width 0.6s ease;}
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:1000;align-items:center;justify-content:center;}
+.modal-overlay.active{display:flex;}
+.modal{background:#fff;border-radius:16px;padding:32px 28px;width:340px;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,0.2);}
+.modal h2{font-size:16px;color:#1F3864;margin-bottom:6px;}
+.modal p{font-size:12px;color:#8899aa;margin-bottom:20px;line-height:1.5;}
+.pin-input{width:100%;border:2px solid #d0dae8;border-radius:10px;padding:10px 14px;font-size:20px;letter-spacing:6px;text-align:center;color:#1F3864;font-weight:700;margin-bottom:14px;}
+.pin-input:focus{outline:none;border-color:#2E75B6;}
+.token-input{width:100%;border:2px solid #d0dae8;border-radius:10px;padding:10px 14px;font-size:12px;letter-spacing:0;text-align:left;color:#344563;font-weight:400;margin-bottom:14px;font-family:monospace;}
+.token-input:focus{outline:none;border-color:#2E75B6;}
+.pin-error{color:#dc2626;font-size:12px;margin-bottom:10px;min-height:16px;}
+.btn-pin-ok{background:#1F3864;color:white;width:100%;padding:10px;font-size:14px;border-radius:10px;margin-bottom:8px;}
+.btn-pin-cancel{background:#f0f4f8;color:#344563;width:100%;padding:10px;font-size:13px;border-radius:10px;}
+.edit-panel{display:none;background:#fff;border-radius:12px;padding:24px;box-shadow:0 1px 4px rgba(0,0,0,0.08);margin-bottom:28px;border:2px solid #2E75B6;}
+.edit-panel.active{display:block;}
+.edit-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:8px 16px;align-items:center;}
+.col-hdr{font-size:11px;font-weight:700;color:#8899aa;text-transform:uppercase;letter-spacing:1px;padding-bottom:6px;border-bottom:1px solid #e8eef5;margin-bottom:4px;}
+.edit-row-label{font-size:13px;color:#344563;font-weight:500;padding:6px 0;border-bottom:1px solid #f0f4f8;}
+.edit-input{border:1px solid #d0dae8;border-radius:7px;padding:6px 10px;font-size:13px;color:#1a2b3c;width:100%;text-align:right;}
+.edit-input:focus{outline:none;border-color:#2E75B6;box-shadow:0 0 0 2px rgba(46,117,182,0.15);}
+.edit-note{font-size:11px;color:#8899aa;margin-top:16px;font-style:italic;}
+.sites-card{background:#fff;border-radius:12px;padding:24px;box-shadow:0 1px 4px rgba(0,0,0,0.08);margin-bottom:32px;overflow-x:auto;}
+.filter-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;align-items:center;}
+.filter-btn{border:1px solid #d0dae8;border-radius:20px;padding:5px 14px;font-size:12px;font-weight:600;cursor:pointer;transition:all 0.15s;background:#f5f8fc;color:#344563;}
+.filter-btn:hover{border-color:#2E75B6;color:#2E75B6;}
+.filter-btn.active{background:#2E75B6;color:white;border-color:#2E75B6;}
+table{width:100%;border-collapse:collapse;font-size:13px;table-layout:fixed;}
+thead tr{background:#1F3864;}
+thead th{color:white;font-weight:600;padding:10px 14px;text-align:left;font-size:11px;letter-spacing:0.5px;}
+thead th:nth-child(1){width:22%;}
+thead th:nth-child(2){width:12%;}
+thead th:nth-child(3){width:13%;}
+thead th:nth-child(4){width:13%;}
+thead th:nth-child(5){width:40%;}
+tbody tr{border-bottom:1px solid #f0f4f8;transition:background 0.1s;}
+tbody tr:hover{background:#f5f8fc;}
+tbody td{padding:9px 14px;color:#344563;vertical-align:middle;overflow:hidden;}
+.region-badge{display:inline-block;border-radius:12px;padding:2px 10px;font-size:11px;font-weight:600;}
+.badge-emea{background:#dbeafe;color:#1e40af;}
+.badge-americas{background:#dcfce7;color:#166534;}
+.badge-apac{background:#fef3c7;color:#92400e;}
+.status-badge{display:inline-block;border-radius:12px;padding:2px 10px;font-size:11px;font-weight:600;}
+.status-decom{background:#fee2e2;color:#991b1b;}
+.status-active{background:#f0f4f8;color:#475569;}
+.status-progress{background:#fef9c3;color:#854d0e;}
+.status-blocked{background:#7f1d1d;color:#ffffff;font-weight:700;letter-spacing:0.3px;}
+.notes-cell{font-size:11px;color:#6b7a8d;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;cursor:pointer;max-width:100%;}
+.notes-cell:hover{color:#2E75B6;}
+.notes-cell.expanded{white-space:normal;overflow:visible;text-overflow:unset;}
+.tbl-status-select{border:1px solid #d0dae8;border-radius:6px;padding:4px 8px;font-size:12px;color:#1a2b3c;background:#fff;cursor:pointer;}
+.tbl-notes-input{border:1px solid #d0dae8;border-radius:6px;padding:5px 8px;font-size:11px;color:#344563;width:100%;min-width:200px;resize:vertical;min-height:36px;font-family:inherit;}
+.tbl-date-input{border:1px solid #d0dae8;border-radius:6px;padding:4px 8px;font-size:12px;color:#344563;background:#fff;cursor:pointer;width:100%;}
+.date-display{font-size:12px;color:#344563;}
+.date-display.empty{color:#aab4c0;font-style:italic;}
+.table-edit-bar{display:none;justify-content:space-between;align-items:center;margin-bottom:12px;background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:10px 14px;}
+.table-edit-bar.active{display:flex;}
+.table-edit-bar span{font-size:12px;color:#1e40af;font-weight:500;}
+.btn-save-sites{background:#2E75B6;color:white;padding:6px 14px;font-size:12px;border-radius:7px;}
+.loading-overlay{display:none;position:fixed;inset:0;background:rgba(240,244,248,0.85);z-index:500;align-items:center;justify-content:center;flex-direction:column;gap:12px;}
+.loading-overlay.active{display:flex;}
+.spinner{width:36px;height:36px;border:3px solid #d0dae8;border-top-color:#2E75B6;border-radius:50%;animation:spin 0.7s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.loading-text{font-size:13px;color:#344563;font-weight:500;}
+footer{text-align:center;color:#aab8c8;font-size:11px;padding:16px;}
+</style>
+</head>
+<body>
+
+<div class="loading-overlay active" id="loadingOverlay">
+  <div class="spinner"></div>
+  <div class="loading-text">Loading dashboard data...</div>
+</div>
+
+<!-- PIN modal -->
+<div class="modal-overlay" id="pinModal">
+  <div class="modal">
+    <h2>Admin Access</h2>
+    <p>Enter your PIN to edit the dashboard</p>
+    <input type="password" class="pin-input" id="pinInput" maxlength="10" placeholder="------" autocomplete="off">
+    <div class="pin-error" id="pinError"></div>
+    <button class="btn-pin-ok" onclick="checkPin()">Unlock</button>
+    <button class="btn-pin-cancel" onclick="closePin()">Cancel</button>
+  </div>
+</div>
+
+<!-- GitHub token setup modal -->
+<div class="modal-overlay" id="tokenModal">
+  <div class="modal">
+    <h2>GitHub Token Setup</h2>
+    <p>Paste your fine-grained GitHub token below. It will be stored only in this browser and never uploaded to GitHub.</p>
+    <input type="password" class="token-input" id="tokenInput" placeholder="github_pat_..." autocomplete="off">
+    <div class="pin-error" id="tokenError"></div>
+    <button class="btn-pin-ok" onclick="saveToken()">Save Token</button>
+    <button class="btn-pin-cancel" onclick="closeTokenModal()">Cancel</button>
+  </div>
+</div>
+
+<header>
+  <div>
+    <h1>Infrastructure Integration</h1>
+    <p>Migration Status Dashboard</p>
+  </div>
+  <div class="header-right">
+    <span class="as-of" id="asOfLabel">Loading...</span>
+    <span class="save-status" id="saveStatus"></span>
+    <button class="btn-lock" id="btnLock" onclick="lockAll()">Lock</button>
+    <button class="btn-cancel" id="btnCancel" onclick="cancelEdit()">Cancel</button>
+    <button class="btn-save" id="btnSave" onclick="saveEdit()">Save &amp; Refresh</button>
+    <button class="btn-edit" id="btnEdit" onclick="requirePin('figures')">Edit Figures</button>
+  </div>
+</header>
+
+<main>
+  <div class="edit-panel" id="editPanel">
+    <div class="section-label" style="margin-bottom:16px;">Update Figures</div>
+    <div class="edit-grid">
+      <div class="col-hdr">Metric</div>
+      <div class="col-hdr" style="text-align:right">Complete</div>
+      <div class="col-hdr" style="text-align:right">Total</div>
+    </div>
+    <div class="edit-grid" id="editRows"></div>
+    <div style="margin-top:14px;display:flex;gap:10px;align-items:center;">
+      <div style="font-size:12px;color:#344563;font-weight:600;">As of date:</div>
+      <input type="text" id="editDate" class="edit-input" style="width:180px;text-align:left;" placeholder="e.g. 29 Jun 2026">
+    </div>
+    <p class="edit-note">Remaining is calculated automatically as Total minus Complete.</p>
+  </div>
+
+  <div class="section-label">Migration Progress</div>
+  <div class="charts-grid" id="chartsGrid"></div>
+
+  <div class="section-label">Overall Summary</div>
+  <div class="progress-card" id="progressBars"></div>
+
+  <div class="section-label" style="margin-top:32px;">Site Decommissioning by Region</div>
+  <div class="regional-grid" id="regionalGrid"></div>
+
+  <div class="section-label" style="margin-top:16px;">Site Status</div>
+  <div class="sites-card">
+    <div class="table-edit-bar" id="tableEditBar">
+      <span>Edit mode - update status and notes, then save.</span>
+      <button class="btn-save-sites" onclick="saveSites()">Save Site Changes</button>
+    </div>
+    <div class="filter-bar">
+      <span style="font-size:12px;color:#6b7a8d;font-weight:600;">Filter:</span>
+      <button class="filter-btn active" id="btnFilterAll" onclick="filterAll()">All Sites</button>
+      <span style="width:1px;background:#d0dae8;margin:0 6px;align-self:stretch;display:inline-block;"></span>
+      <button class="filter-btn" data-filter-region="EMEA" onclick="toggleFilter(this,'region','EMEA')">EMEA</button>
+      <button class="filter-btn" data-filter-region="Americas" onclick="toggleFilter(this,'region','Americas')">Americas</button>
+      <button class="filter-btn" data-filter-region="APAC" onclick="toggleFilter(this,'region','APAC')">APAC</button>
+      <span style="width:1px;background:#d0dae8;margin:0 6px;align-self:stretch;display:inline-block;"></span>
+      <button class="filter-btn" data-filter-status="Decommissioned" onclick="toggleFilter(this,'status','Decommissioned')">Decommissioned</button>
+      <button class="filter-btn" data-filter-status="In Progress" onclick="toggleFilter(this,'status','In Progress')">In Progress</button>
+      <button class="filter-btn" data-filter-status="Active" onclick="toggleFilter(this,'status','Active')">Active</button>
+      <button class="filter-btn" data-filter-status="Blocked" onclick="toggleFilter(this,'status','Blocked')" style="border-color:#7f1d1d;color:#7f1d1d;">Blocked</button>
+      <span style="width:1px;background:#d0dae8;margin:0 6px;align-self:stretch;display:inline-block;"></span>
+      <span style="font-size:12px;color:#6b7a8d;font-weight:600;">Date:</span>
+      <input type="date" id="filterDateFrom" class="tbl-date-input" style="width:130px;" onchange="applyDateFilter()" title="From date" />
+      <span style="font-size:12px;color:#6b7a8d;">to</span>
+      <input type="date" id="filterDateTo" class="tbl-date-input" style="width:130px;" onchange="applyDateFilter()" title="To date" />
+      <button class="filter-btn" id="btnClearDate" onclick="clearDateFilter()" style="display:none;border-color:#e74c3c;color:#e74c3c;">✕ Clear Date</button>
+      <button class="filter-btn" id="btnEditSites" onclick="requirePin('sites')" style="margin-left:auto;border-color:#2E75B6;color:#2E75B6;">Edit Sites</button>
+    </div>
+    <table>
+      <thead><tr><th>Site</th><th>Region</th><th>Status</th><th>Migration Date</th><th>Notes</th></tr></thead>
+      <tbody id="sitesBody"></tbody>
+    </table>
+  </div>
+</main>
+
+<footer>Infrastructure Integration &middot; Confidential &middot; Data as at <span id="footerDate"></span></footer>
+
+<script>
+// ============================================================
+// CONFIG
+// ============================================================
+var GITHUB_REPO  = 'rbrown1983/tt-migration';
+var DATA_FILE    = 'data.json';
+var ADMIN_PIN    = '170717';
+var GH_TOKEN_KEY = 'tt_gh_token';
+// ============================================================
+
+var DEFAULT_METRICS = [
+  {label:'Server Decommissioning',complete:126,total:265,unitLabel:'servers',doneLabel:'Decommissioned',color:'#2E75B6'},
+  {label:'Servers to Redundant Cluster',complete:91,total:116,unitLabel:'servers',doneLabel:'In Cluster',color:'#4ec9a0'},
+  {label:'Servers Failed Over to Romford DC',complete:25,total:116,unitLabel:'servers',doneLabel:'Failed Over',color:'#f59e42'},
+  {label:'Remote Sites Synced to Leeds',complete:36,total:50,unitLabel:'sites',doneLabel:'Synchronised',color:'#a78bfa'},
+  {label:'Data Volume Synced to Leeds',complete:128.66,total:223.4,unitLabel:'TB',doneLabel:'Moved',color:'#2E75B6'},
+  {label:'Remote Sites Decommissioned',complete:12,total:39,unitLabel:'sites',doneLabel:'Decommissioned',color:'#f472b6'},
+  {label:'CostX Servers Migrated to Azure',complete:27,total:36,unitLabel:'servers',doneLabel:'Migrated',color:'#4ec9a0'}
+];
+
+var DEFAULT_SITES = [
+  {site:'Abu Dhabi',country:'UAE',region:'EMEA',status:'Active',notes:''},
+  {site:'Amsterdam',country:'Netherlands',region:'EMEA',status:'Active',notes:''},
+  {site:'Birmingham',country:'UK',region:'EMEA',status:'Decommissioned',notes:''},
+  {site:'Brisbane',country:'Australia',region:'APAC',status:'Active',notes:''},
+  {site:'Bristol',country:'UK',region:'EMEA',status:'Active',notes:''},
+  {site:'Cape Town',country:'South Africa',region:'EMEA',status:'Decommissioned',notes:'3 servers: CostX, data, test. Data and CostX migrated.'},
+  {site:'Darwin',country:'Australia',region:'APAC',status:'Active',notes:''},
+  {site:'Doha',country:'Qatar',region:'EMEA',status:'Active',notes:''},
+  {site:'Dubai',country:'UAE',region:'EMEA',status:'Active',notes:''},
+  {site:'Dublin',country:'Ireland',region:'EMEA',status:'In Progress',notes:'1 Server CostX. CostX migrated to cloud. Support ends 26/11 - being decommissioned.'},
+  {site:'Durban',country:'South Africa',region:'EMEA',status:'Decommissioned',notes:'3 servers: CostX, File, test. Data migrated.'},
+  {site:'Edinburgh',country:'UK',region:'EMEA',status:'Decommissioned',notes:''},
+  {site:'Frankfurt',country:'Germany',region:'EMEA',status:'Decommissioned',notes:''},
+  {site:'Gaborone',country:'Botswana',region:'EMEA',status:'Decommissioned',notes:'2 servers: File, test. Data migrated. No HW support.'},
+  {site:'Glasgow',country:'UK',region:'EMEA',status:'Decommissioned',notes:''},
+  {site:'Gold Coast',country:'Australia',region:'APAC',status:'Active',notes:''},
+  {site:'Hong Kong',country:'SAR China',region:'APAC',status:'Active',notes:''},
+  {site:'Houston',country:'USA',region:'Americas',status:'Active',notes:''},
+  {site:'Johannesburg',country:'South Africa',region:'EMEA',status:'In Progress',notes:'Telstra contract end July 2026.'},
+  {site:'Krakow',country:'Poland',region:'EMEA',status:'Decommissioned',notes:'3 servers: DC, data, test. Data migrated, DC demoted.'},
+  {site:'Kuala Lumpur',country:'Malaysia',region:'APAC',status:'Decommissioned',notes:'2 servers: data, DC. Data migrated, DC demoted.'},
+  {site:'Leeds',country:'UK',region:'EMEA',status:'Active',notes:'Primary datacenter / migration target.'},
+  {site:'London',country:'UK',region:'EMEA',status:'In Progress',notes:'Target decommission end of August.'},
+  {site:'Manchester',country:'UK',region:'EMEA',status:'Decommissioned',notes:''},
+  {site:'Melbourne',country:'Australia',region:'APAC',status:'Decommissioned',notes:''},
+  {site:'Mumbai',country:'India',region:'APAC',status:'Active',notes:''},
+  {site:'Munich',country:'Germany',region:'EMEA',status:'In Progress',notes:'Telstra contract end July 2026.'},
+  {site:'Nairobi',country:'Kenya',region:'EMEA',status:'Active',notes:''},
+  {site:'Newcastle',country:'UK',region:'EMEA',status:'Active',notes:''},
+  {site:'New York',country:'USA',region:'Americas',status:'Active',notes:''},
+  {site:'Nottingham',country:'UK',region:'EMEA',status:'Active',notes:''},
+  {site:'Perth',country:'Australia',region:'APAC',status:'Active',notes:''},
+  {site:'Riyadh',country:'Saudi Arabia',region:'EMEA',status:'Active',notes:''},
+  {site:'Shanghai',country:'China',region:'APAC',status:'In Progress',notes:'10 servers: DC, CostX, Door, Data, test, FSCT, Pay. Office move July-August.'},
+  {site:'Sheffield',country:'UK',region:'EMEA',status:'Decommissioned',notes:''},
+  {site:'Singapore',country:'Singapore',region:'APAC',status:'In Progress',notes:'Data migrated (confirm Fin use). DC not yet decommissioned. DHCP/DNS pending.'},
+  {site:'Sydney',country:'Australia',region:'APAC',status:'Active',notes:''},
+  {site:'Teesside',country:'UK',region:'EMEA',status:'Active',notes:''},
+  {site:'Toronto',country:'Canada',region:'Americas',status:'In Progress',notes:'4 servers: DC, CostX, FSCT, test. CostX uses local GPU. HW support extended. Migration Aug/Sep.'}
+];
+
+var REGIONAL_COLORS = {EMEA:'#2E75B6',Americas:'#4ec9a0',APAC:'#f59e42'};
+var STATUS_CLASS = {Decommissioned:'status-decom',Active:'status-active','In Progress':'status-progress',Blocked:'status-blocked'};
+var REGION_CLASS = {EMEA:'badge-emea',Americas:'badge-americas',APAC:'badge-apac'};
+var STATUSES = ['Active','In Progress','Decommissioned','Blocked'];
+
+var isAuthenticated = false;
+var pendingAction = null;
+var metrics, sites;
+var charts = [], regionalCharts = [];
+var tableEditMode = false;
+var currentFilter = 'all';
+var asOf = '22 Jun 2026';
+var currentSHA = null;
+
+function deepCopy(o){ return JSON.parse(JSON.stringify(o)); }
+function getStoredToken(){ return localStorage.getItem(GH_TOKEN_KEY) || ''; }
+
+// ---- GitHub API ----
+function toBase64(str){ return btoa(unescape(encodeURIComponent(str))); }
+
+function setSaveStatus(msg, cls){
+  var el = document.getElementById('saveStatus');
+  el.textContent = msg;
+  el.className = 'save-status'+(cls?' '+cls:'');
+}
+
+async function loadFromGitHub(){
+  // Read from GitHub Pages URL - no rate limits, no auth needed.
+  // Each unique timestamp bypasses CDN cache so everyone always gets fresh data.
+  var pagesUrl = 'https://'+GITHUB_REPO.split('/')[0]+'.github.io/'+GITHUB_REPO.split('/')[1]+'/'+DATA_FILE+'?t='+Date.now();
+  try {
+    var res = await fetch(pagesUrl, { cache:'no-store' });
+    if(res.ok){
+      var data = await res.json();
+      if(data.metrics && data.metrics.length > 0) metrics = data.metrics;
+      if(data.sites   && data.sites.length   > 0) sites   = data.sites;
+      if(data.asOf) asOf = data.asOf;
+    }
+  } catch(e){ console.warn('Load error, using defaults:', e); }
+  if(!metrics || metrics.length === 0) metrics = deepCopy(DEFAULT_METRICS);
+  if(!sites   || sites.length   === 0) sites   = deepCopy(DEFAULT_SITES);
+}
+
+async function saveToGitHub(){
+  var token = getStoredToken();
+  if(!token){ setSaveStatus('No token', 'error'); return; }
+  setSaveStatus('Saving...', 'saving');
+  // Re-fetch SHA immediately before save to avoid conflict errors
+  try {
+    var shaRes = await fetch('https://api.github.com/repos/'+GITHUB_REPO+'/contents/'+DATA_FILE, {
+      headers:{ Authorization:'token '+token, Accept:'application/vnd.github.v3+json' },
+      cache:'no-store'
+    });
+    if(shaRes.ok){ var shaJson = await shaRes.json(); currentSHA = shaJson.sha; }
+  } catch(e){}
+  var payload = JSON.stringify({metrics:metrics, sites:sites, asOf:asOf}, null, 2);
+  var body = { message:'Dashboard update '+new Date().toISOString(), content:toBase64(payload) };
+  if(currentSHA) body.sha = currentSHA;
+  try {
+    var res = await fetch('https://api.github.com/repos/'+GITHUB_REPO+'/contents/'+DATA_FILE, {
+      method:'PUT',
+      headers:{ Authorization:'token '+token, Accept:'application/vnd.github.v3+json', 'Content-Type':'application/json' },
+      body: JSON.stringify(body)
+    });
+    if(res.ok){
+      var saved = await res.json();
+      currentSHA = saved.content.sha;
+      setSaveStatus('Saved', 'saved');
+      setTimeout(function(){ setSaveStatus(''); }, 3000);
+    } else {
+      var err = await res.json();
+      setSaveStatus('Save failed', 'error');
+      console.error('Save error:', err);
+    }
+  } catch(e){ setSaveStatus('Save failed','error'); console.error(e); }
+}
+
+// ---- Token modal ----
+function showTokenModal(){
+  document.getElementById('tokenInput').value = getStoredToken();
+  document.getElementById('tokenError').textContent = '';
+  document.getElementById('tokenModal').classList.add('active');
+  setTimeout(function(){ document.getElementById('tokenInput').focus(); }, 100);
+}
+function closeTokenModal(){ document.getElementById('tokenModal').classList.remove('active'); }
+function saveToken(){
+  var val = document.getElementById('tokenInput').value.trim();
+  if(!val){ document.getElementById('tokenError').textContent = 'Please paste a token.'; return; }
+  localStorage.setItem(GH_TOKEN_KEY, val);
+  closeTokenModal();
+  doAction(pendingAction);
+}
+
+// ---- PIN ----
+function requirePin(action){
+  if(isAuthenticated){ doAction(action); return; }
+  pendingAction = action;
+  document.getElementById('pinInput').value = '';
+  document.getElementById('pinError').textContent = '';
+  document.getElementById('pinModal').classList.add('active');
+  setTimeout(function(){ document.getElementById('pinInput').focus(); }, 100);
+}
+function checkPin(){
+  var val = document.getElementById('pinInput').value.trim();
+  if(val === ADMIN_PIN){
+    isAuthenticated = true;
+    document.getElementById('pinModal').classList.remove('active');
+    document.getElementById('btnLock').style.display = 'inline-block';
+    // Check token exists before proceeding
+    if(!getStoredToken()){ showTokenModal(); }
+    else { doAction(pendingAction); }
+  } else {
+    document.getElementById('pinError').textContent = 'Incorrect PIN.';
+    document.getElementById('pinInput').value = '';
+    document.getElementById('pinInput').focus();
+  }
+}
+function closePin(){ document.getElementById('pinModal').classList.remove('active'); pendingAction = null; }
+function lockAll(){
+  isAuthenticated = false;
+  document.getElementById('btnLock').style.display = 'none';
+  cancelEdit();
+  if(tableEditMode){
+    tableEditMode = false;
+    document.getElementById('tableEditBar').classList.remove('active');
+    document.getElementById('btnEditSites').textContent = 'Edit Sites';
+    renderSitesTable();
+  }
+}
+document.getElementById('pinInput').addEventListener('keydown', function(e){ if(e.key==='Enter') checkPin(); });
+document.getElementById('tokenInput').addEventListener('keydown', function(e){ if(e.key==='Enter') saveToken(); });
+function doAction(action){
+  if(action==='figures') openEdit();
+  if(action==='sites') openTableEdit();
+}
+
+// ---- Figures edit ----
+function openEdit(){
+  document.getElementById('editDate').value = asOf;
+  var html = '';
+  for(var i=0; i<metrics.length; i++){
+    var m = metrics[i];
+    html += '<div class="edit-row-label">'+m.label+'</div>';
+    html += '<input class="edit-input" type="number" id="inp_c_'+i+'" value="'+fmt(m.complete)+'" step="any" min="0">';
+    html += '<input class="edit-input" type="number" id="inp_t_'+i+'" value="'+fmt(m.total)+'" step="any" min="0">';
+  }
+  document.getElementById('editRows').innerHTML = html;
+  document.getElementById('editPanel').classList.add('active');
+  document.getElementById('btnEdit').style.display = 'none';
+  document.getElementById('btnSave').style.display = 'inline-block';
+  document.getElementById('btnCancel').style.display = 'inline-block';
+}
+function cancelEdit(){
+  document.getElementById('editPanel').classList.remove('active');
+  document.getElementById('btnEdit').style.display = 'inline-block';
+  document.getElementById('btnSave').style.display = 'none';
+  document.getElementById('btnCancel').style.display = 'none';
+}
+async function saveEdit(){
+  var d = document.getElementById('editDate').value.trim();
+  if(d) asOf = d;
+  for(var i=0; i<metrics.length; i++){
+    var c = parseFloat(document.getElementById('inp_c_'+i).value);
+    var t = parseFloat(document.getElementById('inp_t_'+i).value);
+    if(!isNaN(c)) metrics[i].complete = c;
+    if(!isNaN(t)) metrics[i].total = t;
+  }
+  cancelEdit(); renderAll();
+  await saveToGitHub();
+}
+
+// ---- Table edit ----
+function openTableEdit(){
+  tableEditMode = true;
+  document.getElementById('tableEditBar').classList.add('active');
+  document.getElementById('btnEditSites').textContent = 'Editing...';
+  renderSitesTable();
+}
+async function saveSites(){
+  for(var i=0; i<sites.length; i++){
+    var sel   = document.getElementById('sel_'+i);
+    var mdate = document.getElementById('mdate_'+i);
+    var notes = document.getElementById('notes_'+i);
+    if(sel)   sites[i].status        = sel.value;
+    if(mdate) sites[i].migrationDate = mdate.value;
+    if(notes) sites[i].notes         = notes.value;
+  }
+  tableEditMode = false;
+  document.getElementById('tableEditBar').classList.remove('active');
+  document.getElementById('btnEditSites').textContent = 'Edit Sites';
+  metrics[5].complete = sites.filter(function(s){ return s.status==='Decommissioned'; }).length;
+  metrics[5].total    = sites.length;
+  renderAll();
+  await saveToGitHub();
+}
+
+// ---- Render ----
+function pct(done,total){ return total>0 ? done/total : 0; }
+function fmt(n){ return Number.isInteger(n) ? n : parseFloat(n.toFixed(2)); }
+
+function renderAll(){
+  document.getElementById('asOfLabel').textContent = 'As of '+asOf;
+  document.getElementById('footerDate').textContent = asOf;
+  renderMetricCharts();
+  renderBars();
+  renderRegionalCharts();
+  renderSitesTable();
+}
+
+function renderMetricCharts(){
+  charts.forEach(function(c){ c.destroy(); }); charts=[];
+  var grid = document.getElementById('chartsGrid');
+  grid.innerHTML='';
+  for(var i=0; i<metrics.length; i++){
+    var m=metrics[i], p=pct(m.complete,m.total);
+    var card=document.createElement('div'); card.className='chart-card';
+    card.innerHTML='<h3>'+m.label+'</h3>'+
+      '<div class="chart-wrap"><canvas id="mc_'+i+'"></canvas>'+
+      '<div class="chart-center"><div class="chart-pct">'+(p*100).toFixed(1)+'%</div><div class="chart-sub">complete</div></div></div>'+
+      '<div class="stat-row">'+
+      '<div class="stat"><div class="stat-val">'+fmt(m.complete)+'</div><div class="stat-lbl">'+m.doneLabel+'</div></div>'+
+      '<div class="stat"><div class="stat-val">'+fmt(m.total-m.complete)+'</div><div class="stat-lbl">Remaining</div></div>'+
+      '<div class="stat"><div class="stat-val">'+fmt(m.total)+'</div><div class="stat-lbl">Total '+m.unitLabel+'</div></div>'+
+      '</div>';
+    grid.appendChild(card);
+    charts.push(makeDonut('mc_'+i,p,m.color));
+  }
+}
+
+function renderRegionalCharts(){
+  regionalCharts.forEach(function(c){ c.destroy(); }); regionalCharts=[];
+  var grid=document.getElementById('regionalGrid'); grid.innerHTML='';
+  var rd=getRegionalData();
+  for(var i=0; i<rd.length; i++){
+    var r=rd[i], p=pct(r.decom,r.total);
+    var card=document.createElement('div'); card.className='chart-card regional';
+    card.innerHTML='<h3>'+r.label+'</h3>'+
+      '<div class="chart-wrap large"><canvas id="rc_'+i+'"></canvas>'+
+      '<div class="chart-center"><div class="chart-pct">'+(p*100).toFixed(0)+'%</div><div class="chart-sub">decommissioned</div></div></div>'+
+      '<div class="stat-row">'+
+      '<div class="stat"><div class="stat-val">'+r.decom+'</div><div class="stat-lbl">Decommissioned</div></div>'+
+      '<div class="stat"><div class="stat-val">'+(r.total-r.decom)+'</div><div class="stat-lbl">Remaining</div></div>'+
+      '<div class="stat"><div class="stat-val">'+r.total+'</div><div class="stat-lbl">Total Sites</div></div>'+
+      '</div>';
+    grid.appendChild(card);
+    regionalCharts.push(makeDonut('rc_'+i,p,r.color));
+  }
+}
+
+function getRegionalData(){
+  return ['EMEA','Americas','APAC'].map(function(r){
+    return {
+      label:r,
+      decom:sites.filter(function(s){ return s.region===r&&s.status==='Decommissioned'; }).length,
+      total:sites.filter(function(s){ return s.region===r; }).length,
+      color:REGIONAL_COLORS[r]
+    };
+  });
+}
+
+function makeDonut(id,p,fillColor){
+  var ctx=document.getElementById(id).getContext('2d');
+  return new Chart(ctx,{
+    type:'doughnut',
+    data:{datasets:[{data:[p*100,(1-p)*100],backgroundColor:[fillColor,'#e8eef5'],borderWidth:0,borderRadius:3}]},
+    options:{responsive:true,maintainAspectRatio:false,cutout:'72%',plugins:{legend:{display:false},tooltip:{enabled:false}},animation:{animateRotate:true,duration:700}}
+  });
+}
+
+function renderBars(){
+  var html='';
+  for(var i=0; i<metrics.length; i++){
+    var m=metrics[i], p=pct(m.complete,m.total);
+    html+='<div class="prog-item"><div class="prog-header"><span class="prog-name">'+m.label+'</span><span class="prog-pct">'+(p*100).toFixed(1)+'%</span></div>'+
+          '<div class="bar-track"><div class="bar-fill" style="width:'+(p*100).toFixed(1)+'%;background:'+m.color+';"></div></div></div>';
+  }
+  document.getElementById('progressBars').innerHTML=html;
+}
+
+function renderSitesTable(){
+  var filtered=[];
+  for(var i=0; i<sites.length; i++){
+    var s=sites[i];
+    var regionOk=activeRegions.length===0||activeRegions.indexOf(s.region)!==-1;
+    var statusOk=activeStatuses.length===0||activeStatuses.indexOf(s.status)!==-1;
+    var dateOk=true;
+    if(dateFilterFrom||dateFilterTo){
+      var d=s.migrationDate||'';
+      if(!d){ dateOk=false; }
+      else{
+        if(dateFilterFrom&&d<dateFilterFrom) dateOk=false;
+        if(dateFilterTo  &&d>dateFilterTo)   dateOk=false;
+      }
+    }
+    if(regionOk&&statusOk&&dateOk)
+      filtered.push({site:s.site,country:s.country,region:s.region,status:s.status,migrationDate:s.migrationDate||'',notes:s.notes,idx:i});
+  }
+  var html='';
+  for(var j=0; j<filtered.length; j++){
+    var row=filtered[j], idx=row.idx, statusCell, dateCell, notesCell;
+    if(tableEditMode){
+      var opts='';
+      for(var k=0; k<STATUSES.length; k++)
+        opts+='<option value="'+STATUSES[k]+'"'+(STATUSES[k]===row.status?' selected':'')+'>'+STATUSES[k]+'</option>';
+      statusCell='<select class="tbl-status-select" id="sel_'+idx+'">'+opts+'</select>';
+      dateCell='<input type="date" class="tbl-date-input" id="mdate_'+idx+'"'+(row.migrationDate?' value="'+row.migrationDate+'"':'')+' />';
+      notesCell='<textarea class="tbl-notes-input" id="notes_'+idx+'">'+row.notes+'</textarea>';
+    } else {
+      var sc=STATUS_CLASS[row.status]||'status-active';
+      statusCell='<span class="status-badge '+sc+'">'+row.status+'</span>';
+      if(row.migrationDate){
+        var dp=new Date(row.migrationDate+'T00:00:00');
+        var fmtDate=dp.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'});
+        dateCell='<span class="date-display">'+fmtDate+'</span>';
+      } else {
+        dateCell='<span class="date-display empty">—</span>';
+      }
+      var notesTxt=row.notes||'&mdash;';
+      notesCell='<span class="notes-cell" title="'+notesTxt.replace(/"/g,'&quot;')+'" onclick="this.classList.toggle(\'expanded\')">'+notesTxt+'</span>';
+    }
+    var rc=REGION_CLASS[row.region]||'';
+    html+='<tr>'+
+      '<td><strong>'+row.site+'</strong><br><span style="font-size:11px;color:#8899aa;">'+row.country+'</span></td>'+
+      '<td><span class="region-badge '+rc+'">'+row.region+'</span></td>'+
+      '<td>'+statusCell+'</td>'+
+      '<td>'+dateCell+'</td>'+
+      '<td>'+notesCell+'</td>'+
+      '</tr>';
+  }
+  document.getElementById('sitesBody').innerHTML=html;
+}
+
+var activeRegions=[], activeStatuses=[], dateFilterFrom='', dateFilterTo='';
+
+function filterAll(){
+  activeRegions=[];
+  activeStatuses=[];
+  var btns=document.querySelectorAll('.filter-btn[data-filter-region],.filter-btn[data-filter-status]');
+  for(var i=0; i<btns.length; i++) btns[i].classList.remove('active');
+  document.getElementById('btnFilterAll').classList.add('active');
+  renderSitesTable();
+}
+
+function toggleFilter(btn,type,value){
+  var arr=type==='region'?activeRegions:activeStatuses;
+  var idx=arr.indexOf(value);
+  if(idx===-1){ arr.push(value); btn.classList.add('active'); }
+  else{ arr.splice(idx,1); btn.classList.remove('active'); }
+  document.getElementById('btnFilterAll').classList.toggle('active', activeRegions.length===0&&activeStatuses.length===0&&!dateFilterFrom&&!dateFilterTo);
+  renderSitesTable();
+}
+
+function applyDateFilter(){
+  dateFilterFrom=document.getElementById('filterDateFrom').value;
+  dateFilterTo=document.getElementById('filterDateTo').value;
+  document.getElementById('btnClearDate').style.display=(dateFilterFrom||dateFilterTo)?'':'none';
+  document.getElementById('btnFilterAll').classList.toggle('active', activeRegions.length===0&&activeStatuses.length===0&&!dateFilterFrom&&!dateFilterTo);
+  renderSitesTable();
+}
+
+function clearDateFilter(){
+  dateFilterFrom=''; dateFilterTo='';
+  document.getElementById('filterDateFrom').value='';
+  document.getElementById('filterDateTo').value='';
+  document.getElementById('btnClearDate').style.display='none';
+  document.getElementById('btnFilterAll').classList.toggle('active', activeRegions.length===0&&activeStatuses.length===0);
+  renderSitesTable();
+}
+
+// ---- Init ----
+(async function(){
+  await loadFromGitHub();
+  document.getElementById('loadingOverlay').classList.remove('active');
+  renderAll();
+})();
+</script>
+</body>
+</html>
