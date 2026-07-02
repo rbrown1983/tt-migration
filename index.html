@@ -154,6 +154,7 @@ footer{text-align:center;color:#aab8c8;font-size:11px;padding:16px;}
   <div class="header-right">
     <span class="as-of" id="asOfLabel">Loading...</span>
     <span class="save-status" id="saveStatus"></span>
+    <button class="btn-lock" id="btnToken" onclick="showTokenModal()" style="display:none;">Update Token</button>
     <button class="btn-lock" id="btnLock" onclick="lockAll()">Lock</button>
     <button class="btn-cancel" id="btnCancel" onclick="cancelEdit()">Cancel</button>
     <button class="btn-save" id="btnSave" onclick="saveEdit()">Save &amp; Refresh</button>
@@ -369,6 +370,7 @@ function checkPin(){
     isAuthenticated = true;
     document.getElementById('pinModal').classList.remove('active');
     document.getElementById('btnLock').style.display = 'inline-block';
+    document.getElementById('btnToken').style.display = 'inline-block';
     if(!getStoredToken()){ showTokenModal(); }
     else { doAction(pendingAction); }
   } else {
@@ -381,6 +383,7 @@ function closePin(){ document.getElementById('pinModal').classList.remove('activ
 function lockAll(){
   isAuthenticated = false;
   document.getElementById('btnLock').style.display = 'none';
+  document.getElementById('btnToken').style.display = 'none';
   cancelEdit();
   if(tableEditMode){
     tableEditMode = false;
