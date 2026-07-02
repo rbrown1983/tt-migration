@@ -2,7 +2,7 @@
   "metrics": [
     {
       "label": "Server Decommissioning",
-      "complete": 135,
+      "complete": 139,
       "total": 265,
       "unitLabel": "servers",
       "doneLabel": "Decommissioned",
@@ -71,7 +71,7 @@
       "country": "Netherlands",
       "region": "EMEA",
       "status": "Active",
-      "notes": "",
+      "notes": "test",
       "migrationDate": ""
     },
     {
