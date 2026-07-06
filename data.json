@@ -42,7 +42,7 @@
     },
     {
       "label": "Remote Sites Decommissioned",
-      "complete": 16,
+      "complete": 18,
       "total": 38,
       "unitLabel": "sites",
       "doneLabel": "Decommissioned",
@@ -262,7 +262,7 @@
       "site": "Munich",
       "country": "Germany",
       "region": "EMEA",
-      "status": "In Progress",
+      "status": "Decommissioned",
       "notes": "DHCP and DNS being migrated - data copied. There is a local server that needs to be migrated to Leeds, Sam has setup Zerto to replicate and is trying to identify an owner.",
       "migrationDate": "2026-08-03"
     },
@@ -278,7 +278,7 @@
       "site": "Newcastle",
       "country": "UK",
       "region": "EMEA",
-      "status": "In Progress",
+      "status": "Decommissioned",
       "notes": "",
       "migrationDate": ""
     },
