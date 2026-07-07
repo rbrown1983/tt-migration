@@ -287,7 +287,7 @@
       "country": "USA",
       "region": "Americas",
       "status": "In Progress",
-      "notes": "Costx  ready to be decommissioned",
+      "notes": "Costx  ready to be decommissioned\nDAC - to be confirmed if required \nOSTX - to confirm what this is with Stephen",
       "migrationDate": "2026-08-03"
     },
     {
@@ -363,5 +363,5 @@
       "migrationDate": "2026-08-03"
     }
   ],
-  "asOf": "07 Jul 2026 10:35"
+  "asOf": "07 Jul 2026 10:37"
 }
