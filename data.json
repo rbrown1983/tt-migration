@@ -174,8 +174,8 @@
       "site": "Gold Coast",
       "country": "Australia",
       "region": "APAC",
-      "status": "Active",
-      "notes": "",
+      "status": "In Progress",
+      "notes": "Costx ready to be decommissioned ",
       "migrationDate": "2026-08-03"
     },
     {
@@ -231,7 +231,7 @@
       "country": "UK",
       "region": "EMEA",
       "status": "Blocked",
-      "notes": "Data and Apps to migrate including Exchange and CostX to VAST\nCostX networking deployed for VAST license server to be built this week (06/07)\nExchange meeting 08/07",
+      "notes": "Data and Apps to migrate including Exchange and CostX to VAST\nCostX networking deployed for VAST license server to be built this week (06/07)\nExchange meeting 08/07\nThycotic servers don't work after migration - no support. To be replaced with WDAC but no one owns the migration. Sam sending email to Richard Hare",
       "migrationDate": "2026-08-03"
     },
     {
@@ -286,8 +286,8 @@
       "site": "New York",
       "country": "USA",
       "region": "Americas",
-      "status": "Active",
-      "notes": "",
+      "status": "In Progress",
+      "notes": "Costx  ready to be decommissioned",
       "migrationDate": "2026-08-03"
     },
     {
@@ -303,7 +303,7 @@
       "country": "Australia",
       "region": "APAC",
       "status": "In Progress",
-      "notes": "",
+      "notes": "Costx  to be decommissioned and then site can go",
       "migrationDate": "2026-08-03"
     },
     {
@@ -343,7 +343,7 @@
       "country": "Australia",
       "region": "APAC",
       "status": "Blocked",
-      "notes": "Primavera instance on Citrix \nIssues with Data, working with networks on VPN or will send HDD",
+      "notes": "Primavera instance on Citrix - potentially move to Azure, confirm with Donna\nIssues with Data, working with networks on VPN or will send HDD",
       "migrationDate": "2026-08-03"
     },
     {
@@ -363,5 +363,5 @@
       "migrationDate": "2026-08-03"
     }
   ],
-  "asOf": "07 Jul 2026 10:17"
+  "asOf": "07 Jul 2026 10:35"
 }
