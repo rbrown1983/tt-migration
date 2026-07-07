@@ -231,7 +231,7 @@
       "country": "UK",
       "region": "EMEA",
       "status": "Blocked",
-      "notes": "Data and Apps to migrate including Exchange and CostX to VAST",
+      "notes": "Data and Apps to migrate including Exchange and CostX to VAST\nCostX networking deployed for VAST license server to be built this week (06/07)\nExchange meeting 08/07",
       "migrationDate": "2026-08-03"
     },
     {
@@ -363,5 +363,5 @@
       "migrationDate": "2026-08-03"
     }
   ],
-  "asOf": "07 Jul 2026 09:56"
+  "asOf": "07 Jul 2026 10:17"
 }
