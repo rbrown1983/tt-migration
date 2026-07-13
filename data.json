@@ -2,7 +2,7 @@
   "metrics": [
     {
       "label": "Server Decommissioning",
-      "complete": 145,
+      "complete": 150,
       "total": 265,
       "unitLabel": "servers",
       "doneLabel": "Decommissioned",
@@ -363,5 +363,5 @@
       "migrationDate": "2026-08-03"
     }
   ],
-  "asOf": "08 Jul 2026 14:42"
+  "asOf": "13 Jul 2026 16:46"
 }
