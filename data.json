@@ -288,7 +288,7 @@
       "region": "Americas",
       "status": "In Progress",
       "notes": "Costx  ready to be decommissioned\nDAC - to be confirmed if required \nOSTX - to confirm what this is with Stephen",
-      "migrationDate": "2026-08-03"
+      "migrationDate": "2026-10-01"
     },
     {
       "site": "Nottingham",
@@ -363,5 +363,5 @@
       "migrationDate": "2026-08-03"
     }
   ],
-  "asOf": "13 Jul 2026 16:46"
+  "asOf": "14 Jul 2026 16:14"
 }
