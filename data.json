@@ -335,7 +335,7 @@
       "country": "Singapore",
       "region": "APAC",
       "status": "In Progress",
-      "notes": "DHCP and DNS being migrated - data copied, door access controls, forescout and test servers to decom with site",
+      "notes": "door access controls, forescout and test servers to decom with site",
       "migrationDate": "2026-08-03"
     },
     {
@@ -363,5 +363,5 @@
       "migrationDate": "2026-08-03"
     }
   ],
-  "asOf": "15 Jul 2026 11:51"
+  "asOf": "15 Jul 2026 11:52"
 }
