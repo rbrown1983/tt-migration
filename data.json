@@ -42,7 +42,7 @@
     },
     {
       "label": "Remote Sites Decommissioned",
-      "complete": 20,
+      "complete": 21,
       "total": 38,
       "unitLabel": "sites",
       "doneLabel": "Decommissioned",
@@ -190,7 +190,7 @@
       "site": "Houston",
       "country": "USA",
       "region": "Americas",
-      "status": "In Progress",
+      "status": "Decommissioned",
       "notes": "Data hasn't been accessed for a month plan to set to RO in the coming weeks.\n01/07",
       "migrationDate": "2026-08-03"
     },
