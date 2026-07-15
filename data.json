@@ -42,7 +42,7 @@
     },
     {
       "label": "Remote Sites Decommissioned",
-      "complete": 18,
+      "complete": 20,
       "total": 38,
       "unitLabel": "sites",
       "doneLabel": "Decommissioned",
@@ -70,7 +70,7 @@
       "site": "Amsterdam",
       "country": "Netherlands",
       "region": "EMEA",
-      "status": "Active",
+      "status": "Decommissioned",
       "notes": "",
       "migrationDate": ""
     },
@@ -190,7 +190,7 @@
       "site": "Houston",
       "country": "USA",
       "region": "Americas",
-      "status": "Active",
+      "status": "In Progress",
       "notes": "Data hasn't been accessed for a month plan to set to RO in the coming weeks.\n01/07",
       "migrationDate": "2026-08-03"
     },
@@ -302,7 +302,7 @@
       "site": "Perth",
       "country": "Australia",
       "region": "APAC",
-      "status": "In Progress",
+      "status": "Decommissioned",
       "notes": "Costx  to be decommissioned and then site can go",
       "migrationDate": "2026-08-03"
     },
@@ -363,5 +363,5 @@
       "migrationDate": "2026-08-03"
     }
   ],
-  "asOf": "15 Jul 2026 11:50"
+  "asOf": "15 Jul 2026 11:51"
 }
