@@ -42,7 +42,7 @@
     },
     {
       "label": "Remote Sites Decommissioned",
-      "complete": 21,
+      "complete": 22,
       "total": 38,
       "unitLabel": "sites",
       "doneLabel": "Decommissioned",
@@ -174,8 +174,8 @@
       "site": "Gold Coast",
       "country": "Australia",
       "region": "APAC",
-      "status": "In Progress",
-      "notes": "Costx ready to be decommissioned ",
+      "status": "Decommissioned",
+      "notes": "",
       "migrationDate": "2026-08-03"
     },
     {
@@ -363,5 +363,5 @@
       "migrationDate": "2026-08-03"
     }
   ],
-  "asOf": "15 Jul 2026 16:25"
+  "asOf": "17 Jul 2026 10:16"
 }
