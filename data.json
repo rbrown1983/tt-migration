@@ -18,7 +18,7 @@
     },
     {
       "label": "Servers Failed Over to Romford DC",
-      "complete": 41,
+      "complete": 42,
       "total": 120,
       "unitLabel": "servers",
       "doneLabel": "Failed Over",
@@ -363,5 +363,5 @@
       "migrationDate": "2026-08-03"
     }
   ],
-  "asOf": "17 Jul 2026 14:58"
+  "asOf": "23 Jul 2026 10:40"
 }
