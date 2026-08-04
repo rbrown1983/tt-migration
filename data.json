@@ -111,7 +111,7 @@
       "country": "Qatar",
       "region": "EMEA",
       "status": "Blocked",
-      "notes": "Local data in use - working to identify what can be moved to sharepoint to have the shares stopped..",
+      "notes": "Local data in use - working to identify what can be moved to sharepoint to have the shares stopped.. 1 person in the office is still accessing data, everyone else RO. Adrian is looking to move his data to Leeds, deadline to close access on the 14th.",
       "migrationDate": ""
     },
     {
@@ -271,7 +271,7 @@
       "country": "Kenya",
       "region": "EMEA",
       "status": "Blocked",
-      "notes": "Local data still in use.",
+      "notes": "Local data still in use. Closure emails sent out by Adrian set to RO and close shares on the 7th",
       "migrationDate": ""
     },
     {
@@ -319,7 +319,7 @@
       "country": "China",
       "region": "APAC",
       "status": "Blocked",
-      "notes": "Data still in use locally",
+      "notes": "Data still in use locally. Closure emails sent out by Adrian set to RO and close shares on the 7th",
       "migrationDate": "2026-08-03"
     },
     {
@@ -363,5 +363,5 @@
       "migrationDate": "2026-08-03"
     }
   ],
-  "asOf": "04 Aug 2026 10:13"
+  "asOf": "04 Aug 2026 10:17"
 }
