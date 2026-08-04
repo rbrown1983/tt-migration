@@ -63,7 +63,7 @@
       "country": "UAE",
       "region": "EMEA",
       "status": "Blocked",
-      "notes": "Anyconnect firewall and CostX running until end of June",
+      "notes": "Anyconnect firewall and CostX running until end of June.\nWnQS deployed in Azure being tested and should be able to deocm site by EOW 09/08",
       "migrationDate": "2026-08-03"
     },
     {
@@ -363,5 +363,5 @@
       "migrationDate": "2026-08-03"
     }
   ],
-  "asOf": "24 Jul 2026 14:46"
+  "asOf": "04 Aug 2026 10:13"
 }
