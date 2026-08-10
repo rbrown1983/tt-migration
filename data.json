@@ -3,7 +3,7 @@
     {
       "label": "Server Decommissioning",
       "complete": 162,
-      "total": 265,
+      "total": 268,
       "unitLabel": "servers",
       "doneLabel": "Decommissioned",
       "color": "#2E75B6"
@@ -19,7 +19,7 @@
     {
       "label": "Servers Failed Over to Romford DC",
       "complete": 55,
-      "total": 120,
+      "total": 117,
       "unitLabel": "servers",
       "doneLabel": "Failed Over",
       "color": "#f59e42"
@@ -363,5 +363,5 @@
       "migrationDate": "2026-08-03"
     }
   ],
-  "asOf": "10 Aug 2026 11:53"
+  "asOf": "10 Aug 2026 14:44"
 }
