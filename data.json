@@ -198,8 +198,8 @@
       "site": "Johannesburg",
       "country": "South Africa",
       "region": "EMEA",
-      "status": "Blocked",
-      "notes": "Local instances of Finance apps, Fin and Sage.",
+      "status": "In Progress",
+      "notes": "Local server, PrinterLogic",
       "migrationDate": ""
     },
     {
@@ -363,5 +363,5 @@
       "migrationDate": "2026-08-03"
     }
   ],
-  "asOf": "10 Aug 2026 09:35"
+  "asOf": "10 Aug 2026 09:36"
 }
