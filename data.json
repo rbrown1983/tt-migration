@@ -87,7 +87,7 @@
       "country": "Australia",
       "region": "APAC",
       "status": "Active",
-      "notes": "PrinterLogic- where to move it to? ",
+      "notes": "PrinterLogic- where to move it to? Sydney CBRE?",
       "migrationDate": "2026-08-03"
     },
     {
@@ -363,5 +363,5 @@
       "migrationDate": "2026-08-03"
     }
   ],
-  "asOf": "11 Aug 2026 10:25"
+  "asOf": "11 Aug 2026 10:26"
 }
