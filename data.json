@@ -199,7 +199,7 @@
       "country": "South Africa",
       "region": "EMEA",
       "status": "In Progress",
-      "notes": "Local server, DC- can we decomm this?",
+      "notes": "Servers migrated to Romford looking to migrate DHCP and DNS",
       "migrationDate": ""
     },
     {
@@ -363,5 +363,5 @@
       "migrationDate": "2026-08-03"
     }
   ],
-  "asOf": "11 Aug 2026 14:09"
+  "asOf": "11 Aug 2026 16:24"
 }
