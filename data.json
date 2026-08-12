@@ -384,7 +384,7 @@
       "name": "BeyondTrust Virtual Appliance",
       "location": "Leeds, UK",
       "role": "Bomgar appliance",
-      "status": "To be replicated",
+      "status": "Replicating",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -393,7 +393,7 @@
       "name": "D365Data02",
       "location": "Leeds, UK",
       "role": "D365 SQL Databases",
-      "status": "To be replicated",
+      "status": "Replicating",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -402,7 +402,7 @@
       "name": "DxbPay02",
       "location": "Dubai, United Arab Emirates",
       "role": "Dubai Payroll",
-      "status": "To be replicated",
+      "status": "Replicating",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -510,7 +510,7 @@
       "name": "HRApps05",
       "location": "Leeds, UK",
       "role": "Itrent HR server",
-      "status": "To be replicated",
+      "status": "Replicating",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -519,7 +519,7 @@
       "name": "HRBusObj05",
       "location": "Leeds, UK",
       "role": "Itrent HR server",
-      "status": "To be replicated",
+      "status": "Replicating",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -528,7 +528,7 @@
       "name": "HRSQL04",
       "location": "Leeds, UK",
       "role": "Itrent HR server",
-      "status": "To be replicated",
+      "status": "Replicating",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -537,7 +537,7 @@
       "name": "HRSQL05",
       "location": "Leeds, UK",
       "role": "Itrent HR server",
-      "status": "To be replicated",
+      "status": "Replicating",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -546,7 +546,7 @@
       "name": "HRWeb05",
       "location": "Leeds, UK",
       "role": "Itrent HR server",
-      "status": "To be replicated",
+      "status": "Replicating",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -555,7 +555,7 @@
       "name": "LeeADFS02",
       "location": "Leeds, UK",
       "role": "ADFS server (leeprox02 dependency). Telstra NAT rule",
-      "status": "To be replicated",
+      "status": "Replicating",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -573,7 +573,7 @@
       "name": "LeeCASHyb201",
       "location": "Leeds, UK",
       "role": "Exchange Server",
-      "status": "To be replicated",
+      "status": "Replicating",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -582,7 +582,7 @@
       "name": "LeeDagArc201",
       "location": "Leeds, UK",
       "role": "Exchange Server (Automated Scripts/Mgmt)",
-      "status": "To be replicated",
+      "status": "Replicating",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -591,7 +591,7 @@
       "name": "LeeDC11",
       "location": "Leeds, UK",
       "role": "Domain Controller",
-      "status": "To be replicated",
+      "status": "Replicating",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -600,7 +600,7 @@
       "name": "LeeDCradKMS11",
       "location": "Leeds, UK",
       "role": "Domain Controller / RADIUS / NPS",
-      "status": "To be replicated",
+      "status": "Replicating",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -609,7 +609,7 @@
       "name": "LeeHeeryQB",
       "location": "Leeds, UK",
       "role": "Heery - Quickbooks",
-      "status": "To be replicated",
+      "status": "Replicating",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -618,7 +618,7 @@
       "name": "LeeHeeryTAP",
       "location": "Leeds, UK",
       "role": "Heery - Microsoft Silverlight access within DAX",
-      "status": "To be replicated",
+      "status": "Replicating",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -636,7 +636,7 @@
       "name": "LeeNessus01",
       "location": "Leeds, UK",
       "role": "Nessus Vulnerability Scanner",
-      "status": "To be replicated",
+      "status": "Replicating",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -645,7 +645,7 @@
       "name": "LeePam01",
       "location": "Leeds, UK",
       "role": "Thycotic servers",
-      "status": "To be replicated",
+      "status": "Replicating",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -681,7 +681,7 @@
       "name": "LeeRDIntGW01",
       "location": "Leeds, UK",
       "role": "RDP Internal Gateway",
-      "status": "To be replicated",
+      "status": "Replicating",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -690,7 +690,7 @@
       "name": "LeeSQL09-New",
       "location": "Leeds, UK",
       "role": "Primavera centrally hosted SQL server",
-      "status": "To be replicated",
+      "status": "Replicating",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -708,7 +708,7 @@
       "name": "LeeSQL13",
       "location": "Leeds, UK",
       "role": "SQL server reporting (various systems)",
-      "status": "To be replicated",
+      "status": "Replicating",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -717,7 +717,7 @@
       "name": "LeeSQL15",
       "location": "Leeds, UK",
       "role": "Performance Forum SQL server",
-      "status": "To be replicated",
+      "status": "Replicating",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -726,7 +726,7 @@
       "name": "LeeSSDE01",
       "location": "Leeds, UK",
       "role": "Secret Server / Delinea server",
-      "status": "To be replicated",
+      "status": "Replicating",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -735,7 +735,7 @@
       "name": "LeeSSSQL01",
       "location": "Leeds, UK",
       "role": "Secret Server / Delinea server",
-      "status": "To be replicated",
+      "status": "Replicating",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -744,7 +744,7 @@
       "name": "LonADFS02",
       "location": "London, UK",
       "role": "ADFS",
-      "status": "To be replicated",
+      "status": "Replicating",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -753,7 +753,7 @@
       "name": "LonCASHyb201",
       "location": "London, UK",
       "role": "Exchange server",
-      "status": "To be replicated",
+      "status": "Replicating",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -780,7 +780,7 @@
       "name": "LonDoorSec03",
       "location": "London, UK",
       "role": "London door access system",
-      "status": "To be replicated",
+      "status": "Replicating",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -789,7 +789,7 @@
       "name": "LonPam01",
       "location": "London, UK",
       "role": "Thycotic servers",
-      "status": "To be replicated",
+      "status": "Replicating",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -798,7 +798,7 @@
       "name": "LonSSDE01",
       "location": "London, UK",
       "role": "Secret Server / Delinea server",
-      "status": "To be replicated",
+      "status": "Replicating",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -807,7 +807,7 @@
       "name": "LonSSSQL01",
       "location": "London, UK",
       "role": "Secret Server / Delinea server / SQL",
-      "status": "To be replicated",
+      "status": "Replicating",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -924,7 +924,7 @@
       "name": "TTFtpUk01-DMZ",
       "location": "Leeds, UK",
       "role": "FTP Server - DMZ",
-      "status": "To be replicated",
+      "status": "Replicating",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -969,7 +969,7 @@
       "name": "TTnFinLee",
       "location": "Leeds, UK",
       "role": "Leeds finance - Lotus Domino",
-      "status": "To be replicated",
+      "status": "Replicating",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -978,7 +978,7 @@
       "name": "TTvCenter02-v8.0",
       "location": "Leeds, UK",
       "role": "vCentre Appliance",
-      "status": "To be replicated",
+      "status": "Replicating",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -996,7 +996,7 @@
       "name": "VmP6CtxLeeP01",
       "location": "Leeds, UK",
       "role": "Citrix Primavera server",
-      "status": "To be replicated",
+      "status": "Replicating",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -1014,7 +1014,7 @@
       "name": "VmP6CtxLeeP02",
       "location": "Leeds, UK",
       "role": "Citrix Primavera server",
-      "status": "To be replicated",
+      "status": "Replicating",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -1023,7 +1023,7 @@
       "name": "WebApps04",
       "location": "Leeds, UK",
       "role": "Main web server for on-prem apps",
-      "status": "To be replicated",
+      "status": "Replicating",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -1561,5 +1561,5 @@
     }
   ],
   "issues": [],
-  "asOf": "12 Aug 2026 11:19"
+  "asOf": "12 Aug 2026 11:24"
 }
