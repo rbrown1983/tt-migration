@@ -470,6 +470,12 @@ async function loadData(){
   if(!sites   || sites.length   === 0) sites   = deepCopy(DEFAULT_SITES);
   if(!servers || servers.length === 0) servers = deepCopy(DEFAULT_SERVERS);
   if(!issues) issues = deepCopy(DEFAULT_ISSUES);
+  // Merge any new default sites not yet in saved data (e.g. Darwin)
+  var siteNames={};
+  for(var si=0;si<sites.length;si++) siteNames[sites[si].site]=true;
+  for(var di=0;di<DEFAULT_SITES.length;di++){
+    if(!siteNames[DEFAULT_SITES[di].site]) sites.push(deepCopy(DEFAULT_SITES[di]));
+  }
   // Back-fill missing fields from defaults (upgrade from older data.json)
   var defMap={};
   for(var d=0;d<DEFAULT_SERVERS.length;d++) defMap[DEFAULT_SERVERS[d].name]=DEFAULT_SERVERS[d];
