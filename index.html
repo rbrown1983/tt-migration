@@ -289,6 +289,7 @@ footer{text-align:center;color:#aab8c8;font-size:11px;padding:16px;}
 // ============================================================
 // CONFIG
 // ============================================================
+var EMBEDDED_DATA = ; /*SNAPSHOT*/
 var GITHUB_REPO  = 'rbrown1983/tt-migration';
 var DATA_FILE    = 'data.json';
 var ADMIN_PIN    = '170717';
@@ -457,29 +458,52 @@ function setSaveStatus(msg, cls){
 
 function showLoadError(msg){
   var b=document.getElementById('loadErrorBanner');
-  if(b){ b.textContent='⚠ Data load issue: '+msg+' — showing cached defaults. Enter PIN and use Update Token to fix.'; b.classList.add('active'); }
+  if(b){ b.textContent='⚠ Could not load latest data ('+msg+'). Displaying embedded snapshot — save will update to latest.'; b.classList.add('active'); }
+}
+function hideLoadError(){ var b=document.getElementById('loadErrorBanner'); if(b) b.classList.remove('active'); }
+function applyData(data){
+  if(data.metrics && data.metrics.length > 0) metrics = data.metrics;
+  if(data.sites   && data.sites.length   > 0) sites   = data.sites;
+  if(data.servers && data.servers.length > 0) servers = data.servers;
+  if(data.issues)  issues  = data.issues;
+  if(data.asOf) asOf = data.asOf;
 }
 async function loadData(){
-  var apiUrl = 'https://api.github.com/repos/'+GITHUB_REPO+'/contents/'+DATA_FILE;
-  var hdrs = { Accept:'application/vnd.github.v3.raw', cache:'no-store' };
-  var hasToken = !!getStoredToken();
-  if(hasToken) hdrs['Authorization'] = 'token '+getStoredToken();
-  console.log('[Dashboard] Loading data. Token present:', hasToken);
+  var loaded = false;
+
+  // Attempt 1: GitHub Contents API (freshest, supports auth)
   try {
+    var apiUrl = 'https://api.github.com/repos/'+GITHUB_REPO+'/contents/'+DATA_FILE;
+    var hdrs = { Accept:'application/vnd.github.v3.raw' };
+    if(getStoredToken()) hdrs['Authorization'] = 'token '+getStoredToken();
+    console.log('[Dashboard] Trying GitHub API...');
     var res = await fetch(apiUrl, { headers:hdrs, cache:'no-store' });
-    console.log('[Dashboard] GitHub API response status:', res.status);
-    if(res.ok){
-      var data = await res.json();
-      console.log('[Dashboard] Data loaded. asOf:', data.asOf, 'sites:', data.sites&&data.sites.length, 'servers:', data.servers&&data.servers.length);
-      if(data.metrics && data.metrics.length > 0) metrics = data.metrics;
-      if(data.sites   && data.sites.length   > 0) sites   = data.sites;
-      if(data.servers && data.servers.length > 0) servers = data.servers;
-      if(data.issues)  issues  = data.issues;
-      if(data.asOf) asOf = data.asOf;
-    } else {
-      showLoadError('GitHub API returned status '+res.status+(res.status===401||res.status===403?' (token required or rate limited)':res.status===404?' (file not found)':''));
-    }
-  } catch(e){ console.warn('[Dashboard] Load error:', e); showLoadError(e.message||'network error'); }
+    console.log('[Dashboard] API status:', res.status);
+    if(res.ok){ applyData(await res.json()); loaded=true; console.log('[Dashboard] Loaded via API. asOf:', asOf); }
+    else { console.warn('[Dashboard] API returned', res.status); }
+  } catch(e){ console.warn('[Dashboard] API fetch failed:', e.message); }
+
+  // Attempt 2: raw.githubusercontent.com CDN with cache-buster
+  if(!loaded){
+    try {
+      var rawUrl = 'https://raw.githubusercontent.com/'+GITHUB_REPO+'/main/'+DATA_FILE+'?t='+Date.now();
+      console.log('[Dashboard] Trying raw CDN...');
+      var res2 = await fetch(rawUrl, { cache:'no-store' });
+      console.log('[Dashboard] CDN status:', res2.status);
+      if(res2.ok){ applyData(await res2.json()); loaded=true; console.log('[Dashboard] Loaded via CDN. asOf:', asOf); }
+      else { console.warn('[Dashboard] CDN returned', res2.status); }
+    } catch(e2){ console.warn('[Dashboard] CDN fetch failed:', e2.message); }
+  }
+
+  // Attempt 3: Embedded snapshot baked in by publish script
+  if(!loaded && typeof EMBEDDED_DATA !== 'undefined' && EMBEDDED_DATA){
+    console.log('[Dashboard] Using embedded snapshot.');
+    applyData(EMBEDDED_DATA);
+    loaded=true;
+    showLoadError('live fetch blocked — using embedded snapshot from last publish');
+  }
+
+  if(!loaded){ showLoadError('all data sources unreachable'); }
   if(!metrics || metrics.length === 0) metrics = deepCopy(DEFAULT_METRICS);
   if(!sites   || sites.length   === 0) sites   = deepCopy(DEFAULT_SITES);
   if(!servers || servers.length === 0) servers = deepCopy(DEFAULT_SERVERS);
