@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Infrastructure Integration - Migration Status</title>
-<!-- BUILD: 2026-08-12-v3 -->
+<!-- BUILD: 2026-08-12-v4 -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.js" integrity="sha384-iU8HYtnGQ8Cy4zl7gbNMOhsDTTKX02BTXptVP/vqAWIaTfM7isw76iyZCsjL2eVi" crossorigin="anonymous"></script>
 <style>
 :root{color-scheme:light;}
@@ -90,6 +90,8 @@ thead th:nth-child(6){width:35%;}
 .badge-replicated{background:#dcfce7;color:#166534;}
 .badge-to-replicate{background:#dbeafe;color:#1e40af;}
 .badge-srv-decom{background:#fee2e2;color:#991b1b;}
+.badge-to-decom{background:#fed7aa;color:#9a3412;}
+.badge-office-move{background:#e9d5ff;color:#6b21a8;}
 tbody tr{border-bottom:1px solid #f0f4f8;transition:background 0.1s;}
 tbody tr:hover{background:#f5f8fc;}
 tbody td{padding:9px 14px;color:#344563;vertical-align:middle;overflow:hidden;}
@@ -251,6 +253,8 @@ footer{text-align:center;color:#aab8c8;font-size:11px;padding:16px;}
       <button class="filter-btn" data-srv-status="To be replicated" onclick="toggleSrvFilter(this,'To be replicated')">To be replicated</button>
       <button class="filter-btn" data-srv-status="Replicating" onclick="toggleSrvFilter(this,'Replicating')">Replicating</button>
       <button class="filter-btn" data-srv-status="Replicated" onclick="toggleSrvFilter(this,'Replicated')">Replicated</button>
+      <button class="filter-btn" data-srv-status="To Be Decom" onclick="toggleSrvFilter(this,'To Be Decom')">To Be Decom</button>
+      <button class="filter-btn" data-srv-status="Office will move" onclick="toggleSrvFilter(this,'Office will move')">Office will move</button>
       <button class="filter-btn" data-srv-status="Decommissioned" onclick="toggleSrvFilter(this,'Decommissioned')">Decommissioned</button>
       <button class="filter-btn" id="btnEditServers" onclick="requirePin('servers')" style="margin-left:auto;border-color:#2E75B6;color:#2E75B6;">Edit Servers</button>
     </div>
@@ -675,7 +679,7 @@ var EMBEDDED_DATA = {
       "name": "BeyondTrust Virtual Appliance",
       "location": "Leeds, UK",
       "role": "Bomgar appliance",
-      "status": "To be replicated",
+      "status": "Replicating",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -684,7 +688,7 @@ var EMBEDDED_DATA = {
       "name": "D365Data02",
       "location": "Leeds, UK",
       "role": "D365 SQL Databases",
-      "status": "To be replicated",
+      "status": "Replicating",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -693,7 +697,7 @@ var EMBEDDED_DATA = {
       "name": "DxbPay02",
       "location": "Dubai, United Arab Emirates",
       "role": "Dubai Payroll",
-      "status": "To be replicated",
+      "status": "Replicating",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -801,7 +805,7 @@ var EMBEDDED_DATA = {
       "name": "HRApps05",
       "location": "Leeds, UK",
       "role": "Itrent HR server",
-      "status": "To be replicated",
+      "status": "Replicating",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -810,7 +814,7 @@ var EMBEDDED_DATA = {
       "name": "HRBusObj05",
       "location": "Leeds, UK",
       "role": "Itrent HR server",
-      "status": "To be replicated",
+      "status": "Replicating",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -819,7 +823,7 @@ var EMBEDDED_DATA = {
       "name": "HRSQL04",
       "location": "Leeds, UK",
       "role": "Itrent HR server",
-      "status": "To be replicated",
+      "status": "Replicating",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -828,7 +832,7 @@ var EMBEDDED_DATA = {
       "name": "HRSQL05",
       "location": "Leeds, UK",
       "role": "Itrent HR server",
-      "status": "To be replicated",
+      "status": "Replicating",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -837,7 +841,7 @@ var EMBEDDED_DATA = {
       "name": "HRWeb05",
       "location": "Leeds, UK",
       "role": "Itrent HR server",
-      "status": "To be replicated",
+      "status": "Replicating",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -846,7 +850,7 @@ var EMBEDDED_DATA = {
       "name": "LeeADFS02",
       "location": "Leeds, UK",
       "role": "ADFS server (leeprox02 dependency). Telstra NAT rule",
-      "status": "To be replicated",
+      "status": "Replicating",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -864,7 +868,7 @@ var EMBEDDED_DATA = {
       "name": "LeeCASHyb201",
       "location": "Leeds, UK",
       "role": "Exchange Server",
-      "status": "To be replicated",
+      "status": "Replicating",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -873,7 +877,7 @@ var EMBEDDED_DATA = {
       "name": "LeeDagArc201",
       "location": "Leeds, UK",
       "role": "Exchange Server (Automated Scripts/Mgmt)",
-      "status": "To be replicated",
+      "status": "Replicating",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -882,7 +886,7 @@ var EMBEDDED_DATA = {
       "name": "LeeDC11",
       "location": "Leeds, UK",
       "role": "Domain Controller",
-      "status": "To be replicated",
+      "status": "Replicating",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -891,7 +895,7 @@ var EMBEDDED_DATA = {
       "name": "LeeDCradKMS11",
       "location": "Leeds, UK",
       "role": "Domain Controller / RADIUS / NPS",
-      "status": "To be replicated",
+      "status": "Replicating",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -900,7 +904,7 @@ var EMBEDDED_DATA = {
       "name": "LeeHeeryQB",
       "location": "Leeds, UK",
       "role": "Heery - Quickbooks",
-      "status": "To be replicated",
+      "status": "Replicating",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -909,7 +913,7 @@ var EMBEDDED_DATA = {
       "name": "LeeHeeryTAP",
       "location": "Leeds, UK",
       "role": "Heery - Microsoft Silverlight access within DAX",
-      "status": "To be replicated",
+      "status": "Replicating",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -927,7 +931,7 @@ var EMBEDDED_DATA = {
       "name": "LeeNessus01",
       "location": "Leeds, UK",
       "role": "Nessus Vulnerability Scanner",
-      "status": "To be replicated",
+      "status": "Replicating",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -936,7 +940,7 @@ var EMBEDDED_DATA = {
       "name": "LeePam01",
       "location": "Leeds, UK",
       "role": "Thycotic servers",
-      "status": "To be replicated",
+      "status": "Replicating",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -972,7 +976,7 @@ var EMBEDDED_DATA = {
       "name": "LeeRDIntGW01",
       "location": "Leeds, UK",
       "role": "RDP Internal Gateway",
-      "status": "To be replicated",
+      "status": "Replicating",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -981,7 +985,7 @@ var EMBEDDED_DATA = {
       "name": "LeeSQL09-New",
       "location": "Leeds, UK",
       "role": "Primavera centrally hosted SQL server",
-      "status": "To be replicated",
+      "status": "Replicating",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -999,7 +1003,7 @@ var EMBEDDED_DATA = {
       "name": "LeeSQL13",
       "location": "Leeds, UK",
       "role": "SQL server reporting (various systems)",
-      "status": "To be replicated",
+      "status": "Replicating",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -1008,7 +1012,7 @@ var EMBEDDED_DATA = {
       "name": "LeeSQL15",
       "location": "Leeds, UK",
       "role": "Performance Forum SQL server",
-      "status": "To be replicated",
+      "status": "Replicating",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -1017,7 +1021,7 @@ var EMBEDDED_DATA = {
       "name": "LeeSSDE01",
       "location": "Leeds, UK",
       "role": "Secret Server / Delinea server",
-      "status": "To be replicated",
+      "status": "Replicating",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -1026,7 +1030,7 @@ var EMBEDDED_DATA = {
       "name": "LeeSSSQL01",
       "location": "Leeds, UK",
       "role": "Secret Server / Delinea server",
-      "status": "To be replicated",
+      "status": "Replicating",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -1035,7 +1039,7 @@ var EMBEDDED_DATA = {
       "name": "LonADFS02",
       "location": "London, UK",
       "role": "ADFS",
-      "status": "To be replicated",
+      "status": "Replicating",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -1044,7 +1048,7 @@ var EMBEDDED_DATA = {
       "name": "LonCASHyb201",
       "location": "London, UK",
       "role": "Exchange server",
-      "status": "To be replicated",
+      "status": "Replicating",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -1071,7 +1075,7 @@ var EMBEDDED_DATA = {
       "name": "LonDoorSec03",
       "location": "London, UK",
       "role": "London door access system",
-      "status": "To be replicated",
+      "status": "Replicating",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -1080,7 +1084,7 @@ var EMBEDDED_DATA = {
       "name": "LonPam01",
       "location": "London, UK",
       "role": "Thycotic servers",
-      "status": "To be replicated",
+      "status": "Replicating",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -1089,7 +1093,7 @@ var EMBEDDED_DATA = {
       "name": "LonSSDE01",
       "location": "London, UK",
       "role": "Secret Server / Delinea server",
-      "status": "To be replicated",
+      "status": "Replicating",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -1098,7 +1102,7 @@ var EMBEDDED_DATA = {
       "name": "LonSSSQL01",
       "location": "London, UK",
       "role": "Secret Server / Delinea server / SQL",
-      "status": "To be replicated",
+      "status": "Replicating",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -1215,7 +1219,7 @@ var EMBEDDED_DATA = {
       "name": "TTFtpUk01-DMZ",
       "location": "Leeds, UK",
       "role": "FTP Server - DMZ",
-      "status": "To be replicated",
+      "status": "Replicating",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -1260,7 +1264,7 @@ var EMBEDDED_DATA = {
       "name": "TTnFinLee",
       "location": "Leeds, UK",
       "role": "Leeds finance - Lotus Domino",
-      "status": "To be replicated",
+      "status": "Replicating",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -1269,7 +1273,7 @@ var EMBEDDED_DATA = {
       "name": "TTvCenter02-v8.0",
       "location": "Leeds, UK",
       "role": "vCentre Appliance",
-      "status": "To be replicated",
+      "status": "Replicating",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -1287,7 +1291,7 @@ var EMBEDDED_DATA = {
       "name": "VmP6CtxLeeP01",
       "location": "Leeds, UK",
       "role": "Citrix Primavera server",
-      "status": "To be replicated",
+      "status": "Replicating",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -1305,7 +1309,7 @@ var EMBEDDED_DATA = {
       "name": "VmP6CtxLeeP02",
       "location": "Leeds, UK",
       "role": "Citrix Primavera server",
-      "status": "To be replicated",
+      "status": "Replicating",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -1314,7 +1318,7 @@ var EMBEDDED_DATA = {
       "name": "WebApps04",
       "location": "Leeds, UK",
       "role": "Main web server for on-prem apps",
-      "status": "To be replicated",
+      "status": "Replicating",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -1323,23 +1327,536 @@ var EMBEDDED_DATA = {
       "name": "fmsdbzone1",
       "location": "Leeds, UK",
       "role": "",
-      "status": "To be replicated",
+      "status": "Replicating",
       "migrationDate": "",
       "app": "",
-      "notes": ""
+      "notes": "Replicating to Azure to be cut over"
     },
     {
       "name": "fmsdbzone2",
       "location": "Leeds, UK",
       "role": "",
-      "status": "To be replicated",
+      "status": "Replicating",
+      "migrationDate": "",
+      "app": "",
+      "notes": "Replicating to Azure to be cut over"
+    },
+    {
+      "name": "HRTestApps05",
+      "location": "Leeds, UK",
+      "role": "Itrent HR server",
+      "status": "Replicated",
       "migrationDate": "",
       "app": "",
       "notes": ""
+    },
+    {
+      "name": "HRTestSQL05",
+      "location": "Leeds, UK",
+      "role": "Itrent HR server",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "HRTestWeb05",
+      "location": "Leeds, UK",
+      "role": "Itrent HR server",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "JhbFin02",
+      "location": "Johannesburg, South Africa",
+      "role": "Finance Software",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "jhbprnlog01",
+      "location": "Johannesburg, South Africa",
+      "role": "Print Server - PrinterLogic Service Client",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "JhbSQL04",
+      "location": "Johannesburg, South Africa",
+      "role": "SQL",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "JHBVIP03",
+      "location": "Johannesburg, South Africa",
+      "role": "Sage VIP",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "TimefitW10",
+      "location": "Johannesburg, South Africa",
+      "role": "Timefit - Africa",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "TimefitW10-2",
+      "location": "Johannesburg, South Africa",
+      "role": "Timefit - Africa",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "MunApps02",
+      "location": "Munich, Germany",
+      "role": "BIM Cloud",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LEEADCON03",
+      "location": "Leeds, UK",
+      "role": "AD/Entra Connector / Freshservice (to LeeDC11)",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LEEADCON04",
+      "location": "Leeds, UK",
+      "role": "AD/Entra Connector",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LEEADCON05",
+      "location": "Leeds, UK",
+      "role": "AD/Entra Connector / Insight Failover for Entra connect",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LeeBkCaso01",
+      "location": "Leeds, UK",
+      "role": "Backup Exec Caso server",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LeeCamFTP01",
+      "location": "Leeds, UK",
+      "role": "On-prem exchange monitoring - dashboard for 365 team",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LEECBREDL01",
+      "location": "Leeds, UK",
+      "role": "CBRE Delinea integration",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LEECBREDL02",
+      "location": "Leeds, UK",
+      "role": "CBRE Delinea integration",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "Leectx14",
+      "location": "Leeds, UK",
+      "role": "Citrix Performance Forum",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LeeCtx15",
+      "location": "Leeds, UK",
+      "role": "Citrix CostX ONP test server",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LeeDC13",
+      "location": "Leeds, UK",
+      "role": "Domain Controller",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LeeDCxx",
+      "location": "Leeds, UK",
+      "role": "Standby Domain Controller",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LeeECMCON01",
+      "location": "Leeds, UK",
+      "role": "Intune Connector for Active Directory",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LeeEvoko01",
+      "location": "Leeds, UK",
+      "role": "Room booking application - Houston",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LeeIT01",
+      "location": "Leeds, UK",
+      "role": "Data",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LEEMECM01",
+      "location": "Leeds, UK",
+      "role": "MECM",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LEEOCSP01",
+      "location": "Leeds, UK",
+      "role": "OCSP / Certificate for PJM migration",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LeeMngt01",
+      "location": "Leeds, UK",
+      "role": "Management Server / Jump Box / Scripts",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LEEPRNLOG01",
+      "location": "Leeds, UK",
+      "role": "Print Server - PrinterLogic Service Client",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LeePropelW11PC1",
+      "location": "Leeds, UK",
+      "role": "D365-related (Graham Cottle)",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LeeRDPLic02",
+      "location": "Leeds, UK",
+      "role": "RDP Licence - Citrix",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LeeRDPLic03",
+      "location": "Leeds, UK",
+      "role": "RDP Licence - Citrix",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LeeSharegate01",
+      "location": "Leeds, UK",
+      "role": "Sharegate external connection",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "Leesharegate02",
+      "location": "Leeds, UK",
+      "role": "Sharegate external connection",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LEESRV04",
+      "location": "Leeds, UK",
+      "role": "",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LEESRV10",
+      "location": "Leeds, UK",
+      "role": "Cert Server",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LeeTest02",
+      "location": "Leeds, UK",
+      "role": "Holly/Paul - main test VM",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LeeW11InfraAC",
+      "location": "Leeds, UK",
+      "role": "Windows 11 test",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LeeW11InfraCJ",
+      "location": "Leeds, UK",
+      "role": "Windows 11 test",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LeeW11SFTP01",
+      "location": "Leeds, UK",
+      "role": "SFTP client - Jonathan Hardisty / Niall Boyle",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LeeW11-Test",
+      "location": "Leeds, UK",
+      "role": "Windows 11 test - BG test",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LeeWDACVM-AC",
+      "location": "Leeds, UK",
+      "role": "WDAC test server",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LeeWDACVM-CH",
+      "location": "Leeds, UK",
+      "role": "WDAC test server",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LeeWDACVM-CJ",
+      "location": "Leeds, UK",
+      "role": "WDAC test server",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LeeWDACVM-SP",
+      "location": "Leeds, UK",
+      "role": "WDAC test server",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LEEZABBIX07",
+      "location": "Leeds, UK",
+      "role": "Zabbix server",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "TTBackup",
+      "location": "Leeds, UK",
+      "role": "Backup storage",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "TTiLO",
+      "location": "Leeds, UK",
+      "role": "iLO Amplifier Pack v2.22",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "TTTSTAADA",
+      "location": "Leeds, UK",
+      "role": "Test Tenant",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "TTTSTDCB",
+      "location": "Leeds, UK",
+      "role": "Domain Controller - Test Tenant",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "TTTSTW11A",
+      "location": "Leeds, UK",
+      "role": "Windows 10 test domain devices",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "TTTTSDCC",
+      "location": "Leeds, UK",
+      "role": "Domain Controller - Test Tenant",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "VmFreshOrcLeeP01",
+      "location": "Leeds, UK",
+      "role": "Confirm with Holly",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LONADCON03",
+      "location": "London, UK",
+      "role": "AD/Entra Connector",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LonBKCaso01",
+      "location": "London, UK",
+      "role": "Backup Exec server",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LonSharegate01",
+      "location": "London, UK",
+      "role": "Sharegate external connection",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LONZABBIX07",
+      "location": "London, UK",
+      "role": "Zabbix",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "NYCOST01",
+      "location": "New York, NY, USA",
+      "role": "On Screen Take Off DB Server",
+      "status": "To be replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": "Server is running some DB's in MySQL for 2 apps. Stephen Penuel iis working on update app deployment with intune before working with Mark Scott to host the DB's in CBRE DC. estimated date end of August."
     }
   ],
   "issues": [],
-  "asOf": "12 Aug 2026 10:59"
+  "asOf": "12 Aug 2026 11:24"
 }; /*SNAPSHOT*/
 var GITHUB_REPO  = 'rbrown1983/tt-migration';
 var DATA_FILE    = 'data.json';
@@ -1452,10 +1969,6 @@ var DEFAULT_SERVERS = [
   {name:'NotesGroup',location:'Leeds, UK',role:'Lotus Notes server',status:'To be replicated',migrationDate:'',app:'',notes:''},
   {name:'NYCAccessControl01',location:'New York, NY, USA',role:'Test VM for door access',status:'To be replicated',migrationDate:'',app:'',notes:''},
   {name:'NYCPRNLOG01',location:'New York, NY, USA',role:'Print Server - PrinterLogic Service Client',status:'To be replicated',migrationDate:'',app:'',notes:''},
-  {name:'riycostx03',location:'Riyadh, Saudi Arabia',role:'CostX (on-premise due to data sovereignty)',status:'To be replicated',migrationDate:'',app:'',notes:''},
-  {name:'riycostx04',location:'Riyadh, Saudi Arabia',role:'CostX (on-premise due to data sovereignty)',status:'To be replicated',migrationDate:'',app:'',notes:''},
-  {name:'riydc11',location:'Riyadh, Saudi Arabia',role:'Domain Controller',status:'To be replicated',migrationDate:'',app:'',notes:''},
-  {name:'riysrv01',location:'Riyadh, Saudi Arabia',role:'Data / DHCP / Print',status:'To be replicated',migrationDate:'',app:'',notes:''},
   {name:'SinPam01',location:'Singapore',role:'Security - Delinea',status:'To be replicated',migrationDate:'',app:'',notes:''},
   {name:'SINPRNLOG01',location:'Singapore',role:'Print Server - PrinterLogic Service Client',status:'To be replicated',migrationDate:'',app:'',notes:''},
   {name:'SYDCOSTX01',location:'Sydney, Australia',role:'CostX',status:'To be replicated',migrationDate:'',app:'',notes:''},
@@ -1538,8 +2051,8 @@ var REGIONAL_COLORS = {EMEA:'#2E75B6',Americas:'#4ec9a0',APAC:'#f59e42'};
 var STATUS_CLASS = {Decommissioned:'status-decom',Active:'status-active','In Progress':'status-progress',Blocked:'status-blocked'};
 var REGION_CLASS = {EMEA:'badge-emea',Americas:'badge-americas',APAC:'badge-apac'};
 var STATUSES = ['Active','In Progress','Decommissioned','Blocked'];
-var SERVER_STATUSES = ['To be replicated','Replicating','Replicated','Decommissioned'];
-var SERVER_STATUS_CLASS = {'To be replicated':'badge-to-replicate','Replicating':'badge-replicating','Replicated':'badge-replicated','Decommissioned':'badge-srv-decom'};
+var SERVER_STATUSES = ['To be replicated','Replicating','Replicated','To Be Decom','Office will move','Decommissioned'];
+var SERVER_STATUS_CLASS = {'To be replicated':'badge-to-replicate','Replicating':'badge-replicating','Replicated':'badge-replicated','To Be Decom':'badge-to-decom','Office will move':'badge-office-move','Decommissioned':'badge-srv-decom'};
 
 var DEFAULT_ISSUES = [];
 var isAuthenticated = false;
@@ -1628,6 +2141,11 @@ async function loadData(){
   for(var dj=0;dj<DEFAULT_SERVERS.length;dj++){
     if(!srvNames[DEFAULT_SERVERS[dj].name]) servers.push(deepCopy(DEFAULT_SERVERS[dj]));
   }
+  // Remove servers that have been deleted from the list
+  var REMOVED_SERVERS=['riycostx03','riycostx04','riydc11','riysrv01'];
+  servers=servers.filter(function(s){ return REMOVED_SERVERS.indexOf(s.name)===-1; });
+  // Sort alphabetically
+  servers.sort(function(a,b){ return a.name.toLowerCase().localeCompare(b.name.toLowerCase()); });
   // Back-fill missing fields from defaults (upgrade from older data.json)
   var defMap={};
   for(var d=0;d<DEFAULT_SERVERS.length;d++) defMap[DEFAULT_SERVERS[d].name]=DEFAULT_SERVERS[d];
