@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Infrastructure Integration - Migration Status</title>
+<!-- BUILD: 2026-08-12-v3 -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.js" integrity="sha384-iU8HYtnGQ8Cy4zl7gbNMOhsDTTKX02BTXptVP/vqAWIaTfM7isw76iyZCsjL2eVi" crossorigin="anonymous"></script>
 <style>
 :root{color-scheme:light;}
@@ -127,6 +128,8 @@ tbody td{padding:9px 14px;color:#344563;vertical-align:middle;overflow:hidden;}
 @keyframes spin{to{transform:rotate(360deg);}}
 .loading-text{font-size:13px;color:#344563;font-weight:500;}
 footer{text-align:center;color:#aab8c8;font-size:11px;padding:16px;}
+.load-error-banner{background:#fee2e2;border:1px solid #fca5a5;border-radius:8px;color:#991b1b;font-size:12px;padding:10px 16px;margin-bottom:16px;display:none;}
+.load-error-banner.active{display:block;}
 </style>
 </head>
 <body>
@@ -178,6 +181,7 @@ footer{text-align:center;color:#aab8c8;font-size:11px;padding:16px;}
 </header>
 
 <main>
+  <div class="load-error-banner" id="loadErrorBanner"></div>
   <div class="edit-panel" id="editPanel">
     <div class="section-label" style="margin-bottom:16px;">Update Figures</div>
     <div class="edit-grid">
@@ -451,21 +455,31 @@ function setSaveStatus(msg, cls){
   el.className = 'save-status'+(cls?' '+cls:'');
 }
 
+function showLoadError(msg){
+  var b=document.getElementById('loadErrorBanner');
+  if(b){ b.textContent='⚠ Data load issue: '+msg+' — showing cached defaults. Enter PIN and use Update Token to fix.'; b.classList.add('active'); }
+}
 async function loadData(){
   var apiUrl = 'https://api.github.com/repos/'+GITHUB_REPO+'/contents/'+DATA_FILE;
   var hdrs = { Accept:'application/vnd.github.v3.raw', cache:'no-store' };
-  if(getStoredToken()) hdrs['Authorization'] = 'token '+getStoredToken();
+  var hasToken = !!getStoredToken();
+  if(hasToken) hdrs['Authorization'] = 'token '+getStoredToken();
+  console.log('[Dashboard] Loading data. Token present:', hasToken);
   try {
     var res = await fetch(apiUrl, { headers:hdrs, cache:'no-store' });
+    console.log('[Dashboard] GitHub API response status:', res.status);
     if(res.ok){
       var data = await res.json();
+      console.log('[Dashboard] Data loaded. asOf:', data.asOf, 'sites:', data.sites&&data.sites.length, 'servers:', data.servers&&data.servers.length);
       if(data.metrics && data.metrics.length > 0) metrics = data.metrics;
       if(data.sites   && data.sites.length   > 0) sites   = data.sites;
       if(data.servers && data.servers.length > 0) servers = data.servers;
       if(data.issues)  issues  = data.issues;
       if(data.asOf) asOf = data.asOf;
+    } else {
+      showLoadError('GitHub API returned status '+res.status+(res.status===401||res.status===403?' (token required or rate limited)':res.status===404?' (file not found)':''));
     }
-  } catch(e){ console.warn('Load error, using defaults:', e); }
+  } catch(e){ console.warn('[Dashboard] Load error:', e); showLoadError(e.message||'network error'); }
   if(!metrics || metrics.length === 0) metrics = deepCopy(DEFAULT_METRICS);
   if(!sites   || sites.length   === 0) sites   = deepCopy(DEFAULT_SITES);
   if(!servers || servers.length === 0) servers = deepCopy(DEFAULT_SERVERS);
