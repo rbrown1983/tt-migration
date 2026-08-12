@@ -1032,21 +1032,534 @@
       "name": "fmsdbzone1",
       "location": "Leeds, UK",
       "role": "",
-      "status": "To be replicated",
+      "status": "Replicating",
       "migrationDate": "",
       "app": "",
-      "notes": ""
+      "notes": "Replicating to Azure to be cut over"
     },
     {
       "name": "fmsdbzone2",
       "location": "Leeds, UK",
       "role": "",
-      "status": "To be replicated",
+      "status": "Replicating",
+      "migrationDate": "",
+      "app": "",
+      "notes": "Replicating to Azure to be cut over"
+    },
+    {
+      "name": "HRTestApps05",
+      "location": "Leeds, UK",
+      "role": "Itrent HR server",
+      "status": "Replicated",
       "migrationDate": "",
       "app": "",
       "notes": ""
+    },
+    {
+      "name": "HRTestSQL05",
+      "location": "Leeds, UK",
+      "role": "Itrent HR server",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "HRTestWeb05",
+      "location": "Leeds, UK",
+      "role": "Itrent HR server",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "JhbFin02",
+      "location": "Johannesburg, South Africa",
+      "role": "Finance Software",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "jhbprnlog01",
+      "location": "Johannesburg, South Africa",
+      "role": "Print Server - PrinterLogic Service Client",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "JhbSQL04",
+      "location": "Johannesburg, South Africa",
+      "role": "SQL",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "JHBVIP03",
+      "location": "Johannesburg, South Africa",
+      "role": "Sage VIP",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "TimefitW10",
+      "location": "Johannesburg, South Africa",
+      "role": "Timefit - Africa",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "TimefitW10-2",
+      "location": "Johannesburg, South Africa",
+      "role": "Timefit - Africa",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "MunApps02",
+      "location": "Munich, Germany",
+      "role": "BIM Cloud",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LEEADCON03",
+      "location": "Leeds, UK",
+      "role": "AD/Entra Connector / Freshservice (to LeeDC11)",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LEEADCON04",
+      "location": "Leeds, UK",
+      "role": "AD/Entra Connector",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LEEADCON05",
+      "location": "Leeds, UK",
+      "role": "AD/Entra Connector / Insight Failover for Entra connect",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LeeBkCaso01",
+      "location": "Leeds, UK",
+      "role": "Backup Exec Caso server",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LeeCamFTP01",
+      "location": "Leeds, UK",
+      "role": "On-prem exchange monitoring - dashboard for 365 team",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LEECBREDL01",
+      "location": "Leeds, UK",
+      "role": "CBRE Delinea integration",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LEECBREDL02",
+      "location": "Leeds, UK",
+      "role": "CBRE Delinea integration",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "Leectx14",
+      "location": "Leeds, UK",
+      "role": "Citrix Performance Forum",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LeeCtx15",
+      "location": "Leeds, UK",
+      "role": "Citrix CostX ONP test server",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LeeDC13",
+      "location": "Leeds, UK",
+      "role": "Domain Controller",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LeeDCxx",
+      "location": "Leeds, UK",
+      "role": "Standby Domain Controller",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LeeECMCON01",
+      "location": "Leeds, UK",
+      "role": "Intune Connector for Active Directory",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LeeEvoko01",
+      "location": "Leeds, UK",
+      "role": "Room booking application - Houston",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LeeIT01",
+      "location": "Leeds, UK",
+      "role": "Data",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LEEMECM01",
+      "location": "Leeds, UK",
+      "role": "MECM",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LEEOCSP01",
+      "location": "Leeds, UK",
+      "role": "OCSP / Certificate for PJM migration",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LeeMngt01",
+      "location": "Leeds, UK",
+      "role": "Management Server / Jump Box / Scripts",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LEEPRNLOG01",
+      "location": "Leeds, UK",
+      "role": "Print Server - PrinterLogic Service Client",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LeePropelW11PC1",
+      "location": "Leeds, UK",
+      "role": "D365-related (Graham Cottle)",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LeeRDPLic02",
+      "location": "Leeds, UK",
+      "role": "RDP Licence - Citrix",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LeeRDPLic03",
+      "location": "Leeds, UK",
+      "role": "RDP Licence - Citrix",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LeeSharegate01",
+      "location": "Leeds, UK",
+      "role": "Sharegate external connection",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "Leesharegate02",
+      "location": "Leeds, UK",
+      "role": "Sharegate external connection",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LEESRV04",
+      "location": "Leeds, UK",
+      "role": "",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LEESRV10",
+      "location": "Leeds, UK",
+      "role": "Cert Server",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LeeTest02",
+      "location": "Leeds, UK",
+      "role": "Holly/Paul - main test VM",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LeeW11InfraAC",
+      "location": "Leeds, UK",
+      "role": "Windows 11 test",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LeeW11InfraCJ",
+      "location": "Leeds, UK",
+      "role": "Windows 11 test",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LeeW11SFTP01",
+      "location": "Leeds, UK",
+      "role": "SFTP client - Jonathan Hardisty / Niall Boyle",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LeeW11-Test",
+      "location": "Leeds, UK",
+      "role": "Windows 11 test - BG test",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LeeWDACVM-AC",
+      "location": "Leeds, UK",
+      "role": "WDAC test server",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LeeWDACVM-CH",
+      "location": "Leeds, UK",
+      "role": "WDAC test server",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LeeWDACVM-CJ",
+      "location": "Leeds, UK",
+      "role": "WDAC test server",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LeeWDACVM-SP",
+      "location": "Leeds, UK",
+      "role": "WDAC test server",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LEEZABBIX07",
+      "location": "Leeds, UK",
+      "role": "Zabbix server",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "TTBackup",
+      "location": "Leeds, UK",
+      "role": "Backup storage",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "TTiLO",
+      "location": "Leeds, UK",
+      "role": "iLO Amplifier Pack v2.22",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "TTTSTAADA",
+      "location": "Leeds, UK",
+      "role": "Test Tenant",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "TTTSTDCB",
+      "location": "Leeds, UK",
+      "role": "Domain Controller - Test Tenant",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "TTTSTW11A",
+      "location": "Leeds, UK",
+      "role": "Windows 10 test domain devices",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "TTTTSDCC",
+      "location": "Leeds, UK",
+      "role": "Domain Controller - Test Tenant",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "VmFreshOrcLeeP01",
+      "location": "Leeds, UK",
+      "role": "Confirm with Holly",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LONADCON03",
+      "location": "London, UK",
+      "role": "AD/Entra Connector",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LonBKCaso01",
+      "location": "London, UK",
+      "role": "Backup Exec server",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LonSharegate01",
+      "location": "London, UK",
+      "role": "Sharegate external connection",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LONZABBIX07",
+      "location": "London, UK",
+      "role": "Zabbix",
+      "status": "Replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "NYCOST01",
+      "location": "New York, NY, USA",
+      "role": "On Screen Take Off DB Server",
+      "status": "To be replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": "Server is running some DB's in MySQL for 2 apps. Stephen Penuel iis working on update app deployment with intune before working with Mark Scott to host the DB's in CBRE DC. estimated date end of August."
     }
   ],
   "issues": [],
-  "asOf": "12 Aug 2026 10:59"
+  "asOf": "12 Aug 2026 11:19"
 }
