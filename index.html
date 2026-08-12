@@ -293,7 +293,7 @@ var EMBEDDED_DATA = {
   "metrics": [
     {
       "label": "Server Decommissioning",
-      "complete": 171,
+      "complete": 172,
       "total": 268,
       "unitLabel": "servers",
       "doneLabel": "Decommissioned",
@@ -1339,7 +1339,7 @@ var EMBEDDED_DATA = {
     }
   ],
   "issues": [],
-  "asOf": "12 Aug 2026 10:51"
+  "asOf": "12 Aug 2026 10:59"
 }; /*SNAPSHOT*/
 var GITHUB_REPO  = 'rbrown1983/tt-migration';
 var DATA_FILE    = 'data.json';
@@ -1621,6 +1621,12 @@ async function loadData(){
   for(var si=0;si<sites.length;si++) siteNames[sites[si].site]=true;
   for(var di=0;di<DEFAULT_SITES.length;di++){
     if(!siteNames[DEFAULT_SITES[di].site]) sites.push(deepCopy(DEFAULT_SITES[di]));
+  }
+  // Merge any new default servers not yet in saved data
+  var srvNames={};
+  for(var ri=0;ri<servers.length;ri++) srvNames[servers[ri].name]=true;
+  for(var dj=0;dj<DEFAULT_SERVERS.length;dj++){
+    if(!srvNames[DEFAULT_SERVERS[dj].name]) servers.push(deepCopy(DEFAULT_SERVERS[dj]));
   }
   // Back-fill missing fields from defaults (upgrade from older data.json)
   var defMap={};
