@@ -361,7 +361,692 @@
       "status": "Blocked",
       "notes": "CostX rendering issues - we plan to test Citrix in CBRE cloud over the coming weeks.",
       "migrationDate": "2026-08-03"
+    },
+    {
+      "site": "Darwin",
+      "country": "Australia",
+      "region": "APAC",
+      "status": "Active",
+      "notes": ""
     }
   ],
-  "asOf": "11 Aug 2026 16:24"
+  "servers": [
+    {
+      "name": "bneprnlog01",
+      "location": "Brisbane, Australia",
+      "role": "Print Server - PrinterLogic Service Client",
+      "status": "To be replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "BeyondTrust Virtual Appliance",
+      "location": "Leeds, UK",
+      "role": "Bomgar appliance",
+      "status": "To be replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "D365Data02",
+      "location": "Leeds, UK",
+      "role": "D365 SQL Databases",
+      "status": "To be replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "DxbPay02",
+      "location": "Dubai, United Arab Emirates",
+      "role": "Dubai Payroll",
+      "status": "To be replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "FMSApp14",
+      "location": "Leeds, UK",
+      "role": "FMS - Citrix",
+      "status": "Replicating",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "FMSApp15",
+      "location": "Leeds, UK",
+      "role": "FMS - Citrix",
+      "status": "Replicating",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "FMSApp16",
+      "location": "Leeds, UK",
+      "role": "FMS - Citrix",
+      "status": "Replicating",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "FMSOnlineTest",
+      "location": "Leeds, UK",
+      "role": "FMS",
+      "status": "Replicating",
+      "migrationDate": "",
+      "app": "",
+      "notes": "Replicating to Azure to be cut over"
+    },
+    {
+      "name": "FMSOnlineTest01",
+      "location": "Leeds, UK",
+      "role": "FMS",
+      "status": "Replicating",
+      "migrationDate": "",
+      "app": "",
+      "notes": "Replicating to Azure to be cut over"
+    },
+    {
+      "name": "FMSSQL10",
+      "location": "Leeds, UK",
+      "role": "FMS SQL server - web time sheet",
+      "status": "Decommissioned",
+      "migrationDate": "",
+      "notes": "Replaced by FMSSQL11. SQL Services disabled, left until w/e 7/8 in case of issues.",
+      "app": ""
+    },
+    {
+      "name": "FMSSQL11",
+      "location": "Leeds, UK",
+      "role": "FMS SQL server",
+      "status": "Replicating",
+      "migrationDate": "",
+      "app": "",
+      "notes": "Replicating to Azure to be cut over"
+    },
+    {
+      "name": "FMSWeb10",
+      "location": "Leeds, UK",
+      "role": "FMS web client - web time sheet",
+      "status": "Replicating",
+      "migrationDate": "",
+      "app": "",
+      "notes": "Replicating to Azure to be cut over"
+    },
+    {
+      "name": "FMSWeb11",
+      "location": "Leeds, UK",
+      "role": "FMS web client",
+      "status": "Replicating",
+      "migrationDate": "",
+      "app": "",
+      "notes": "Replicating to Azure to be cut over"
+    },
+    {
+      "name": "HkgDoorSec02",
+      "location": "Hong Kong, SAR China",
+      "role": "Hong Kong door access",
+      "status": "To be replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "HkgPay02",
+      "location": "Hong Kong, SAR China",
+      "role": "Hong Kong Payroll software",
+      "status": "To be replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "HRApps05",
+      "location": "Leeds, UK",
+      "role": "Itrent HR server",
+      "status": "To be replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "HRBusObj05",
+      "location": "Leeds, UK",
+      "role": "Itrent HR server",
+      "status": "To be replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "HRSQL04",
+      "location": "Leeds, UK",
+      "role": "Itrent HR server",
+      "status": "To be replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "HRSQL05",
+      "location": "Leeds, UK",
+      "role": "Itrent HR server",
+      "status": "To be replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "HRWeb05",
+      "location": "Leeds, UK",
+      "role": "Itrent HR server",
+      "status": "To be replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LeeADFS02",
+      "location": "Leeds, UK",
+      "role": "ADFS server (leeprox02 dependency). Telstra NAT rule",
+      "status": "To be replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LEEAZMFARAD01",
+      "location": "Leeds, UK",
+      "role": "Azure MFA RDG AUTH",
+      "status": "To be replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LeeCASHyb201",
+      "location": "Leeds, UK",
+      "role": "Exchange Server",
+      "status": "To be replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LeeDagArc201",
+      "location": "Leeds, UK",
+      "role": "Exchange Server (Automated Scripts/Mgmt)",
+      "status": "To be replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LeeDC11",
+      "location": "Leeds, UK",
+      "role": "Domain Controller",
+      "status": "To be replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LeeDCradKMS11",
+      "location": "Leeds, UK",
+      "role": "Domain Controller / RADIUS / NPS",
+      "status": "To be replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LeeHeeryQB",
+      "location": "Leeds, UK",
+      "role": "Heery - Quickbooks",
+      "status": "To be replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LeeHeeryTAP",
+      "location": "Leeds, UK",
+      "role": "Heery - Microsoft Silverlight access within DAX",
+      "status": "To be replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LEEMIVB01 - V9",
+      "location": "Leeds, UK",
+      "role": "MiVoice Business software",
+      "status": "To be replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LeeNessus01",
+      "location": "Leeds, UK",
+      "role": "Nessus Vulnerability Scanner",
+      "status": "To be replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LeePam01",
+      "location": "Leeds, UK",
+      "role": "Thycotic servers",
+      "status": "To be replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LeeProx02",
+      "location": "Leeds, UK",
+      "role": "ADFS proxy - DMZ",
+      "status": "To be replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LEEQCLF02",
+      "location": "Leeds, UK",
+      "role": "Log shipping/collection",
+      "status": "To be replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LeeRDGateway01",
+      "location": "Leeds, UK",
+      "role": "RDP remote gateway",
+      "status": "To be replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LeeRDIntGW01",
+      "location": "Leeds, UK",
+      "role": "RDP Internal Gateway",
+      "status": "To be replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LeeSQL09-New",
+      "location": "Leeds, UK",
+      "role": "Primavera centrally hosted SQL server",
+      "status": "To be replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LEESRV03",
+      "location": "Leeds, UK",
+      "role": "Data",
+      "status": "To be replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LeeSQL13",
+      "location": "Leeds, UK",
+      "role": "SQL server reporting (various systems)",
+      "status": "To be replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LeeSQL15",
+      "location": "Leeds, UK",
+      "role": "Performance Forum SQL server",
+      "status": "To be replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LeeSSDE01",
+      "location": "Leeds, UK",
+      "role": "Secret Server / Delinea server",
+      "status": "To be replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LeeSSSQL01",
+      "location": "Leeds, UK",
+      "role": "Secret Server / Delinea server",
+      "status": "To be replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LonADFS02",
+      "location": "London, UK",
+      "role": "ADFS",
+      "status": "To be replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LonCASHyb201",
+      "location": "London, UK",
+      "role": "Exchange server",
+      "status": "To be replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LonDNS02",
+      "location": "London, UK",
+      "role": "External DNS",
+      "status": "To be replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LONPROX02",
+      "location": "London, UK",
+      "role": "ADFS proxy",
+      "status": "To be replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LonDoorSec03",
+      "location": "London, UK",
+      "role": "London door access system",
+      "status": "To be replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LonPam01",
+      "location": "London, UK",
+      "role": "Thycotic servers",
+      "status": "To be replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LonSSDE01",
+      "location": "London, UK",
+      "role": "Secret Server / Delinea server",
+      "status": "To be replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "LonSSSQL01",
+      "location": "London, UK",
+      "role": "Secret Server / Delinea server / SQL",
+      "status": "To be replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "NotesGroup",
+      "location": "Leeds, UK",
+      "role": "Lotus Notes server",
+      "status": "To be replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "NYCAccessControl01",
+      "location": "New York, NY, USA",
+      "role": "Test VM for door access",
+      "status": "To be replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "NYCPRNLOG01",
+      "location": "New York, NY, USA",
+      "role": "Print Server - PrinterLogic Service Client",
+      "status": "To be replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "riycostx03",
+      "location": "Riyadh, Saudi Arabia",
+      "role": "CostX (on-premise due to data sovereignty)",
+      "status": "To be replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "riycostx04",
+      "location": "Riyadh, Saudi Arabia",
+      "role": "CostX (on-premise due to data sovereignty)",
+      "status": "To be replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "riydc11",
+      "location": "Riyadh, Saudi Arabia",
+      "role": "Domain Controller",
+      "status": "To be replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "riysrv01",
+      "location": "Riyadh, Saudi Arabia",
+      "role": "Data / DHCP / Print",
+      "status": "To be replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "SinPam01",
+      "location": "Singapore",
+      "role": "Security - Delinea",
+      "status": "To be replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "SINPRNLOG01",
+      "location": "Singapore",
+      "role": "Print Server - PrinterLogic Service Client",
+      "status": "To be replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "SYDCOSTX01",
+      "location": "Sydney, Australia",
+      "role": "CostX",
+      "status": "To be replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "Telstra NextGen Cyber Detection & Response",
+      "location": "Leeds, UK",
+      "role": "Telstra Cyber",
+      "status": "To be replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "Telstra-TopCat",
+      "location": "Leeds, UK",
+      "role": "Telstra Segmentation - topcat-ttgroup-uk-01",
+      "status": "To be replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "TTFtpUk01-DMZ",
+      "location": "Leeds, UK",
+      "role": "FTP Server - DMZ",
+      "status": "To be replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "TTFDTLee07",
+      "location": "Leeds, UK",
+      "role": "OVSM storage copied to Leeds",
+      "status": "To be replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "TTFtpUk01",
+      "location": "Leeds, UK",
+      "role": "FTP Server",
+      "status": "To be replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "TTRmtLee",
+      "location": "Leeds, UK",
+      "role": "Leeds sites redirection server",
+      "status": "To be replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "TTRmtLon",
+      "location": "London, UK",
+      "role": "London sites redirection server",
+      "status": "To be replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "TTnFinLee",
+      "location": "Leeds, UK",
+      "role": "Leeds finance - Lotus Domino",
+      "status": "To be replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "TTvCenter02-v8.0",
+      "location": "Leeds, UK",
+      "role": "vCentre Appliance",
+      "status": "To be replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "WebApps02",
+      "location": "Leeds, UK",
+      "role": "Old Lotus Notes webserver",
+      "status": "To be replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "VmP6CtxLeeP01",
+      "location": "Leeds, UK",
+      "role": "Citrix Primavera server",
+      "status": "To be replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "SYDSQL01",
+      "location": "Sydney, Australia",
+      "role": "Primavera centrally hosted SQL server",
+      "status": "To be replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "VmP6CtxLeeP02",
+      "location": "Leeds, UK",
+      "role": "Citrix Primavera server",
+      "status": "To be replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "WebApps04",
+      "location": "Leeds, UK",
+      "role": "Main web server for on-prem apps",
+      "status": "To be replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "fmsdbzone1",
+      "location": "Leeds, UK",
+      "role": "",
+      "status": "To be replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    },
+    {
+      "name": "fmsdbzone2",
+      "location": "Leeds, UK",
+      "role": "",
+      "status": "To be replicated",
+      "migrationDate": "",
+      "app": "",
+      "notes": ""
+    }
+  ],
+  "issues": [],
+  "asOf": "12 Aug 2026 10:51"
 }
