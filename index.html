@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Infrastructure Integration - Migration Status</title>
-<!-- BUILD: 2026-08-12-v4 -->
+<!-- BUILD: 2026-08-12-v5 -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.js" integrity="sha384-iU8HYtnGQ8Cy4zl7gbNMOhsDTTKX02BTXptVP/vqAWIaTfM7isw76iyZCsjL2eVi" crossorigin="anonymous"></script>
 <style>
 :root{color-scheme:light;}
@@ -92,6 +92,7 @@ thead th:nth-child(6){width:35%;}
 .badge-srv-decom{background:#fee2e2;color:#991b1b;}
 .badge-to-decom{background:#fed7aa;color:#9a3412;}
 .badge-office-move{background:#e9d5ff;color:#6b21a8;}
+.badge-other{background:#e5e7eb;color:#374151;}
 tbody tr{border-bottom:1px solid #f0f4f8;transition:background 0.1s;}
 tbody tr:hover{background:#f5f8fc;}
 tbody td{padding:9px 14px;color:#344563;vertical-align:middle;overflow:hidden;}
@@ -256,6 +257,7 @@ footer{text-align:center;color:#aab8c8;font-size:11px;padding:16px;}
       <button class="filter-btn" data-srv-status="To Be Decom" onclick="toggleSrvFilter(this,'To Be Decom')">To Be Decom</button>
       <button class="filter-btn" data-srv-status="Office will move" onclick="toggleSrvFilter(this,'Office will move')">Office will move</button>
       <button class="filter-btn" data-srv-status="Decommissioned" onclick="toggleSrvFilter(this,'Decommissioned')">Decommissioned</button>
+      <button class="filter-btn" data-srv-status="Other" onclick="toggleSrvFilter(this,'Other')">Other</button>
       <button class="filter-btn" id="btnEditServers" onclick="requirePin('servers')" style="margin-left:auto;border-color:#2E75B6;color:#2E75B6;">Edit Servers</button>
     </div>
     <table id="serversTable">
@@ -2051,8 +2053,8 @@ var REGIONAL_COLORS = {EMEA:'#2E75B6',Americas:'#4ec9a0',APAC:'#f59e42'};
 var STATUS_CLASS = {Decommissioned:'status-decom',Active:'status-active','In Progress':'status-progress',Blocked:'status-blocked'};
 var REGION_CLASS = {EMEA:'badge-emea',Americas:'badge-americas',APAC:'badge-apac'};
 var STATUSES = ['Active','In Progress','Decommissioned','Blocked'];
-var SERVER_STATUSES = ['To be replicated','Replicating','Replicated','To Be Decom','Office will move','Decommissioned'];
-var SERVER_STATUS_CLASS = {'To be replicated':'badge-to-replicate','Replicating':'badge-replicating','Replicated':'badge-replicated','To Be Decom':'badge-to-decom','Office will move':'badge-office-move','Decommissioned':'badge-srv-decom'};
+var SERVER_STATUSES = ['To be replicated','Replicating','Replicated','To Be Decom','Office will move','Decommissioned','Other'];
+var SERVER_STATUS_CLASS = {'To be replicated':'badge-to-replicate','Replicating':'badge-replicating','Replicated':'badge-replicated','To Be Decom':'badge-to-decom','Office will move':'badge-office-move','Decommissioned':'badge-srv-decom','Other':'badge-other'};
 
 var DEFAULT_ISSUES = [];
 var isAuthenticated = false;
