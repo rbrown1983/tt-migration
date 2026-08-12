@@ -289,7 +289,373 @@ footer{text-align:center;color:#aab8c8;font-size:11px;padding:16px;}
 // ============================================================
 // CONFIG
 // ============================================================
-var EMBEDDED_DATA = ; /*SNAPSHOT*/
+var EMBEDDED_DATA = {
+  "metrics": [
+    {
+      "label": "Server Decommissioning",
+      "complete": 171,
+      "total": 268,
+      "unitLabel": "servers",
+      "doneLabel": "Decommissioned",
+      "color": "#2E75B6"
+    },
+    {
+      "label": "Servers to Redundant Cluster",
+      "complete": 91,
+      "total": 116,
+      "unitLabel": "servers",
+      "doneLabel": "In Cluster",
+      "color": "#4ec9a0"
+    },
+    {
+      "label": "Servers Failed Over to Romford DC",
+      "complete": 56,
+      "total": 117,
+      "unitLabel": "servers",
+      "doneLabel": "Failed Over",
+      "color": "#f59e42"
+    },
+    {
+      "label": "Remote Sites Synced to Leeds",
+      "complete": 36,
+      "total": 50,
+      "unitLabel": "sites",
+      "doneLabel": "Synchronised",
+      "color": "#a78bfa"
+    },
+    {
+      "label": "Data Volume Synced to Leeds",
+      "complete": 128.66,
+      "total": 223.4,
+      "unitLabel": "TB",
+      "doneLabel": "Moved",
+      "color": "#2E75B6"
+    },
+    {
+      "label": "Remote Sites Decommissioned",
+      "complete": 22,
+      "total": 38,
+      "unitLabel": "sites",
+      "doneLabel": "Decommissioned",
+      "color": "#f472b6"
+    },
+    {
+      "label": "CostX Servers Migrated to Azure",
+      "complete": 27,
+      "total": 36,
+      "unitLabel": "servers",
+      "doneLabel": "Migrated",
+      "color": "#4ec9a0"
+    }
+  ],
+  "sites": [
+    {
+      "site": "Abu Dhabi",
+      "country": "UAE",
+      "region": "EMEA",
+      "status": "Blocked",
+      "notes": "Anyconnect firewall and CostX running until end of June.\nWnQS deployed in Azure being tested and should be able to deocm site by EOW 09/08",
+      "migrationDate": "2026-08-03"
+    },
+    {
+      "site": "Amsterdam",
+      "country": "Netherlands",
+      "region": "EMEA",
+      "status": "Decommissioned",
+      "notes": "",
+      "migrationDate": ""
+    },
+    {
+      "site": "Birmingham",
+      "country": "UK",
+      "region": "EMEA",
+      "status": "Decommissioned",
+      "notes": "",
+      "migrationDate": "2026-08-03"
+    },
+    {
+      "site": "Brisbane",
+      "country": "Australia",
+      "region": "APAC",
+      "status": "Active",
+      "notes": "PrinterLogic- where to move it to? Sydney CBRE?",
+      "migrationDate": "2026-08-03"
+    },
+    {
+      "site": "Bristol",
+      "country": "UK",
+      "region": "EMEA",
+      "status": "Decommissioned",
+      "notes": "",
+      "migrationDate": ""
+    },
+    {
+      "site": "Cape Town",
+      "country": "South Africa",
+      "region": "EMEA",
+      "status": "Decommissioned",
+      "notes": "",
+      "migrationDate": ""
+    },
+    {
+      "site": "Doha",
+      "country": "Qatar",
+      "region": "EMEA",
+      "status": "Blocked",
+      "notes": "Local data in use - working to identify what can be moved to sharepoint to have the shares stopped.. 1 person in the office is still accessing data, everyone else RO. Adrian is looking to move his data to Leeds, deadline to close access on the 14th.",
+      "migrationDate": ""
+    },
+    {
+      "site": "Dubai",
+      "country": "UAE",
+      "region": "EMEA",
+      "status": "Active",
+      "notes": "CostX in use until the end of June, they also have a local pay role server which we are looking to move to CBRE Office.\nThere is also data which needs copying off - HDD sent",
+      "migrationDate": ""
+    },
+    {
+      "site": "Dublin",
+      "country": "Ireland",
+      "region": "EMEA",
+      "status": "Decommissioned",
+      "notes": "",
+      "migrationDate": ""
+    },
+    {
+      "site": "Durban",
+      "country": "South Africa",
+      "region": "EMEA",
+      "status": "Decommissioned",
+      "notes": "",
+      "migrationDate": ""
+    },
+    {
+      "site": "Edinburgh",
+      "country": "UK",
+      "region": "EMEA",
+      "status": "Decommissioned",
+      "notes": "",
+      "migrationDate": "2026-08-03"
+    },
+    {
+      "site": "Frankfurt",
+      "country": "Germany",
+      "region": "EMEA",
+      "status": "Decommissioned",
+      "notes": "",
+      "migrationDate": "2026-08-03"
+    },
+    {
+      "site": "Gaborone",
+      "country": "Botswana",
+      "region": "EMEA",
+      "status": "Decommissioned",
+      "notes": "",
+      "migrationDate": ""
+    },
+    {
+      "site": "Glasgow",
+      "country": "UK",
+      "region": "EMEA",
+      "status": "Decommissioned",
+      "notes": "",
+      "migrationDate": "2026-08-03"
+    },
+    {
+      "site": "Gold Coast",
+      "country": "Australia",
+      "region": "APAC",
+      "status": "Decommissioned",
+      "notes": "",
+      "migrationDate": "2026-08-03"
+    },
+    {
+      "site": "Hong Kong",
+      "country": "SAR China",
+      "region": "APAC",
+      "status": "Blocked",
+      "notes": "Still using CostX until the end of June",
+      "migrationDate": "2026-08-03"
+    },
+    {
+      "site": "Houston",
+      "country": "USA",
+      "region": "Americas",
+      "status": "Decommissioned",
+      "notes": "Data hasn't been accessed for a month plan to set to RO in the coming weeks.\n01/07",
+      "migrationDate": "2026-08-03"
+    },
+    {
+      "site": "Johannesburg",
+      "country": "South Africa",
+      "region": "EMEA",
+      "status": "In Progress",
+      "notes": "Servers migrated to Romford looking to migrate DHCP and DNS",
+      "migrationDate": ""
+    },
+    {
+      "site": "Krakow",
+      "country": "Poland",
+      "region": "EMEA",
+      "status": "Decommissioned",
+      "notes": "",
+      "migrationDate": "2026-08-03"
+    },
+    {
+      "site": "Kuala Lumpur",
+      "country": "Malaysia",
+      "region": "APAC",
+      "status": "Decommissioned",
+      "notes": "",
+      "migrationDate": "2026-08-03"
+    },
+    {
+      "site": "Leeds",
+      "country": "UK",
+      "region": "EMEA",
+      "status": "Blocked",
+      "notes": "Lots of Apps and data to move",
+      "migrationDate": ""
+    },
+    {
+      "site": "London",
+      "country": "UK",
+      "region": "EMEA",
+      "status": "Blocked",
+      "notes": "Data and Apps to migrate including Exchange and CostX to VAST\nCostX networking deployed for VAST license server to be built this week (06/07)\nExchange meeting 08/07\nThycotic servers don't work after migration - no support. To be replaced with WDAC but no one owns the migration. Sam sending email to Richard Hare",
+      "migrationDate": "2026-08-03"
+    },
+    {
+      "site": "Manchester",
+      "country": "UK",
+      "region": "EMEA",
+      "status": "Decommissioned",
+      "notes": "",
+      "migrationDate": "2026-08-03"
+    },
+    {
+      "site": "Melbourne",
+      "country": "Australia",
+      "region": "APAC",
+      "status": "Decommissioned",
+      "notes": "",
+      "migrationDate": "2026-08-03"
+    },
+    {
+      "site": "Mumbai",
+      "country": "India",
+      "region": "APAC",
+      "status": "Blocked",
+      "notes": "Local site using CostX due to rendering issue in the cloud",
+      "migrationDate": "2026-08-03"
+    },
+    {
+      "site": "Munich",
+      "country": "Germany",
+      "region": "EMEA",
+      "status": "Decommissioned",
+      "notes": "DHCP and DNS being migrated - data copied. There is a local server that needs to be migrated to Leeds, Sam has setup Zerto to replicate and is trying to identify an owner.",
+      "migrationDate": "2026-08-03"
+    },
+    {
+      "site": "Nairobi",
+      "country": "Kenya",
+      "region": "EMEA",
+      "status": "Blocked",
+      "notes": "Local data still in use. Closure emails sent out by Adrian set to RO and close shares on the 7th",
+      "migrationDate": ""
+    },
+    {
+      "site": "Newcastle",
+      "country": "UK",
+      "region": "EMEA",
+      "status": "Decommissioned",
+      "notes": "",
+      "migrationDate": ""
+    },
+    {
+      "site": "New York",
+      "country": "USA",
+      "region": "Americas",
+      "status": "In Progress",
+      "notes": "Costx  ready to be decommissioned\nDAC - to be confirmed if required \nOSTX - to confirm what this is with Stephen",
+      "migrationDate": "2026-10-01"
+    },
+    {
+      "site": "Nottingham",
+      "country": "UK",
+      "region": "EMEA",
+      "status": "Decommissioned",
+      "notes": "",
+      "migrationDate": ""
+    },
+    {
+      "site": "Perth",
+      "country": "Australia",
+      "region": "APAC",
+      "status": "Decommissioned",
+      "notes": "Costx  to be decommissioned and then site can go",
+      "migrationDate": "2026-08-03"
+    },
+    {
+      "site": "Riyadh",
+      "country": "Saudi Arabia",
+      "region": "EMEA",
+      "status": "Blocked",
+      "notes": "Due to Data sovereignty ",
+      "migrationDate": ""
+    },
+    {
+      "site": "Shanghai",
+      "country": "China",
+      "region": "APAC",
+      "status": "Blocked",
+      "notes": "Data still in use locally. Closure emails sent out by Adrian set to RO and close shares on the 7th",
+      "migrationDate": "2026-08-03"
+    },
+    {
+      "site": "Sheffield",
+      "country": "UK",
+      "region": "EMEA",
+      "status": "Decommissioned",
+      "notes": "",
+      "migrationDate": "2026-08-03"
+    },
+    {
+      "site": "Singapore",
+      "country": "Singapore",
+      "region": "APAC",
+      "status": "In Progress",
+      "notes": "door access controls, forescout and test servers to decom with site",
+      "migrationDate": "2026-08-03"
+    },
+    {
+      "site": "Sydney",
+      "country": "Australia",
+      "region": "APAC",
+      "status": "Blocked",
+      "notes": "Primavera instance on Citrix - potentially move to Azure, confirm with Donna\nIssues with Data, working with networks on VPN or will send HDD",
+      "migrationDate": "2026-08-03"
+    },
+    {
+      "site": "Teesside",
+      "country": "UK",
+      "region": "EMEA",
+      "status": "Decommissioned",
+      "notes": "DHCP and DNS being migrated - data copied ",
+      "migrationDate": ""
+    },
+    {
+      "site": "Toronto",
+      "country": "Canada",
+      "region": "Americas",
+      "status": "Blocked",
+      "notes": "CostX rendering issues - we plan to test Citrix in CBRE cloud over the coming weeks.",
+      "migrationDate": "2026-08-03"
+    }
+  ],
+  "asOf": "11 Aug 2026 16:24"
+}; /*SNAPSHOT*/
 var GITHUB_REPO  = 'rbrown1983/tt-migration';
 var DATA_FILE    = 'data.json';
 var ADMIN_PIN    = '170717';
