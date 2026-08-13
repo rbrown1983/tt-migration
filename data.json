@@ -2,7 +2,7 @@
   "metrics": [
     {
       "label": "Server Decommissioning",
-      "complete": 177,
+      "complete": 176,
       "total": 268,
       "unitLabel": "servers",
       "doneLabel": "Decommissioned",
@@ -19,7 +19,7 @@
     {
       "label": "Servers Failed Over to Romford DC",
       "complete": 56,
-      "total": 116,
+      "total": 117,
       "unitLabel": "servers",
       "doneLabel": "Failed Over",
       "color": "#f59e42"
@@ -42,7 +42,7 @@
     },
     {
       "label": "Remote Sites Decommissioned",
-      "complete": 22,
+      "complete": 23,
       "total": 39,
       "unitLabel": "sites",
       "doneLabel": "Decommissioned",
@@ -404,7 +404,7 @@
       "site": "Darwin",
       "country": "Australia",
       "region": "APAC",
-      "status": "Active",
+      "status": "Decommissioned",
       "notes": "",
       "migrationDate": "",
       "hwRemoved": ""
@@ -1565,5 +1565,5 @@
     }
   ],
   "issues": [],
-  "asOf": "13 Aug 2026 10:35"
+  "asOf": "13 Aug 2026 13:43"
 }
