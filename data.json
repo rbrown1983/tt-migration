@@ -216,7 +216,7 @@
       "country": "South Africa",
       "region": "EMEA",
       "status": "In Progress",
-      "notes": "Servers migrated to Romford looking to migrate DHCP and DNS",
+      "notes": "Just jhbsrv01 to decommission",
       "migrationDate": "",
       "hwRemoved": ""
     },
@@ -1565,5 +1565,5 @@
     }
   ],
   "issues": [],
-  "asOf": "18 Aug 2026 14:11"
+  "asOf": "18 Aug 2026 14:12"
 }
