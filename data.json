@@ -42,7 +42,7 @@
     },
     {
       "label": "Remote Sites Decommissioned",
-      "complete": 23,
+      "complete": 24,
       "total": 39,
       "unitLabel": "sites",
       "doneLabel": "Decommissioned",
@@ -215,8 +215,8 @@
       "site": "Johannesburg",
       "country": "South Africa",
       "region": "EMEA",
-      "status": "In Progress",
-      "notes": "Just jhbsrv01 to decommission",
+      "status": "Decommissioned",
+      "notes": "",
       "migrationDate": "",
       "hwRemoved": ""
     },
@@ -1565,5 +1565,5 @@
     }
   ],
   "issues": [],
-  "asOf": "18 Aug 2026 14:36"
+  "asOf": "19 Aug 2026 09:00"
 }
