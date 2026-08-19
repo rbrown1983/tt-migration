@@ -315,7 +315,7 @@
       "country": "USA",
       "region": "Americas",
       "status": "In Progress",
-      "notes": "Costx  ready to be decommissioned\nDAC - to be confirmed if required \nOSTX - to confirm what this is with Stephen",
+      "notes": "Costx  ready to be decommissioned\nDAC - to be confirmed if required \nOSTX - to confirm what this is with Stephen\nPrinterlogic- moving servers into CBRE's instance",
       "migrationDate": "2026-10-01",
       "hwRemoved": ""
     },
@@ -1565,5 +1565,5 @@
     }
   ],
   "issues": [],
-  "asOf": "19 Aug 2026 09:00"
+  "asOf": "19 Aug 2026 11:33"
 }
