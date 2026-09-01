@@ -296,8 +296,8 @@
       "site": "Nairobi",
       "country": "Kenya",
       "region": "EMEA",
-      "status": "Blocked",
-      "notes": "Local data still in use. Closure emails sent out by Adrian set to RO and close shares on the 7th",
+      "status": "Active",
+      "notes": "Local data still in use. Closure emails sent out by Adrian set to RO and close shares on the 7th-",
       "migrationDate": "",
       "hwRemoved": ""
     },
@@ -369,7 +369,7 @@
       "country": "Singapore",
       "region": "APAC",
       "status": "In Progress",
-      "notes": "door access controls, forescout and test servers to decom with site.\nCease order on the links made for 21st Sep",
+      "notes": "door access controls, forescout and test servers to decom with site.\nCease order on the links made for 21st Sep- 01/09- check site status- to shutdown ",
       "migrationDate": "2026-08-03",
       "hwRemoved": ""
     },
@@ -377,8 +377,8 @@
       "site": "Sydney",
       "country": "Australia",
       "region": "APAC",
-      "status": "Blocked",
-      "notes": "Primavera instance on Citrix - potentially move to Azure, confirm with Donna\nIssues with Data, working with networks on VPN or will send HDD",
+      "status": "In Progress",
+      "notes": "Primavera instance on Citrix - potentially move to Azure, confirm with Donna\nIssues with Data, working with networks on VPN or will send HDD 01/09- data done- need to get PV into Azure",
       "migrationDate": "2026-08-03",
       "hwRemoved": ""
     },
@@ -1565,5 +1565,5 @@
     }
   ],
   "issues": [],
-  "asOf": "01 Sept 2026 10:27"
+  "asOf": "01 Sept 2026 10:29"
 }
