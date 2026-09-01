@@ -62,7 +62,7 @@
       "site": "Abu Dhabi",
       "country": "UAE",
       "region": "EMEA",
-      "status": "Blocked",
+      "status": "Active",
       "notes": "Anyconnect firewall and CostX running until end of June.\nWnQS deployed in Azure being tested and should be able to deocm site by EOW 09/08\nCostx Decomissioned",
       "migrationDate": "2026-08-03",
       "hwRemoved": ""
@@ -1565,5 +1565,5 @@
     }
   ],
   "issues": [],
-  "asOf": "21 Aug 2026 11:52"
+  "asOf": "01 Sept 2026 10:24"
 }
