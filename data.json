@@ -42,7 +42,7 @@
     },
     {
       "label": "Remote Sites Decommissioned",
-      "complete": 24,
+      "complete": 25,
       "total": 39,
       "unitLabel": "sites",
       "doneLabel": "Decommissioned",
@@ -368,8 +368,8 @@
       "site": "Singapore",
       "country": "Singapore",
       "region": "APAC",
-      "status": "In Progress",
-      "notes": "door access controls, forescout and test servers to decom with site.\nCease order on the links made for 21st Sep- 01/09- check site status- to shutdown ",
+      "status": "Decommissioned",
+      "notes": "door access controls, forescout and test servers to decom with site.\nCease order on the links made for 21st Sep- 01/09- check site status- to shutdown - SITE NOW SHUT DOWN",
       "migrationDate": "2026-08-03",
       "hwRemoved": ""
     },
