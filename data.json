@@ -198,7 +198,7 @@
       "country": "SAR China",
       "region": "APAC",
       "status": "Blocked",
-      "notes": "Still using CostX until the end of June",
+      "notes": "Costx server still in use. pay server & Printerlogic to move to Azure?",
       "migrationDate": "2026-11-23",
       "hwRemoved": ""
     },
@@ -1565,5 +1565,5 @@
     }
   ],
   "issues": [],
-  "asOf": "17 Sept 2026 09:41"
+  "asOf": "17 Sept 2026 09:42"
 }
