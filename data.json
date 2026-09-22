@@ -90,7 +90,7 @@
       "country": "Australia",
       "region": "APAC",
       "status": "Active",
-      "notes": "PrinterLogic- Aus printers moved to CBRE service clients- testing\nBNESRV01- move DNS & DHCP",
+      "notes": "PrinterLogic- Aus printers moved to CBRE service clients- \nBNESRV01- move DNS & DHCP",
       "migrationDate": "2026-10-12",
       "hwRemoved": ""
     },
@@ -1565,5 +1565,5 @@
     }
   ],
   "issues": [],
-  "asOf": "22 Sept 2026 14:58"
+  "asOf": "22 Sept 2026 14:59"
 }
