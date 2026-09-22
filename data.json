@@ -10,7 +10,7 @@
     },
     {
       "label": "Servers to Redundant Cluster",
-      "complete": 91,
+      "complete": 92,
       "total": 116,
       "unitLabel": "servers",
       "doneLabel": "In Cluster",
