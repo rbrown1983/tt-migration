@@ -424,10 +424,10 @@
       "name": "bneprnlog01",
       "location": "Brisbane, Australia",
       "role": "Print Server - PrinterLogic Service Client",
-      "status": "To be replicated",
+      "status": "Decommissioned",
       "migrationDate": "",
       "app": "",
-      "notes": ""
+      "notes": "Decommissioned now. "
     },
     {
       "name": "D365Data02",
@@ -1565,5 +1565,5 @@
     }
   ],
   "issues": [],
-  "asOf": "25 Sept 2026 15:06"
+  "asOf": "25 Sept 2026 15:12"
 }
