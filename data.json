@@ -42,7 +42,7 @@
     },
     {
       "label": "Remote Sites Decommissioned",
-      "complete": 25,
+      "complete": 26,
       "total": 39,
       "unitLabel": "sites",
       "doneLabel": "Decommissioned",
@@ -350,7 +350,7 @@
       "site": "Shanghai",
       "country": "China",
       "region": "APAC",
-      "status": "Active",
+      "status": "Decommissioned",
       "notes": "Data still in use locally. Closure emails sent out by Adrian set to RO and close shares on the 7th- 1/9- data closed off- only DNS & DHCP needed to be moved",
       "migrationDate": "2026-10-12",
       "hwRemoved": ""
