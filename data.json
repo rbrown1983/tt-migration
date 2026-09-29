@@ -62,8 +62,8 @@
       "site": "Abu Dhabi",
       "country": "UAE",
       "region": "EMEA",
-      "status": "Active",
-      "notes": "Anyconnect firewall and CostX running until end of June.\nWnQS deployed in Azure being tested and should be able to deocm site by EOW 09/08\nCostx Decomissioned",
+      "status": "In Progress",
+      "notes": "Anyconnect firewall and CostX running until end of June.\nWnQS deployed in Azure being tested and should be able to deocm site by EOW 09/08\nCostx Decomissioned\n29/09Moving to Riyadh DC and then decom DHCP\\DNS before decommissioning ",
       "migrationDate": "2026-08-03",
       "hwRemoved": ""
     },
@@ -89,8 +89,8 @@
       "site": "Brisbane",
       "country": "Australia",
       "region": "APAC",
-      "status": "Active",
-      "notes": "PrinterLogic- Aus printers moved to CBRE service clients- \nBNESRV01- move DNS & DHCP",
+      "status": "In Progress",
+      "notes": "PrinterLogic- Aus printers moved to CBRE service clients- \nBNESRV01- move DNS & DHCP\n29/09 - DHCP and DNS being decommissioned now ",
       "migrationDate": "2026-10-12",
       "hwRemoved": ""
     },
@@ -116,8 +116,8 @@
       "site": "Doha",
       "country": "Qatar",
       "region": "EMEA",
-      "status": "Active",
-      "notes": "Local data in use - working to identify what can be moved to sharepoint to have the shares stopped.. 1 person in the office is still accessing data, everyone else RO. Adrian is looking to move his data to Leeds, deadline to close access on the 14th.",
+      "status": "In Progress",
+      "notes": "Local data in use - working to identify what can be moved to sharepoint to have the shares stopped.. 1 person in the office is still accessing data, everyone else RO. Adrian is looking to move his data to Leeds, deadline to close access on the 14th.\n29/09 - given date for making RO shares",
       "migrationDate": "",
       "hwRemoved": ""
     },
@@ -125,8 +125,8 @@
       "site": "Dubai",
       "country": "UAE",
       "region": "EMEA",
-      "status": "Active",
-      "notes": "CostX in use until the end of June, they also have a local pay role server which we are looking to move to CBRE Office.\nThere is also data which needs copying off - HDD sent",
+      "status": "In Progress",
+      "notes": "CostX in use until the end of June, they also have a local pay role server which we are looking to move to CBRE Office.\nThere is also data which needs copying off - HDD sent\nMoving to Riyadh DC and then decom DHCP\\DNS before decommissioning, need to get the HDD delivered.",
       "migrationDate": "",
       "hwRemoved": ""
     },
@@ -198,7 +198,7 @@
       "country": "SAR China",
       "region": "APAC",
       "status": "Blocked",
-      "notes": "Costx server still in use. pay server & Printerlogic to move to Azure?",
+      "notes": "Costx server still in use. pay server & Printerlogic to move to Azure?\n29/09 - issues on what to do with PL and PAM\\Thycotic server which need to go to Sydney or Azure.",
       "migrationDate": "2026-11-23",
       "hwRemoved": ""
     },
@@ -251,7 +251,7 @@
       "site": "London",
       "country": "UK",
       "region": "EMEA",
-      "status": "Blocked",
+      "status": "In Progress",
       "notes": "Data and Apps to migrate including Exchange and CostX to VAST\nCostX networking deployed for VAST license server to be built this week (06/07)\nExchange meeting 08/07\nThycotic servers don't work after migration - no support. To be replaced with WDAC but no one owns the migration. Sam sending email to Richard Hare",
       "migrationDate": "2026-10-17",
       "hwRemoved": ""
@@ -296,8 +296,8 @@
       "site": "Nairobi",
       "country": "Kenya",
       "region": "EMEA",
-      "status": "Active",
-      "notes": "Local data still in use. Closure emails sent out by Adrian set to RO and close shares on the 7th-",
+      "status": "In Progress",
+      "notes": "Local data still in use. Closure emails sent out by Adrian set to RO and close shares on the 7th-\n29/09 - DHCP and DNS to move",
       "migrationDate": "",
       "hwRemoved": ""
     },
@@ -315,7 +315,7 @@
       "country": "USA",
       "region": "Americas",
       "status": "In Progress",
-      "notes": "Costx  ready to be decommissioned\nDAC - to be confirmed if required \nOSTX - to confirm what this is with Stephen\nPrinterlogic- moving servers into CBRE's instance",
+      "notes": "Costx  ready to be decommissioned\nDAC - to be confirmed if required \n29/09 - Stephen planning migration of apps just need DHCP and DNS\nOSTX - to confirm what this is with Stephen\nPrinterlogic- moving servers into CBRE's instance",
       "migrationDate": "2026-11-02",
       "hwRemoved": ""
     },
@@ -1565,5 +1565,5 @@
     }
   ],
   "issues": [],
-  "asOf": "25 Sept 2026 15:12"
+  "asOf": "29 Sept 2026 10:40"
 }
