@@ -42,7 +42,7 @@
     },
     {
       "label": "Remote Sites Decommissioned",
-      "complete": 26,
+      "complete": 27,
       "total": 39,
       "unitLabel": "sites",
       "doneLabel": "Decommissioned",
@@ -89,7 +89,7 @@
       "site": "Brisbane",
       "country": "Australia",
       "region": "APAC",
-      "status": "In Progress",
+      "status": "Decommissioned",
       "notes": "PrinterLogic- Aus printers moved to CBRE service clients- \nBNESRV01- move DNS & DHCP\n29/09 - DHCP and DNS being decommissioned now ",
       "migrationDate": "2026-10-12",
       "hwRemoved": ""
@@ -1565,5 +1565,5 @@
     }
   ],
   "issues": [],
-  "asOf": "30 Sept 2026 11:04"
+  "asOf": "30 Sept 2026 11:05"
 }
