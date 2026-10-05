@@ -126,7 +126,7 @@
       "country": "UAE",
       "region": "EMEA",
       "status": "In Progress",
-      "notes": "CostX in use until the end of June, they also have a local pay role server which we are looking to move to CBRE Office.\nThere is also data which needs copying off - HDD sent\nMoving to Riyadh DC and then decom DHCP\\DNS before decommissioning, need to get the HDD delivered.",
+      "notes": "ONLY DHCP & DNS TO DO- DXBSRV01\nCostX in use until the end of June, they also have a local pay role server which we are looking to move to CBRE Office.\n\nThere is also data which needs copying off - HDD sent\nMoving to Riyadh DC and then decom DHCP\\DNS before decommissioning, need to get the HDD delivered.",
       "migrationDate": "",
       "hwRemoved": ""
     },
@@ -1565,5 +1565,5 @@
     }
   ],
   "issues": [],
-  "asOf": "05 Oct 2026 11:00"
+  "asOf": "05 Oct 2026 11:01"
 }
