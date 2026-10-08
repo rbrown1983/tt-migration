@@ -2,7 +2,7 @@
   "metrics": [
     {
       "label": "Server Decommissioning",
-      "complete": 206,
+      "complete": 208,
       "total": 268,
       "unitLabel": "servers",
       "doneLabel": "Decommissioned",
@@ -1565,5 +1565,5 @@
     }
   ],
   "issues": [],
-  "asOf": "07 Oct 2026 16:31"
+  "asOf": "08 Oct 2026 09:24"
 }
