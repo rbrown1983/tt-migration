@@ -3,7 +3,7 @@
     {
       "label": "Server Decommissioning",
       "complete": 214,
-      "total": 268,
+      "total": 276,
       "unitLabel": "servers",
       "doneLabel": "Decommissioned",
       "color": "#2E75B6"
@@ -1565,5 +1565,5 @@
     }
   ],
   "issues": [],
-  "asOf": "14 Oct 2026 15:10"
+  "asOf": "14 Oct 2026 15:11"
 }
