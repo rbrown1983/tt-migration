@@ -42,7 +42,7 @@
     },
     {
       "label": "Remote Sites Decommissioned",
-      "complete": 27,
+      "complete": 28,
       "total": 39,
       "unitLabel": "sites",
       "doneLabel": "Decommissioned",
@@ -62,7 +62,7 @@
       "site": "Abu Dhabi",
       "country": "UAE",
       "region": "EMEA",
-      "status": "In Progress",
+      "status": "Decommissioned",
       "notes": "Anyconnect firewall and CostX running until end of June.\nWnQS deployed in Azure being tested and should be able to deocm site by EOW 09/08\nCostx Decomissioned\n29/09Moving to Riyadh DC and then decom DHCP\\DNS before decommissioning ",
       "migrationDate": "2026-08-03",
       "hwRemoved": ""
