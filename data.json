@@ -42,7 +42,7 @@
     },
     {
       "label": "Remote Sites Decommissioned",
-      "complete": 28,
+      "complete": 29,
       "total": 39,
       "unitLabel": "sites",
       "doneLabel": "Decommissioned",
@@ -116,7 +116,7 @@
       "site": "Doha",
       "country": "Qatar",
       "region": "EMEA",
-      "status": "In Progress",
+      "status": "Decommissioned",
       "notes": "Local data in use - working to identify what can be moved to sharepoint to have the shares stopped.. 1 person in the office is still accessing data, everyone else RO. Adrian is looking to move his data to Leeds, deadline to close access on the 14th.\n29/09 - given date for making RO shares",
       "migrationDate": "",
       "hwRemoved": ""
