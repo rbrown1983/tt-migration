@@ -199,7 +199,7 @@
       "region": "APAC",
       "status": "Blocked",
       "notes": "Costx server still in use. pay server & Printerlogic to move to Azure?\n29/09 - issues on what to do with PL and PAM\\Thycotic server which need to go to Sydney or Azure.",
-      "migrationDate": "2026-11-23",
+      "migrationDate": "2026-11-13",
       "hwRemoved": ""
     },
     {
@@ -379,7 +379,7 @@
       "region": "APAC",
       "status": "In Progress",
       "notes": "Primavera instance on Citrix - potentially move to Azure, confirm with Donna\nIssues with Data, working with networks on VPN or will send HDD 01/09- data done- need to get PV into Azure",
-      "migrationDate": "2026-11-09",
+      "migrationDate": "2026-11-21",
       "hwRemoved": ""
     },
     {
@@ -1565,5 +1565,5 @@
     }
   ],
   "issues": [],
-  "asOf": "06 Nov 2026 14:51"
+  "asOf": "06 Nov 2026 14:52"
 }
