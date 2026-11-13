@@ -1225,7 +1225,7 @@
       "name": "LonDoorSec03",
       "location": "London, UK",
       "role": "London door access system",
-      "status": "Replicating",
+      "status": "Replicated",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -1270,7 +1270,7 @@
       "name": "LonSSSQL01",
       "location": "London, UK",
       "role": "Secret Server / Delinea server / SQL",
-      "status": "Replicating",
+      "status": "Decommissioned",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -1360,7 +1360,7 @@
       "name": "SYDSQL01",
       "location": "Sydney, Australia",
       "role": "Primavera centrally hosted SQL server",
-      "status": "To be replicated",
+      "status": "To Be Decom",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -1369,7 +1369,7 @@
       "name": "Telstra NextGen Cyber Detection & Response",
       "location": "Leeds, UK",
       "role": "Telstra Cyber",
-      "status": "To be replicated",
+      "status": "To Be Decom",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -1378,7 +1378,7 @@
       "name": "Telstra-TopCat",
       "location": "Leeds, UK",
       "role": "Telstra Segmentation - topcat-ttgroup-uk-01",
-      "status": "To be replicated",
+      "status": "To Be Decom",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -1565,5 +1565,5 @@
     }
   ],
   "issues": [],
-  "asOf": "12 Nov 2026 18:54"
+  "asOf": "13 Nov 2026 09:50"
 }
