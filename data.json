@@ -1081,7 +1081,7 @@
       "name": "LeeSSSQL01",
       "location": "Leeds, UK",
       "role": "Secret Server / Delinea server",
-      "status": "Replicating",
+      "status": "Replicated",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -1565,5 +1565,5 @@
     }
   ],
   "issues": [],
-  "asOf": "13 Nov 2026 09:50"
+  "asOf": "13 Nov 2026 09:51"
 }
