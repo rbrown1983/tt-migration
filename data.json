@@ -42,7 +42,7 @@
     },
     {
       "label": "Remote Sites Decommissioned",
-      "complete": 29,
+      "complete": 30,
       "total": 39,
       "unitLabel": "sites",
       "doneLabel": "Decommissioned",
@@ -377,7 +377,7 @@
       "site": "Sydney",
       "country": "Australia",
       "region": "APAC",
-      "status": "In Progress",
+      "status": "Decommissioned",
       "notes": "Primavera instance on Citrix - potentially move to Azure, confirm with Donna\nIssues with Data, working with networks on VPN or will send HDD 01/09- data done- need to get PV into Azure",
       "migrationDate": "2026-11-21",
       "hwRemoved": ""
@@ -1565,5 +1565,5 @@
     }
   ],
   "issues": [],
-  "asOf": "16 Nov 2026 14:12"
+  "asOf": "16 Nov 2026 14:13"
 }
