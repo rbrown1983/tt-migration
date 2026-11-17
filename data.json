@@ -418,7 +418,7 @@
       "status": "Replicating",
       "migrationDate": "",
       "app": "",
-      "notes": "testing123"
+      "notes": "Requires a micro DMZ"
     },
     {
       "name": "bneprnlog01",
@@ -1565,5 +1565,5 @@
     }
   ],
   "issues": [],
-  "asOf": "17 Nov 2026 12:15"
+  "asOf": "17 Nov 2026 12:18"
 }
