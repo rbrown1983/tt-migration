@@ -1207,7 +1207,7 @@
       "name": "LonCASHyb201",
       "location": "London, UK",
       "role": "Exchange server",
-      "status": "Replicating",
+      "status": "Replicated",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -1234,7 +1234,7 @@
       "name": "LonPam01",
       "location": "London, UK",
       "role": "Thycotic servers",
-      "status": "Replicating",
+      "status": "Replicated",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -1262,7 +1262,7 @@
       "location": "London, UK",
       "role": "Secret Server / Delinea server",
       "status": "Replicating",
-      "migrationDate": "",
+      "migrationDate": "2026-11-20",
       "app": "",
       "notes": ""
     },
@@ -1565,5 +1565,5 @@
     }
   ],
   "issues": [],
-  "asOf": "17 Nov 2026 12:18"
+  "asOf": "17 Nov 2026 12:19"
 }
