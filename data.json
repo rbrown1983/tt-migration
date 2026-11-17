@@ -1216,7 +1216,7 @@
       "name": "LonDNS02",
       "location": "London, UK",
       "role": "External DNS",
-      "status": "To be replicated",
+      "status": "To Be Decom",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -1243,7 +1243,7 @@
       "name": "LONPROX02",
       "location": "London, UK",
       "role": "ADFS proxy",
-      "status": "To be replicated",
+      "status": "To Be Decom",
       "migrationDate": "",
       "app": "",
       "notes": ""
