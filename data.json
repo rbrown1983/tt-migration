@@ -568,7 +568,7 @@
       "name": "HRApps05",
       "location": "Leeds, UK",
       "role": "Itrent HR server",
-      "status": "Replicating",
+      "status": "Replicated",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -577,7 +577,7 @@
       "name": "HRBusObj05",
       "location": "Leeds, UK",
       "role": "Itrent HR server",
-      "status": "Replicating",
+      "status": "Replicated",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -586,7 +586,7 @@
       "name": "HRSQL04",
       "location": "Leeds, UK",
       "role": "Itrent HR server",
-      "status": "Replicating",
+      "status": "Replicated",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -595,7 +595,7 @@
       "name": "HRSQL05",
       "location": "Leeds, UK",
       "role": "Itrent HR server",
-      "status": "Replicating",
+      "status": "Replicated",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -604,7 +604,7 @@
       "name": "HRTestApps05",
       "location": "Leeds, UK",
       "role": "Itrent HR server",
-      "status": "Replicated",
+      "status": "Decommissioned",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -613,7 +613,7 @@
       "name": "HRTestSQL05",
       "location": "Leeds, UK",
       "role": "Itrent HR server",
-      "status": "Replicated",
+      "status": "Decommissioned",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -622,7 +622,7 @@
       "name": "HRTestWeb05",
       "location": "Leeds, UK",
       "role": "Itrent HR server",
-      "status": "Replicated",
+      "status": "Decommissioned",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -631,7 +631,7 @@
       "name": "HRWeb05",
       "location": "Leeds, UK",
       "role": "Itrent HR server",
-      "status": "Replicating",
+      "status": "Replicated",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -1565,5 +1565,5 @@
     }
   ],
   "issues": [],
-  "asOf": "17 Nov 2026 16:44"
+  "asOf": "17 Nov 2026 16:45"
 }
