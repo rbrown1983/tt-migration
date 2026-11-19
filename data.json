@@ -550,7 +550,7 @@
       "name": "HkgDoorSec02",
       "location": "Hong Kong, SAR China",
       "role": "Hong Kong door access",
-      "status": "To be replicated",
+      "status": "Office will move",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -559,7 +559,7 @@
       "name": "HkgPay02",
       "location": "Hong Kong, SAR China",
       "role": "Hong Kong Payroll software",
-      "status": "To be replicated",
+      "status": "Office will move",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -1565,5 +1565,5 @@
     }
   ],
   "issues": [],
-  "asOf": "18 Nov 2026 11:27"
+  "asOf": "19 Nov 2026 13:22"
 }
