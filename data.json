@@ -1315,7 +1315,7 @@
       "name": "NYCOST01",
       "location": "New York, NY, USA",
       "role": "On Screen Take Off DB Server",
-      "status": "Other",
+      "status": "Decommissioned",
       "migrationDate": "",
       "app": "",
       "notes": "Server is running some DB's in MySQL for 2 apps. Stephen Penuel iis working on update app deployment with intune before working with Mark Scott to host the DB's in CBRE DC. estimated date end of August."
@@ -1360,7 +1360,7 @@
       "name": "SYDSQL01",
       "location": "Sydney, Australia",
       "role": "Primavera centrally hosted SQL server",
-      "status": "To Be Decom",
+      "status": "Decommissioned",
       "migrationDate": "",
       "app": "",
       "notes": ""
@@ -1565,5 +1565,5 @@
     }
   ],
   "issues": [],
-  "asOf": "20 Nov 2026 10:56"
+  "asOf": "20 Nov 2026 10:58"
 }
