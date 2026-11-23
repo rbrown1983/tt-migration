@@ -1021,7 +1021,7 @@
       "status": "Replicating",
       "migrationDate": "",
       "app": "",
-      "notes": "Speak to Donna"
+      "notes": "Build new servers in CBRE"
     },
     {
       "name": "LeeSQL13",
@@ -1039,7 +1039,7 @@
       "status": "Replicating",
       "migrationDate": "",
       "app": "",
-      "notes": "Speak to Donna"
+      "notes": "Leesql15 is for an app that was developed by a third party for the Energy Cost centre a number of years ago, this also has a front-end Citrix leectx14.  "
     },
     {
       "name": "LEESRV03",
@@ -1534,7 +1534,7 @@
       "status": "Replicating",
       "migrationDate": "",
       "app": "",
-      "notes": "Speak to Donna"
+      "notes": "Build new servers in CBRE"
     },
     {
       "name": "VmP6CtxLeeP02",
@@ -1543,7 +1543,7 @@
       "status": "Replicating",
       "migrationDate": "",
       "app": "",
-      "notes": "Speak to Donna"
+      "notes": "Build new servers in CBRE"
     },
     {
       "name": "WebApps02",
@@ -1561,9 +1561,9 @@
       "status": "Replicating",
       "migrationDate": "",
       "app": "",
-      "notes": "Speak to Donna"
+      "notes": "Webapps04 is used for several bespoke developed systems. The main ones are Phoenix (Credit Control) and Contracts database.  The DTP team are redeveloping the Contracts database so this will be superseded with their solution in the Hive next year.  For Phoenix the long-term plan was to redevelop the app in the cloud which is the plan for next year."
     }
   ],
   "issues": [],
-  "asOf": "20 Nov 2026 10:58"
+  "asOf": "23 Nov 2026 15:08"
 }
