@@ -1073,7 +1073,7 @@
       "location": "Leeds, UK",
       "role": "Secret Server / Delinea server",
       "status": "Replicating",
-      "migrationDate": "2026-11-27",
+      "migrationDate": "2026-11-25",
       "app": "",
       "notes": "planned to do 27th if all goes well with London this week"
     },
@@ -1300,7 +1300,7 @@
       "status": "To be replicated",
       "migrationDate": "",
       "app": "",
-      "notes": "Sam to soeak to RH"
+      "notes": "Sam to speak to RH"
     },
     {
       "name": "NYCAccessControl01",
@@ -1414,10 +1414,10 @@
       "name": "TTFDTLee07",
       "location": "Leeds, UK",
       "role": "OVSM storage copied to Leeds",
-      "status": "To be replicated",
+      "status": "Decommissioned",
       "migrationDate": "",
       "app": "",
-      "notes": "James confimred this is a backup server - SL to raise a change and power off"
+      "notes": "James confirmed this is a backup server - SL to raise a change and power off"
     },
     {
       "name": "TTFtpUk01",
@@ -1549,7 +1549,7 @@
       "name": "WebApps02",
       "location": "Leeds, UK",
       "role": "Old Lotus Notes webserver",
-      "status": "To be replicated",
+      "status": "Replicating",
       "migrationDate": "",
       "app": "",
       "notes": "Paul Elmer says it will be gone in a couple of months - Sam to confirm"
@@ -1561,9 +1561,9 @@
       "status": "Replicating",
       "migrationDate": "",
       "app": "",
-      "notes": "Webapps04 is used for several bespoke developed systems. The main ones are Phoenix (Credit Control) and Contracts database.  The DTP team are redeveloping the Contracts database so this will be superseded with their solution in the Hive next year.  For Phoenix the long-term plan was to redevelop the app in the cloud which is the plan for next year."
+      "notes": "Webapps04 is used for several bespoke developed systems. The main ones are Phoenix (Credit Control) and Contracts database.  The DTP team are redeveloping the Contracts database so this will be superseded with their solution in the Hive next year.  For Phoenix the long-term plan was to redevelop the app in the cloud which is the plan for next year.\nCan be moved with SQL after FMS move to D365 in Dec 5th."
     }
   ],
   "issues": [],
-  "asOf": "23 Nov 2026 15:08"
+  "asOf": "24 Nov 2026 10:25"
 }
