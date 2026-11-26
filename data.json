@@ -296,7 +296,7 @@
       "site": "Nairobi",
       "country": "Kenya",
       "region": "EMEA",
-      "status": "In Progress",
+      "status": "Decommissioned",
       "notes": "Local data still in use. Closure emails sent out by Adrian set to RO and close shares on the 7th-\n29/09 - DHCP and DNS to move",
       "migrationDate": "",
       "hwRemoved": ""
@@ -1565,5 +1565,5 @@
     }
   ],
   "issues": [],
-  "asOf": "26 Nov 2026 09:29"
+  "asOf": "26 Nov 2026 09:30"
 }
