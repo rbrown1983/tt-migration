@@ -436,7 +436,7 @@
       "status": "Replicating",
       "migrationDate": "",
       "app": "",
-      "notes": ""
+      "notes": "Issues with downtime as in use until Feb - Graeme Cottle and Jeff Ball"
     },
     {
       "name": "DxbPay02",
@@ -742,7 +742,7 @@
       "status": "Replicating",
       "migrationDate": "2026-11-27",
       "app": "",
-      "notes": "Currently planned for w/c 23rd"
+      "notes": "Currently planned for w/c 30th"
     },
     {
       "name": "LEECBREDL01",
@@ -1048,7 +1048,7 @@
       "status": "To be replicated",
       "migrationDate": "",
       "app": "",
-      "notes": "Adrian awaiting response "
+      "notes": "In use by HR for an app with P11D. Requested to use Isilon share as its around 100GB"
     },
     {
       "name": "LEESRV04",
@@ -1072,7 +1072,7 @@
       "name": "LeeSSDE01",
       "location": "Leeds, UK",
       "role": "Secret Server / Delinea server",
-      "status": "Replicating",
+      "status": "Replicated",
       "migrationDate": "2026-11-25",
       "app": "",
       "notes": "planned to do 27th if all goes well with London this week"
@@ -1565,5 +1565,5 @@
     }
   ],
   "issues": [],
-  "asOf": "26 Nov 2026 10:13"
+  "asOf": "26 Nov 2026 14:05"
 }
