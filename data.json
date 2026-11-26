@@ -1192,7 +1192,7 @@
       "status": "Replicating",
       "migrationDate": "",
       "app": "",
-      "notes": ""
+      "notes": "preceda required until the end of 26 and jagger have removed the cost of the SOW "
     },
     {
       "name": "LonBKCaso01",
@@ -1219,7 +1219,7 @@
       "status": "To Be Decom",
       "migrationDate": "",
       "app": "",
-      "notes": ""
+      "notes": "Internal DNS forwards in place for Infoblox - External being done by Shaz w/c 30th"
     },
     {
       "name": "LonDoorSec03",
@@ -1565,5 +1565,5 @@
     }
   ],
   "issues": [],
-  "asOf": "26 Nov 2026 14:05"
+  "asOf": "26 Nov 2026 14:07"
 }
